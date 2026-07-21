@@ -1,0 +1,173 @@
+
+> start-uo@0.1.0 lint
+> eslint
+
+
+/Users/enkhbayar/start-up/start-uo/app/actions/auth.ts
+  33:9  warning  'user' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/enkhbayar/start-up/start-uo/app/actions/map.ts
+  133:14  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+  144:14  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/enkhbayar/start-up/start-uo/app/actions/onboarding.ts
+  17:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/enkhbayar/start-up/start-uo/app/actions/session.ts
+  8:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/enkhbayar/start-up/start-uo/app/chat/page.tsx
+    5:10  warning  'motion' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+    5:18  warning  'AnimatePresence' is defined but never used                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+   13:44  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   14:52  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   15:46  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  114:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  141:37  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/enkhbayar/start-up/start-uo/app/discover/page.tsx
+    5:38  warning  'ChevronLeft' is defined but never used                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+    5:51  warning  'ChevronRight' is defined but never used                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   10:10  warning  'MessageCircle' is defined but never used                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+   27:11  warning  'router' is assigned a value but never used                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+   70:41  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   70:52  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  164:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/enkhbayar/start-up/start-uo/app/map/page.tsx
+   78:42  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+   90:58  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+  107:7   error    Error: Cannot access variable before it is declared
+
+`fetchFriends` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+/Users/enkhbayar/start-up/start-uo/app/map/page.tsx:107:7
+  105 |
+  106 |       // Fetch friends
+> 107 |       fetchFriends(session.userId);
+      |       ^^^^^^^^^^^^ `fetchFriends` accessed before it is declared
+  108 |     }
+  109 |     init();
+  110 |   }, [router]);
+
+/Users/enkhbayar/start-up/start-uo/app/map/page.tsx:113:3
+  111 |
+  112 |   // 2. Fetch friends logic
+> 113 |   const fetchFriends = async (uid: string) => {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 114 |     const [data, reqs] = await Promise.all([
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 115 |       getMapFriends(uid),
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 116 |       getPendingRequests(uid),
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 117 |     ]);
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 118 |     setFriends(data);
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 119 |     setPendingRequests(reqs);
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 120 |   };
+      | ^^^^^ `fetchFriends` is declared here
+  121 |
+  122 |   // 3. Setup Geolocation Tracking
+  123 |   useEffect(() => {  react-hooks/immutability
+  252:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @next/next/no-img-element
+  390:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @next/next/no-img-element
+
+/Users/enkhbayar/start-up/start-uo/app/onboarding/page.tsx
+    3:20  warning  'useRef' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+  182:50  warning  'err' is defined but never used                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  189:47  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  190:37  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  190:60  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+
+/Users/enkhbayar/start-up/start-uo/app/page.tsx
+  10:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/enkhbayar/start-up/start-uo/app/profile/page.tsx
+   46:10  warning  'newInterest' is assigned a value but never used                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   46:23  warning  'setNewInterest' is assigned a value but never used                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+  201:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  288:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/enkhbayar/start-up/start-uo/components/MatchScreen.tsx
+  35:61  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/Users/enkhbayar/start-up/start-uo/components/MatchScreen.tsx:35:61
+  33 |               <motion.div
+  34 |                   key={i}
+> 35 |                   initial={{ y: "100vh", opacity: 0, scale: Math.random() * 0.5 + 0.5 }}
+     |                                                             ^^^^^^^^^^^^^ Cannot call impure function
+  36 |                   animate={{ y: "-10vh", opacity: [0, 1, 0] }}
+  37 |                   transition={{ duration: Math.random() * 2 + 3, repeat: Infinity, delay: Math.random() * 2 }}
+  38 |                   className="absolute"                                                          react-hooks/purity
+  37:43  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/Users/enkhbayar/start-up/start-uo/components/MatchScreen.tsx:37:43
+  35 |                   initial={{ y: "100vh", opacity: 0, scale: Math.random() * 0.5 + 0.5 }}
+  36 |                   animate={{ y: "-10vh", opacity: [0, 1, 0] }}
+> 37 |                   transition={{ duration: Math.random() * 2 + 3, repeat: Infinity, delay: Math.random() * 2 }}
+     |                                           ^^^^^^^^^^^^^ Cannot call impure function
+  38 |                   className="absolute"
+  39 |                   style={{ left: `${Math.random() * 100}%` }}
+  40 |               >                                                  react-hooks/purity
+  37:91  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/Users/enkhbayar/start-up/start-uo/components/MatchScreen.tsx:37:91
+  35 |                   initial={{ y: "100vh", opacity: 0, scale: Math.random() * 0.5 + 0.5 }}
+  36 |                   animate={{ y: "-10vh", opacity: [0, 1, 0] }}
+> 37 |                   transition={{ duration: Math.random() * 2 + 3, repeat: Infinity, delay: Math.random() * 2 }}
+     |                                                                                           ^^^^^^^^^^^^^ Cannot call impure function
+  38 |                   className="absolute"
+  39 |                   style={{ left: `${Math.random() * 100}%` }}
+  40 |               >  react-hooks/purity
+  39:37  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/Users/enkhbayar/start-up/start-uo/components/MatchScreen.tsx:39:37
+  37 |                   transition={{ duration: Math.random() * 2 + 3, repeat: Infinity, delay: Math.random() * 2 }}
+  38 |                   className="absolute"
+> 39 |                   style={{ left: `${Math.random() * 100}%` }}
+     |                                     ^^^^^^^^^^^^^ Cannot call impure function
+  40 |               >
+  41 |                   <Heart className="text-pink-500/30" size={Math.random() * 40 + 20} fill="currentColor" />
+  42 |               </motion.div>                                                                        react-hooks/purity
+  41:61  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/Users/enkhbayar/start-up/start-uo/components/MatchScreen.tsx:41:61
+  39 |                   style={{ left: `${Math.random() * 100}%` }}
+  40 |               >
+> 41 |                   <Heart className="text-pink-500/30" size={Math.random() * 40 + 20} fill="currentColor" />
+     |                                                             ^^^^^^^^^^^^^ Cannot call impure function
+  42 |               </motion.div>
+  43 |           ))}
+  44 |       </div>                                                                                                                                                                           react-hooks/purity
+  53:13  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react/no-unescaped-entities
+  66:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @next/next/no-img-element
+  86:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @next/next/no-img-element
+
+/Users/enkhbayar/start-up/start-uo/components/TopNav.tsx
+  13:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/enkhbayar/start-up/start-uo/components/ui/AlertProvider.tsx
+  5:43  warning  'X' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/enkhbayar/start-up/start-uo/lib/session.ts
+   8:42  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  20:12  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+/Users/enkhbayar/start-up/start-uo/middleware.ts
+  20:14  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 47 problems (21 errors, 26 warnings)
+

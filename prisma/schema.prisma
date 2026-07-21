@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String?  @unique
+  phone     String?  @unique
+  username  String?  @unique
+  passwordHash String?
+  isVerified Boolean @default(false)
+
+  name      String?
+  bio       String?
+  avatarUrl String?
+  age       Int?
+  gender    String?
+  interests String[] @default([])
+  photos    String[] @default([])
+
+  inviteCode String? @unique
+
+  lat Float?
+  lng Float?
+
+  lastActive DateTime @default(now())
+  createdAt  DateTime @default(now())
+
+  matchesAsUser1 Match[] @relation("UserOneMatches")
+  matchesAsUser2 Match[] @relation("UserTwoMatches")
+
+  friendsAsUser1 Friendship[] @relation("UserOneFriends")
+  friendsAsUser2 Friendship[] @relation("UserTwoFriends")
+
+  messagesSent Message[] @relation("SentMessages")
+}
+
+model VerificationToken {
+  id        String   @id @default(uuid())
+  identifier String   // email or phone
+  code      String   // the 6 digit OTP
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([identifier, code])
+}
+
+model Match {
+  id        String   @id @default(uuid())
+  user1Id   String
+  user2Id   String
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+
+  user1    User      @relation("UserOneMatches", fields: [user1Id], references: [id])
+  user2    User      @relation("UserTwoMatches", fields: [user2Id], references: [id])
+  messages Message[]
+
+  @@unique([user1Id, user2Id])
+}
+
+model Friendship {
+  id        String   @id @default(uuid())
+  user1Id   String
+  user2Id   String
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+
+  user1 User @relation("UserOneFriends", fields: [user1Id], references: [id])
+  user2 User @relation("UserTwoFriends", fields: [user2Id], references: [id])
+
+  @@unique([user1Id, user2Id])
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  matchId   String
+  senderId  String
+  content   String
+  createdAt DateTime @default(now())
+
+  match  Match @relation(fields: [matchId], references: [id])
+  sender User  @relation("SentMessages", fields: [senderId], references: [id])
+
+  isRead Boolean @default(false)
+}
