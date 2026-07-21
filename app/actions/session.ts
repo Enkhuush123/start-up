@@ -5,7 +5,7 @@ import { getSession, clearSession } from "@/lib/session";
 export async function checkSession() {
   try {
     return await getSession();
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error in checkSession:", error);
     return null; 
   }

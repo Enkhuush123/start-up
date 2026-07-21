@@ -14,7 +14,7 @@ export async function completeOnboarding(
 ) {
     const inviteCode = Math.random().toString(36).substring(2, 8).toUpperCase();
 
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
         name: data.name,
         age: data.age,
         gender: data.gender,

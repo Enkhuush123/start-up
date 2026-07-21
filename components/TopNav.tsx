@@ -54,7 +54,7 @@ export default function TopNav() {
 
     const navItems = [
         { name: "Discover", href: "/discover", icon: Heart },
-        { name: "Zenly Map", href: "/map", icon: Map },
+        { name: "Fizz", href: "/map", icon: Map },
         { name: "Messages", href: "/chat", icon: MessageCircle },
     ];
 
@@ -66,7 +66,7 @@ export default function TopNav() {
                 <div className="w-10 h-10 bg-gradient-to-tr from-pink-500 to-purple-500 rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(236,72,153,0.3)]">
                     <Heart className="w-5 h-5 text-white fill-white" />
                 </div>
-                <span className="text-xl font-extrabold tracking-tight text-white hidden sm:block">Dating & Map</span>
+                <span className="text-xl font-extrabold tracking-tight text-white hidden sm:block">Rizz & Fizz</span>
             </Link>
 
             <div className="hidden md:flex items-center gap-10">
@@ -87,7 +87,7 @@ export default function TopNav() {
                                     {unreadCount}
                                 </span>
                             )}
-                            {item.name === "Zenly Map" && mapRequestCount > 0 && (
+                            {item.name === "Fizz" && mapRequestCount > 0 && (
                                 <span className="absolute -top-2 -right-3 min-w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white px-1 shadow-[0_0_10px_rgba(244,63,94,0.6)]">
                                     {mapRequestCount}
                                 </span>
@@ -145,7 +145,7 @@ export default function TopNav() {
                                     {unreadCount}
                                 </span>
                             )}
-                            {item.name === "Zenly Map" && mapRequestCount > 0 && (
+                            {item.name === "Fizz" && mapRequestCount > 0 && (
                                 <span className="absolute top-2 right-2 min-w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white px-1 shadow-[0_0_10px_rgba(244,63,94,0.6)]">
                                     {mapRequestCount}
                                 </span>

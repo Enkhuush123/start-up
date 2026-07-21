@@ -34,6 +34,20 @@ import {
 
 import { useAlert } from "@/components/ui/AlertProvider";
 
+type FriendType = {
+  id: string;
+  name: string;
+  image?: string;
+  lat: number;
+  lng: number;
+};
+
+type PendingRequestType = {
+  id: string;
+  name: string;
+  image?: string;
+};
+
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
 
 const MAP_STYLES = [
@@ -63,7 +77,7 @@ const MAP_STYLES = [
   },
 ];
 
-export default function ZenlyMapPage() {
+export default function FizzPage() {
   const router = useRouter();
   const { showAlert } = useAlert();
   const [userId, setUserId] = useState<string | null>(null);
@@ -75,7 +89,7 @@ export default function ZenlyMapPage() {
   const [mapStyle, setMapStyle] = useState(MAP_STYLES[0].url);
   const [showStyleMenu, setShowStyleMenu] = useState(false);
 
-  const [friends, setFriends] = useState<any[]>([]);
+  const [friends, setFriends] = useState<FriendType[]>([]);
   const [userLocation, setUserLocation] = useState<{
     lat: number;
     lng: number;
@@ -87,7 +101,7 @@ export default function ZenlyMapPage() {
   } | null>(null);
   const [loadingAdd, setLoadingAdd] = useState(false);
 
-  const [pendingRequests, setPendingRequests] = useState<any[]>([]);
+  const [pendingRequests, setPendingRequests] = useState<PendingRequestType[]>([]);
   const [showRequests, setShowRequests] = useState(false);
 
   useEffect(() => {
@@ -99,27 +113,23 @@ export default function ZenlyMapPage() {
       }
       setUserId(session.userId);
 
-      
       const code = await getMyInviteCode(session.userId);
-      setMyInviteCode(code);
+      setMyInviteCode(code || null);
 
-      
       fetchFriends(session.userId);
     }
     init();
   }, [router]);
 
-  
-  const fetchFriends = async (uid: string) => {
+  async function fetchFriends(uid: string) {
     const [data, reqs] = await Promise.all([
       getMapFriends(uid),
       getPendingRequests(uid),
     ]);
-    setFriends(data);
-    setPendingRequests(reqs);
-  };
+    setFriends(data as FriendType[]);
+    setPendingRequests(reqs as PendingRequestType[]);
+  }
 
-  
   useEffect(() => {
     if (!userId) return;
 
@@ -128,7 +138,6 @@ export default function ZenlyMapPage() {
       return;
     }
 
-    
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
         setUserLocation({
@@ -140,7 +149,6 @@ export default function ZenlyMapPage() {
       (err) => console.error("Error getting location:", err),
     );
 
-    
     const watchId = navigator.geolocation.watchPosition(
       async (pos) => {
         setUserLocation({
@@ -153,7 +161,6 @@ export default function ZenlyMapPage() {
       { enableHighAccuracy: true, maximumAge: 10000, timeout: 5000 },
     );
 
-    
     const intervalId = setInterval(() => {
       fetchFriends(userId);
     }, 10000);
@@ -450,7 +457,7 @@ export default function ZenlyMapPage() {
                 Найз нэмэх
               </h3>
               <p className="text-neutral-400 text-sm font-medium mb-6 relative z-10">
-                Найзынхаа урилгын кодыг оруулаад газрын зураг дээр холбогдоорой.
+                Найзынхаа урилгын кодыг оруулаад Fizz дээр холбогдоорой.
               </p>
 
               <div className="space-y-4 relative z-10">

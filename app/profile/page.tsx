@@ -236,7 +236,7 @@ export default function ProfilePage() {
               </button>
             </div>
             <p className="text-sm text-neutral-500 mt-5 leading-relaxed relative z-10 font-medium">
-              Энэхүү кодыг найздаа өгч газрын зураг дээр бие биеэ хараарай.
+              Энэхүү кодыг найздаа өгч Fizz дээр бие биеэ хараарай.
             </p>
           </div>
 

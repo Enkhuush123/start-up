@@ -7,12 +7,40 @@ import { Send, ArrowLeft, Loader2, User, MessageCircle } from "lucide-react";
 import { checkSession } from "@/app/actions/session";
 import { getMatches, getMessages, sendMessage } from "@/app/actions/chat";
 
+type MatchType = {
+  id: string;
+  createdAt: Date;
+  otherUser: {
+    id: string;
+    name: string | null;
+    avatarUrl: string | null;
+    photos: string[];
+    lastActive: Date | null;
+  };
+  lastMessage: {
+    id: string;
+    createdAt: Date;
+    content: string;
+    matchId: string;
+    senderId: string;
+    isRead: boolean;
+  } | null;
+};
+
+type MessageType = {
+  id: string;
+  senderId: string;
+  content: string;
+  createdAt: Date | string;
+};
+
+
 export default function ChatPage() {
   const router = useRouter();
   const [userId, setUserId] = useState<string | null>(null);
-  const [matches, setMatches] = useState<any[]>([]);
-  const [activeMatch, setActiveMatch] = useState<any>(null);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [matches, setMatches] = useState<MatchType[]>([]);
+  const [activeMatch, setActiveMatch] = useState<MatchType | null>(null);
+  const [messages, setMessages] = useState<MessageType[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
@@ -119,7 +147,7 @@ export default function ChatPage() {
                     {avatar ? (
                       <img
                         src={avatar}
-                        alt={otherUser.name}
+                        alt={otherUser.name || ""}
                         className="w-full h-full object-cover"
                       />
                     ) : (
@@ -160,7 +188,7 @@ export default function ChatPage() {
                   <img
                     src={
                       activeMatch.otherUser.photos?.[0] ||
-                      activeMatch.otherUser.avatarUrl
+                      activeMatch.otherUser.avatarUrl || undefined
                     }
                     className="w-full h-full object-cover"
                     alt=""

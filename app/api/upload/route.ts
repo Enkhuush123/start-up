@@ -22,6 +22,8 @@ export async function POST(request: Request) {
 
     
     const uploadDir = join(process.cwd(), "public", "uploads");
+    const { mkdir } = require("fs/promises");
+    await mkdir(uploadDir, { recursive: true });
     const filepath = join(uploadDir, filename);
 
     await writeFile(filepath, buffer);

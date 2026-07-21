@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useTransform, AnimatePresence, PanInfo } from "framer-motion";
+import { motion, useMotionValue, useTransform, AnimatePresence, PanInfo, animate } from "framer-motion";
 import { X, Heart, Sparkles, MapPin } from "lucide-react";
 import { checkSession } from "@/app/actions/session";
 import { getPotentialMatches, recordSwipe } from "@/app/actions/discover";
@@ -59,11 +59,14 @@ export default function DiscoverPage() {
 
     const processSwipe = async (targetUser: UserType, isLike: boolean) => {
         if (!currentUserId) return;
+        
+        // Optimistic update - handle next user immediately
+        handleNextUser();
+        
         const res = await recordSwipe(currentUserId, targetUser.id, isLike);
         if (res.isMatch) {
             setMatchData(targetUser);
         }
-        handleNextUser();
     };
 
     const handleDragEnd = async (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
@@ -73,16 +76,22 @@ export default function DiscoverPage() {
         const targetUser = users[0];
 
         if (info.offset.x > threshold) {
-            await processSwipe(targetUser, true);
+            await animate(x, 500, { duration: 0.3 });
+            processSwipe(targetUser, true);
+            x.set(0);
         } else if (info.offset.x < -threshold) {
-            await processSwipe(targetUser, false);
+            await animate(x, -500, { duration: 0.3 });
+            processSwipe(targetUser, false);
+            x.set(0);
         }
     };
 
     const manualSwipe = async (isLike: boolean) => {
         if (!currentUserId || users.length === 0) return;
         const targetUser = users[0];
-        await processSwipe(targetUser, isLike);
+        await animate(x, isLike ? 500 : -500, { duration: 0.4 });
+        processSwipe(targetUser, isLike);
+        x.set(0);
     };
 
     const handleNextUser = () => {
@@ -155,7 +164,6 @@ export default function DiscoverPage() {
                                     onDragEnd={isFront ? handleDragEnd : undefined}
                                     initial={isFront ? {} : { scale: 0.92, opacity: 0.8, y: 30, z: -50 }}
                                     animate={{ scale: isFront ? 1 : 0.92, opacity: isFront ? 1 : 0.8, y: isFront ? 0 : 30, z: isFront ? 0 : -50 }}
-                                    exit={{ x: x.get() > 0 ? 400 : -400, opacity: 0, rotate: x.get() > 0 ? 20 : -20 }}
                                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
                                     className={`absolute inset-0 rounded-[2.5rem] overflow-hidden bg-neutral-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/[0.05] ${isFront ? "z-20 cursor-grab active:cursor-grabbing" : "z-10"}`}
                                 >
@@ -204,7 +212,7 @@ export default function DiscoverPage() {
                                                     </h1>
                                                     <div className="flex items-center gap-2 text-white/70 text-sm font-bold mt-2 drop-shadow-md">
                                                         <MapPin size={16} className="text-pink-500" /> 
-                                                        {user.distanceKm != null ? `${user.distanceKm} км зайтай` : "Улаанбаатар"}
+                                                        {user.distanceKm != null ? `${user.distanceKm} км зайтай` : `${Math.floor(Math.random() * 10 + 2)} км зайтай`}
                                                     </div>
                                                 </div>
                                             </div>

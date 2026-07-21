@@ -10,7 +10,7 @@ import { AlertProvider } from "@/components/ui/AlertProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Dating & Map App",
+  title: "Rizz & Fizz App",
   description: "Web dating and map tracking app",
 };
 

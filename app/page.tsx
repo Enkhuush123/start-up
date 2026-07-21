@@ -37,7 +37,7 @@ export default function WelcomePage() {
           transition={{ delay: 0.3 }}
           className="text-5xl font-extrabold text-white tracking-tight text-center mb-4 leading-tight drop-shadow-lg"
         >
-          Match.<br />Chat.<br />Map.
+          Match.<br />Chat.<br />Fizz.
         </motion.h1>
 
 
@@ -65,7 +65,7 @@ export default function WelcomePage() {
           <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30 backdrop-blur-md">
             <Map className="text-emerald-400 w-6 h-6" />
           </div>
-          <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">Zenly Map</span>
+          <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">Fizz</span>
         </div>
       </motion.div>
 
