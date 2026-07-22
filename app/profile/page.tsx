@@ -23,6 +23,7 @@ import {
   deleteAccount,
 } from "@/app/actions/profile";
 import { useAlert } from "@/components/ui/AlertProvider";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const INTERESTS_LIST = [
   "Аялал ✈️",
@@ -265,11 +266,7 @@ export default function ProfilePage() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-50 dark:bg-neutral-950 text-pink-500 font-bold">
-        Уншиж байна...
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   const primaryPhoto = profile.photos.length > 0 ? profile.photos[0] : null;

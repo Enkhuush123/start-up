@@ -9,6 +9,7 @@ import { updateLocation } from "@/app/actions/map";
 import { getUserProfile } from "@/app/actions/profile";
 import { useRouter } from "next/navigation";
 import MatchScreen from "@/components/MatchScreen";
+import LoadingScreen from "@/components/LoadingScreen";
 import { useLanguage } from "@/components/LanguageProvider";
 
 type UserType = {
@@ -152,11 +153,7 @@ export default function DiscoverPage() {
     };
 
     if (loading) {
-        return (
-            <div className="flex h-screen items-center justify-center bg-neutral-50 dark:bg-neutral-950">
-                <div className="w-16 h-16 border-4 border-pink-500/20 border-t-pink-500 rounded-full animate-spin" />
-            </div>
-        );
+        return <LoadingScreen />;
     }
 
     return (

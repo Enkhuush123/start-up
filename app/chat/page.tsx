@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, ArrowLeft, Loader2, User, MessageCircle, Sparkles, MapPin } from "lucide-react";
 import { checkSession, logoutUser } from "@/app/actions/session";
+import LoadingScreen from "@/components/LoadingScreen";
 import { getMatches, getMessages, sendMessage } from "@/app/actions/chat";
 import { evaluateChat, suggestDateIdeas, suggestIcebreaker } from "@/app/actions/ai";
 import { supabase } from "@/lib/supabase";
@@ -175,11 +176,7 @@ export default function ChatPage() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-[100dvh] flex items-center justify-center bg-neutral-50 dark:bg-neutral-950">
-        <Loader2 className="w-10 h-10 text-pink-500 animate-spin" />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (
