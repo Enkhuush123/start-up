@@ -3,10 +3,15 @@
 import { prisma } from "@/lib/prisma";
 import { hashPassword, comparePassword } from "@/lib/hash";
 import { setSession } from "@/lib/session";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
+  },
+});
 
 export async function signupUser(data: {
   username: string;
@@ -56,10 +61,9 @@ export async function signupUser(data: {
     }
   });
 
-  
   try {
-    const response = await resend.emails.send({
-      from: "Rizz & Fizz <onboarding@resend.dev>",
+    const info = await transporter.sendMail({
+      from: `"Rizz & Fizz" <${process.env.GMAIL_USER}>`,
       to: data.emailOrPhone,
       subject: "Rizz & Fizz баталгаажуулах код",
       html: `
@@ -74,13 +78,9 @@ export async function signupUser(data: {
       `
     });
 
-    if (response.error) {
-      console.error("Resend API Error:", response.error);
-      return { error: "Имэйл илгээхэд алдаа гарлаа: " + response.error.message };
-    }
   } catch (error: any) {
-    console.error("Failed to send email:", error);
-    return { error: "Имэйл илгээхэд алдаа гарлаа. Та имэйл хаягаа шалгана уу." };
+    console.error("Failed to send email with nodemailer:", error);
+    return { error: "Имэйл илгээхэд алдаа гарлаа: " + (error.message || "Мэдэгдэхгүй алдаа") };
   }
 
   return { success: true, otpSentTo: data.emailOrPhone };
