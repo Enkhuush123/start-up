@@ -6,7 +6,10 @@ export async function POST(req: Request) {
     const { imageUrl } = await req.json();
 
     if (!imageUrl) {
-      return NextResponse.json({ error: "No image URL provided" }, { status: 400 });
+      return NextResponse.json(
+        { error: "No image URL provided" },
+        { status: 400 },
+      );
     }
 
     const imageResp = await fetch(imageUrl);
@@ -16,7 +19,7 @@ export async function POST(req: Request) {
     const mimeType = imageResp.headers.get("content-type") || "image/jpeg";
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
     const prompt = `
     Чи бол Dating апп-ийн профайл зургийн мэргэжлийн зөвлөх.
@@ -42,7 +45,10 @@ export async function POST(req: Request) {
 
     let responseText = result.response.text().trim();
     if (responseText.startsWith("\`\`\`json")) {
-        responseText = responseText.replace(/\`\`\`json/g, "").replace(/\`\`\`/g, "").trim();
+      responseText = responseText
+        .replace(/\`\`\`json/g, "")
+        .replace(/\`\`\`/g, "")
+        .trim();
     }
 
     const parsed = JSON.parse(responseText);
