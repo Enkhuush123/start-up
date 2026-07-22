@@ -19,6 +19,7 @@ model User {
   username  String?  @unique
   passwordHash String?
   isVerified Boolean @default(false)
+  isBanned   Boolean @default(false)
 
   name      String?
   bio       String?

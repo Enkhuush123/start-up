@@ -102,7 +102,11 @@ export default function ChatPage() {
     };
     setMessages((prev) => [...prev, tempMsg]);
 
-    await sendMessage(activeMatch.id, userId, text);
+    const res = await sendMessage(activeMatch.id, userId, text);
+    if (res && 'error' in res) {
+      alert(res.error);
+      window.location.href = "/login";
+    }
     setSending(false);
   };
 

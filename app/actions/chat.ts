@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { checkMessageContent, applyBan } from "./moderation";
 
 export async function getMatches(userId: string) {
     const matches = await prisma.match.findMany({
@@ -75,6 +76,13 @@ export async function getMessages(matchId: string, userId: string) {
 
 export async function sendMessage(matchId: string, senderId: string, content: string) {
     if (!content.trim()) return null;
+    
+    // AI Moderation Check
+    const isBad = await checkMessageContent(content);
+    if (isBad) {
+        await applyBan(senderId);
+        return { error: "Ёс бус мессеж илгээсэн тул таны эрхийг хаалаа." };
+    }
     
     const message = await prisma.message.create({
         data: {

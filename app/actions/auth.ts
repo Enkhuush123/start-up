@@ -141,6 +141,10 @@ export async function loginUser(identifier: string, passwordRaw: string) {
     return { error: "Бүртгэлээ баталгаажуулаагүй байна." };
   }
 
+  if (user.isBanned) {
+    return { error: "Таны эрхийг ёс бус үйлдэл гаргасан тул хаасан байна." };
+  }
+
   await setSession(user.id);
   return { success: true };
 }
