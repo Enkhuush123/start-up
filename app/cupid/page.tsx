@@ -7,9 +7,11 @@ import { getHighCompatibilityMatches } from "@/app/actions/ai";
 import { checkSession } from "@/app/actions/session";
 import { recordSwipe } from "@/app/actions/discover";
 import { useRouter } from "next/navigation";
+import { useAlert } from "@/components/ui/AlertProvider";
 
 export default function CupidPage() {
     const router = useRouter();
+    const { showAlert } = useAlert();
     const [matches, setMatches] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState<string | null>(null);
@@ -32,7 +34,14 @@ export default function CupidPage() {
     const handleMatch = async (otherId: string) => {
         if (!userId) return;
         await recordSwipe(userId, otherId, true);
-        alert("Таалагдлаа! (Like илгээгдлээ)");
+        
+        // Remove the liked user from the UI
+        setMatches(prev => prev.filter(m => m.id !== otherId));
+        
+        showAlert({ 
+            message: "Таалагдлаа! (Зүрх илгээгдлээ 💖)", 
+            type: "success" 
+        });
     };
 
     return (

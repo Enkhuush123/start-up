@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { unstable_noStore as noStore } from "next/cache";
 
 const LOVE_FACTS = [
   "Хүмүүс бие биенийхээ нүд рүү 3 минут ширтэхэд зүрхний цохилт нь ижил хэмнэлтэй болдог.",
@@ -157,6 +158,7 @@ export async function suggestIcebreaker(matchId: string) {
 }
 
 export async function getHighCompatibilityMatches(userId: string) {
+  noStore();
   try {
     const me = await prisma.user.findUnique({
       where: { id: userId },
@@ -164,10 +166,18 @@ export async function getHighCompatibilityMatches(userId: string) {
 
     if (!me) return [];
 
+    // Get swiped/matched user IDs
+    const swipedUserIds = await prisma.match.findMany({
+      where: { user1Id: userId },
+      select: { user2Id: true },
+    });
+    const excludeIds = swipedUserIds.map((m) => m.user2Id);
+    excludeIds.push(userId);
+
     // Find other users
     const others = await prisma.user.findMany({
       where: {
-        id: { not: userId },
+        id: { notIn: excludeIds },
         isBanned: false,
       },
       select: {
