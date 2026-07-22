@@ -15,6 +15,7 @@ import {
   Plus,
   Star,
 } from "lucide-react";
+import imageCompression from 'browser-image-compression';
 import { checkSession, logoutUser } from "@/app/actions/session";
 import { getUserProfile, updateUserProfile, deleteAccount } from "@/app/actions/profile";
 import { useAlert } from "@/components/ui/AlertProvider";
@@ -127,10 +128,16 @@ export default function ProfilePage() {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("file", file);
-
     try {
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1200,
+        useWebWorker: true,
+      };
+      const compressedFile = await imageCompression(file, options);
+      
+      const formData = new FormData();
+      formData.append("file", compressedFile);
       const res = await fetch("/api/upload", {
         method: "POST",
         body: formData,

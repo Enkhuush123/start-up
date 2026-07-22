@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Camera, Sparkles } from "lucide-react";
+import imageCompression from 'browser-image-compression';
 import { checkSession } from "@/app/actions/session";
 import { completeOnboarding } from "@/app/actions/onboarding";
 import { useAlert } from "@/components/ui/AlertProvider";
@@ -169,9 +170,15 @@ export default function OnboardingPage() {
                                         const file = e.target.files?.[0];
                                         if (!file) return;
                                         setLoading(true);
-                                        const form = new FormData();
-                                        form.append("file", file);
                                         try {
+                                            const options = {
+                                                maxSizeMB: 1,
+                                                maxWidthOrHeight: 1200,
+                                                useWebWorker: true,
+                                            };
+                                            const compressedFile = await imageCompression(file, options);
+                                            const form = new FormData();
+                                            form.append("file", compressedFile);
                                             const res = await fetch("/api/upload", { method: "POST", body: form });
                                             const data = await res.json();
                                             if (data.success) {
