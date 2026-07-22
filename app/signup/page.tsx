@@ -15,7 +15,6 @@ export default function SignupPage() {
     const [password, setPassword] = useState("");
     
     const [otpCode, setOtpCode] = useState("");
-    const [devCode, setDevCode] = useState("");
 
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
@@ -30,7 +29,6 @@ export default function SignupPage() {
         if (res?.error) {
             setErrorMsg(res.error);
         } else if (res?.success) {
-            setDevCode(res.devCode || "");
             setStep(2);
         }
         setLoading(false);
