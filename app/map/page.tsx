@@ -487,7 +487,7 @@ export default function FizzPage() {
                   whileTap={{ scale: 0.98 }}
                   onClick={handleAddFriend}
                   disabled={loadingAdd || !inviteCodeInput.trim()}
-                  className="w-full h-14 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center text-neutral-900 dark:text-white font-bold text-lg shadow-[0_10px_30px_-10px_rgba(236,72,153,0.6)] transition-all disabled:opacity-50 disabled:grayscale"
+                  className="w-full h-14 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-[0_10px_30px_-10px_rgba(236,72,153,0.6)] transition-all disabled:opacity-50 disabled:grayscale"
                 >
                   {loadingAdd ? "Уншиж байна..." : "Хүсэлт илгээх"}
                 </motion.button>

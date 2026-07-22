@@ -221,12 +221,12 @@ export default function DiscoverPage() {
 
                                             <div className="flex flex-wrap gap-2 pointer-events-auto">
                                                 {user.interests.slice(0, 5).map((interest, i) => (
-                                                    <span key={i} className="px-3.5 py-1.5 bg-black/10 dark:bg-white/10 backdrop-blur-md rounded-full text-xs font-bold text-neutral-900 dark:text-white border border-black/20 dark:border-white/20 shadow-lg">
+                                                    <span key={i} className="px-3.5 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold text-white border border-white/20 shadow-lg">
                                                         {interest}
                                                     </span>
                                                 ))}
                                                 {user.interests.length > 5 && (
-                                                    <span className="px-3.5 py-1.5 bg-black/5 dark:bg-white/5 backdrop-blur-md rounded-full text-xs font-bold text-neutral-900 dark:text-white/70 border border-black/10 dark:border-white/10">
+                                                    <span className="px-3.5 py-1.5 bg-white/5 backdrop-blur-md rounded-full text-xs font-bold text-white/70 border border-white/10">
                                                         +{user.interests.length - 5}
                                                     </span>
                                                 )}

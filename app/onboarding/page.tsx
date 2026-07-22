@@ -209,7 +209,7 @@ export default function OnboardingPage() {
                     whileTap={{ scale: 0.95 }}
                     onClick={nextStep}
                     disabled={(step === 1 && formData.name.length < 2) || loading}
-                    className="w-full h-16 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center text-neutral-900 dark:text-white font-bold text-xl shadow-[0_10px_40px_-10px_rgba(236,72,153,0.7)] disabled:opacity-50 disabled:grayscale transition-all"
+                    className="w-full h-16 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-[0_10px_40px_-10px_rgba(236,72,153,0.7)] disabled:opacity-50 disabled:grayscale transition-all"
                 >
                     {loading ? "Хадгалж байна..." : (step === 4 ? "Бэлэн боллоо" : "Үргэлжлүүлэх")}
                 </motion.button>

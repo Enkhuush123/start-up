@@ -80,14 +80,14 @@ export default function WelcomePage() {
         {!loading && (
           session ? (
             <Link href="/discover" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-lg font-bold text-neutral-900 dark:text-white shadow-[0_10px_30px_rgba(236,72,153,0.4)] hover:scale-105 transition-all flex items-center justify-center gap-3">
+              <button className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-lg font-bold text-white shadow-[0_10px_30px_rgba(236,72,153,0.4)] hover:scale-105 transition-all flex items-center justify-center gap-3">
                 {t("welcome.continue")} <ArrowRight size={22} />
               </button>
             </Link>
           ) : (
             <>
               <Link href="/signup" className="w-full sm:w-auto">
-                <button className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-lg font-bold text-neutral-900 dark:text-white shadow-[0_10px_30px_rgba(236,72,153,0.4)] hover:scale-105 transition-all">
+                <button className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-lg font-bold text-white shadow-[0_10px_30px_rgba(236,72,153,0.4)] hover:scale-105 transition-all">
                   {t("welcome.signup")}
                 </button>
               </Link>

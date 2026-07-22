@@ -15,20 +15,13 @@ export async function POST(request: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    
-    const originalName = file.name || "upload.jpg";
-    const extension = originalName.split('.').pop();
-    const filename = `${randomUUID()}.${extension}`;
+    // Convert file to base64 Data URI instead of saving to local disk
+    // This allows photo uploads to work on Vercel without S3/Blob storage
+    const mimeType = file.type || "image/jpeg";
+    const base64String = buffer.toString("base64");
+    const dataUri = `data:${mimeType};base64,${base64String}`;
 
-    
-    const uploadDir = join(process.cwd(), "public", "uploads");
-    const { mkdir } = require("fs/promises");
-    await mkdir(uploadDir, { recursive: true });
-    const filepath = join(uploadDir, filename);
-
-    await writeFile(filepath, buffer);
-
-    return NextResponse.json({ success: true, url: `/uploads/${filename}` });
+    return NextResponse.json({ success: true, url: dataUri });
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

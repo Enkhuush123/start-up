@@ -294,14 +294,14 @@ export default function ProfilePage() {
                     <div className="absolute inset-0 bg-white/40 dark:bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                     {idx === 0 && (
-                      <div className="absolute top-2 left-2 px-2 py-1 bg-gradient-to-r from-pink-500 to-purple-500 text-neutral-900 dark:text-white text-[10px] font-black rounded-lg uppercase tracking-wider shadow-lg">
+                      <div className="absolute top-2 left-2 px-2 py-1 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-[10px] font-black rounded-lg uppercase tracking-wider shadow-lg">
                         Үндсэн
                       </div>
                     )}
 
                     <button
                       onClick={() => removePhoto(idx)}
-                      className="absolute top-2 right-2 p-2 bg-rose-500/90 hover:bg-rose-500 text-neutral-900 dark:text-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 shadow-lg"
+                      className="absolute top-2 right-2 p-2 bg-rose-500/90 hover:bg-rose-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 shadow-lg"
                     >
                       <X size={14} strokeWidth={3} />
                     </button>
@@ -309,7 +309,7 @@ export default function ProfilePage() {
                     {idx !== 0 && (
                       <button
                         onClick={() => makePrimaryPhoto(idx)}
-                        className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/10 dark:bg-white/10 backdrop-blur-md hover:bg-white/20 text-neutral-900 dark:text-white rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 border border-black/20 dark:border-white/20 whitespace-nowrap shadow-lg"
+                        className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/50 hover:bg-black/70 text-white rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 border border-white/20 whitespace-nowrap shadow-lg"
                       >
                         Үндсэн болгох
                       </button>

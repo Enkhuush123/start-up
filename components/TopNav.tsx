@@ -109,7 +109,7 @@ export default function TopNav() {
                             {t("nav.login")}
                         </Link>
                         <Link href="/login">
-                            <button className="px-5 py-2.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-sm font-bold text-neutral-900 dark:text-white shadow-[0_5px_20px_rgba(236,72,153,0.4)] hover:scale-105 transition-all">
+                            <button className="px-5 py-2.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-sm font-bold text-white shadow-[0_5px_20px_rgba(236,72,153,0.4)] hover:scale-105 transition-all">
                                 {t("nav.signup")}
                             </button>
                         </Link>
