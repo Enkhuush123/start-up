@@ -19,6 +19,12 @@ type UserType = {
     interests: string[];
     avatarUrl: string | null;
     photos: string[];
+    height: number | null;
+    zodiacSign: string | null;
+    loveLanguage: string | null;
+    lookingFor: string | null;
+    drinking: string | null;
+    smoking: string | null;
     distanceKm?: number | null;
 };
 

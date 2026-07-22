@@ -39,7 +39,7 @@ export async function evaluateChat(matchId: string) {
     const conversation = messages.reverse().map(m => `${m.sender.name}: ${m.content}`).join("\n");
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
     const prompt = `
     Энэхүү харилцан яриаг уншаад хосуудын харилцаа ямархуу байгааг 1 ширхэг EMOJI-гоор дүгнэнэ үү.
@@ -76,7 +76,7 @@ export async function suggestDateIdeas(matchId: string) {
     if (!match) return { error: "Match found not." };
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
     const prompt = `
     Чи бол Cupid AI, хосуудад зориулсан шилдэг болзооны газруудыг санал болгодог туслах.
