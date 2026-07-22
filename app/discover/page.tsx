@@ -241,6 +241,39 @@ export default function DiscoverPage() {
                                                 </div>
                                             </div>
 
+                                            <div className="flex flex-wrap gap-2 pointer-events-auto mb-3">
+                                                {user.height && (
+                                                    <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/20 shadow-sm flex items-center gap-1">
+                                                        📏 {user.height} см
+                                                    </span>
+                                                )}
+                                                {user.zodiacSign && (
+                                                    <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/20 shadow-sm">
+                                                        {user.zodiacSign}
+                                                    </span>
+                                                )}
+                                                {user.loveLanguage && (
+                                                    <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/20 shadow-sm">
+                                                        {user.loveLanguage}
+                                                    </span>
+                                                )}
+                                                {user.lookingFor && (
+                                                    <span className="px-3 py-1 bg-pink-500/30 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-pink-500/30 shadow-sm">
+                                                        🎯 {user.lookingFor}
+                                                    </span>
+                                                )}
+                                                {user.drinking && (
+                                                    <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/20 shadow-sm">
+                                                        🍻 {user.drinking}
+                                                    </span>
+                                                )}
+                                                {user.smoking && (
+                                                    <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/20 shadow-sm">
+                                                        🚬 {user.smoking}
+                                                    </span>
+                                                )}
+                                            </div>
+
                                             <div className="flex flex-wrap gap-2 pointer-events-auto">
                                                 {user.interests.slice(0, 5).map((interest, i) => (
                                                     <span key={i} className="px-3.5 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold text-white border border-white/20 shadow-lg">
