@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Map, Heart, MessageCircle, User, Moon, Sun, Globe } from "lucide-react";
+import { Map, Heart, MessageCircle, User, Moon, Sun, Globe, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { checkSession } from "@/app/actions/session";
 import { getUnreadMessageCount } from "@/app/actions/chat";
 import { getPendingRequestCount } from "@/app/actions/map";
@@ -19,6 +20,7 @@ export default function TopNav() {
     const [unreadCount, setUnreadCount] = useState(0);
     const [mapRequestCount, setMapRequestCount] = useState(0);
     const [loveFact, setLoveFact] = useState("Хайрын баримтууд...");
+    const [showFactModal, setShowFactModal] = useState(false);
 
     useEffect(() => {
         getLoveFact().then(fact => setLoveFact(fact));
@@ -69,10 +71,13 @@ export default function TopNav() {
                 <span className="text-xl font-extrabold tracking-tight text-neutral-900 dark:text-white hidden sm:block">Rizz & Fizz</span>
             </Link>
 
-            <div className="hidden lg:flex items-center gap-2 max-w-sm overflow-hidden bg-pink-500/10 px-4 py-2 rounded-full border border-pink-500/20 shadow-inner">
+            <button 
+                onClick={() => setShowFactModal(true)}
+                className="hidden lg:flex items-center gap-2 max-w-xs cursor-pointer hover:bg-pink-500/20 transition-colors bg-pink-500/10 px-4 py-2 rounded-full border border-pink-500/20 shadow-inner"
+            >
                 <Heart size={14} className="text-pink-500 flex-shrink-0 animate-pulse" fill="currentColor" />
                 <p className="text-xs text-neutral-600 dark:text-neutral-300 truncate font-medium">{loveFact}</p>
-            </div>
+            </button>
 
             <div className="hidden md:flex items-center gap-8">
                 {navItems.map((item) => {
@@ -137,6 +142,33 @@ export default function TopNav() {
             </div>
 
         </nav>
+
+        <AnimatePresence>
+            {showFactModal && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 md:p-8 max-w-sm w-full shadow-2xl relative"
+                    >
+                        <button 
+                            onClick={() => setShowFactModal(false)}
+                            className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-900 dark:hover:text-white bg-neutral-100 dark:bg-neutral-800 p-2 rounded-full transition-colors"
+                        >
+                            <X size={20} />
+                        </button>
+                        <div className="w-16 h-16 bg-pink-500/10 text-pink-500 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-inner">
+                            <Heart size={32} fill="currentColor" className="animate-pulse" />
+                        </div>
+                        <h3 className="text-xl font-black text-center text-neutral-900 dark:text-white mb-4">Хайрын баримт 💡</h3>
+                        <p className="text-center text-neutral-600 dark:text-neutral-300 font-medium leading-relaxed">
+                            {loveFact}
+                        </p>
+                    </motion.div>
+                </div>
+            )}
+        </AnimatePresence>
         
         {}
         {!isAuthPage && session && (
