@@ -44,6 +44,7 @@ export default function ChatPage() {
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
+  const [errorModal, setErrorModal] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -104,8 +105,10 @@ export default function ChatPage() {
 
     const res = await sendMessage(activeMatch.id, userId, text);
     if (res && 'error' in res) {
-      alert(res.error);
-      window.location.href = "/login";
+      setErrorModal(res.error);
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 3000);
     }
     setSending(false);
   };
@@ -250,12 +253,48 @@ export default function ChatPage() {
             </div>
           </>
         ) : (
-          <div className="hidden md:flex flex-1 flex-col items-center justify-center text-neutral-500">
-            <MessageCircle className="w-20 h-20 mb-4 opacity-20" />
-            <p className="font-medium text-lg">Харилцах хүнээ сонгоно уу.</p>
+          <div className="hidden md:flex flex-1 items-center justify-center flex-col gap-4">
+            <div className="w-24 h-24 rounded-full bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center">
+              <MessageCircle className="w-10 h-10 text-neutral-300 dark:text-neutral-700" />
+            </div>
+            <p className="text-neutral-500 font-medium">Чатлах хүнээ сонгоно уу</p>
           </div>
         )}
       </div>
+
+      <AnimatePresence>
+        {errorModal && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          >
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="bg-neutral-900 border border-red-500/30 p-8 rounded-3xl max-w-sm w-full text-center shadow-[0_10px_40px_rgba(239,68,68,0.2)]"
+            >
+              <div className="w-20 h-20 mx-auto bg-red-500/10 rounded-full flex items-center justify-center mb-6">
+                <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-3xl font-extrabold leading-none mb-1">!</span>
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Эрх хаагдлаа</h3>
+              <p className="text-neutral-300 font-medium mb-6 leading-relaxed">{errorModal}</p>
+              <div className="w-full h-1.5 bg-neutral-800 rounded-full overflow-hidden">
+                <motion.div 
+                  initial={{ width: "100%" }}
+                  animate={{ width: "0%" }}
+                  transition={{ duration: 3, ease: "linear" }}
+                  className="h-full bg-red-500"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

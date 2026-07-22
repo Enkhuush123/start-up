@@ -41,11 +41,35 @@ export async function checkMessageContent(content: string): Promise<boolean> {
 
 export async function applyBan(userId: string) {
   try {
-    await prisma.user.update({
+    // 1. Delete all messages associated with the user's matches
+    const matches = await prisma.match.findMany({
+      where: { OR: [{ user1Id: userId }, { user2Id: userId }] }
+    });
+    const matchIds = matches.map(m => m.id);
+
+    if (matchIds.length > 0) {
+      await prisma.message.deleteMany({
+        where: { matchId: { in: matchIds } }
+      });
+    }
+
+    // 2. Delete matches
+    if (matchIds.length > 0) {
+      await prisma.match.deleteMany({
+        where: { id: { in: matchIds } }
+      });
+    }
+
+    // 3. Delete friendships
+    await prisma.friendship.deleteMany({
+      where: { OR: [{ user1Id: userId }, { user2Id: userId }] }
+    });
+
+    // 4. Finally delete the user account entirely
+    await prisma.user.delete({
       where: { id: userId },
-      data: { isBanned: true },
     });
   } catch (error) {
-    console.error("Failed to ban user:", error);
+    console.error("Failed to ban and delete user:", error);
   }
 }
