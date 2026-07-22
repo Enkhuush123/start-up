@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Loader2, User, Info, Check, MessageCircle, ArrowLeft } from "lucide-react";
 import { getHighCompatibilityMatches } from "@/app/actions/ai";
 import { checkSession } from "@/app/actions/session";
-import { sendLike } from "@/app/actions/discover";
+import { recordSwipe } from "@/app/actions/discover";
 import { useRouter } from "next/navigation";
 
 export default function CupidPage() {
@@ -31,7 +31,7 @@ export default function CupidPage() {
 
     const handleMatch = async (otherId: string) => {
         if (!userId) return;
-        await sendLike(userId, otherId);
+        await recordSwipe(userId, otherId, true);
         alert("Таалагдлаа! (Like илгээгдлээ)");
     };
 
