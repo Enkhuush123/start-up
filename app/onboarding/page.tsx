@@ -64,9 +64,9 @@ export default function OnboardingPage() {
     };
 
     return (
-        <div className="relative flex flex-col min-h-[100dvh] bg-transparent text-white overflow-hidden z-10">
+        <div className="relative flex flex-col min-h-[100dvh] bg-transparent text-neutral-900 dark:text-white overflow-hidden z-10">
 
-            <div className="absolute top-0 left-0 w-full h-1 bg-neutral-900/50 z-50">
+            <div className="absolute top-0 left-0 w-full h-1 bg-white dark:bg-neutral-900/50 z-50">
                 <motion.div
                     className="h-full bg-gradient-to-r from-pink-500 to-purple-500 shadow-[0_0_15px_rgba(236,72,153,0.8)]"
                     initial={{ width: "25%" }}
@@ -76,7 +76,7 @@ export default function OnboardingPage() {
             </div>
 
             {step > 1 && (
-                <button onClick={prevStep} className="absolute top-6 left-6 z-50 p-3 bg-neutral-900/60 rounded-full border border-neutral-800/50 backdrop-blur-xl hover:bg-neutral-800 transition-colors">
+                <button onClick={prevStep} className="absolute top-6 left-6 z-50 p-3 bg-white dark:bg-neutral-900/60 rounded-full border border-neutral-200 dark:border-neutral-800/50 backdrop-blur-xl hover:bg-neutral-100 dark:bg-neutral-800 transition-colors">
                     <ArrowLeft size={22} />
                 </button>
             )}
@@ -92,7 +92,7 @@ export default function OnboardingPage() {
                                 placeholder="Саруул"
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full h-16 bg-transparent border-b-2 border-neutral-800 text-3xl font-bold focus:border-pink-500 focus:outline-none transition-colors placeholder:text-neutral-700"
+                                className="w-full h-16 bg-transparent border-b-2 border-neutral-200 dark:border-neutral-800 text-3xl font-bold focus:border-pink-500 focus:outline-none transition-colors placeholder:text-neutral-700"
                                 autoFocus
                             />
                         </motion.div>
@@ -108,7 +108,7 @@ export default function OnboardingPage() {
                                     placeholder="Нас (Ж: 22)"
                                     value={formData.age}
                                     onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                                    className="w-full h-16 bg-neutral-900/60 backdrop-blur-md border border-neutral-800 rounded-2xl px-5 text-2xl font-bold focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all"
+                                    className="w-full h-16 bg-white dark:bg-neutral-900/60 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 rounded-2xl px-5 text-2xl font-bold focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all"
                                 />
                             </div>
 
@@ -117,7 +117,7 @@ export default function OnboardingPage() {
                                     <button
                                         key={gender}
                                         onClick={() => setFormData({ ...formData, gender })}
-                                        className={`flex-1 h-14 rounded-2xl font-bold border-2 transition-all ${formData.gender === gender ? "border-pink-500 bg-pink-500/20 text-pink-400 shadow-[0_0_20px_rgba(236,72,153,0.2)]" : "border-neutral-800 bg-neutral-900/50 text-neutral-400 hover:bg-neutral-800"}`}
+                                        className={`flex-1 h-14 rounded-2xl font-bold border-2 transition-all ${formData.gender === gender ? "border-pink-500 bg-pink-500/20 text-pink-400 shadow-[0_0_20px_rgba(236,72,153,0.2)]" : "border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:bg-neutral-800"}`}
                                     >
                                         {gender}
                                     </button>
@@ -133,7 +133,7 @@ export default function OnboardingPage() {
                                 <span className="font-bold uppercase tracking-wider text-sm">Юунд сонирхолтой вэ?</span>
                             </div>
                             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">Миний сонирхол</h2>
-                            <p className="text-neutral-400 text-sm font-medium">Хамгийн ихдээ 5 зүйл сонгох боломжтой.</p>
+                            <p className="text-neutral-500 dark:text-neutral-400 text-sm font-medium">Хамгийн ихдээ 5 зүйл сонгох боломжтой.</p>
 
                             <div className="flex flex-wrap gap-3 mt-4">
                                 {INTERESTS_LIST.map((interest) => {
@@ -145,7 +145,7 @@ export default function OnboardingPage() {
                                             onClick={() => toggleInterest(interest)}
                                             className={`px-5 py-3 rounded-full text-sm font-bold border-2 transition-all ${isSelected
                                                 ? "border-pink-500 bg-gradient-to-r from-pink-600/20 to-purple-600/20 text-pink-400 shadow-[0_0_15px_rgba(236,72,153,0.3)]"
-                                                : "border-neutral-800 bg-neutral-900/50 text-neutral-300 hover:border-neutral-700"
+                                                : "border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 text-neutral-600 dark:text-neutral-300 hover:border-neutral-700"
                                                 }`}
                                         >
                                             {interest}
@@ -160,7 +160,7 @@ export default function OnboardingPage() {
                         <motion.div key="step4" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="space-y-6">
                             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">Гоёмсог зургаа<br />оруулаарай</h2>
 
-                            <label className="aspect-[3/4] w-full max-w-xs mx-auto bg-neutral-900/40 backdrop-blur-xl border-2 border-dashed border-neutral-700 rounded-3xl flex flex-col items-center justify-center gap-4 hover:border-pink-500 hover:bg-neutral-800/50 transition-all cursor-pointer group relative overflow-hidden">
+                            <label className="aspect-[3/4] w-full max-w-xs mx-auto bg-white dark:bg-neutral-900/40 backdrop-blur-xl border-2 border-dashed border-neutral-700 rounded-3xl flex flex-col items-center justify-center gap-4 hover:border-pink-500 hover:bg-neutral-100 dark:bg-neutral-800/50 transition-all cursor-pointer group relative overflow-hidden">
                                 <input 
                                     type="file" 
                                     className="hidden" 
@@ -190,10 +190,10 @@ export default function OnboardingPage() {
                                     <img src={formData.photos[0]} alt="Uploaded" className="w-full h-full object-cover" />
                                 ) : (
                                     <>
-                                        <div className="w-20 h-20 bg-neutral-800/80 rounded-full flex items-center justify-center group-hover:bg-pink-500/20 group-hover:text-pink-500 transition-colors">
-                                            <Camera size={36} className="text-neutral-400 group-hover:text-pink-500 transition-colors" />
+                                        <div className="w-20 h-20 bg-neutral-100 dark:bg-neutral-800/80 rounded-full flex items-center justify-center group-hover:bg-pink-500/20 group-hover:text-pink-500 transition-colors">
+                                            <Camera size={36} className="text-neutral-500 dark:text-neutral-400 group-hover:text-pink-500 transition-colors" />
                                         </div>
-                                        <span className="font-semibold text-neutral-400 group-hover:text-pink-400">Зураг сонгох</span>
+                                        <span className="font-semibold text-neutral-500 dark:text-neutral-400 group-hover:text-pink-400">Зураг сонгох</span>
                                     </>
                                 )}
                             </label>
@@ -209,7 +209,7 @@ export default function OnboardingPage() {
                     whileTap={{ scale: 0.95 }}
                     onClick={nextStep}
                     disabled={(step === 1 && formData.name.length < 2) || loading}
-                    className="w-full h-16 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-[0_10px_40px_-10px_rgba(236,72,153,0.7)] disabled:opacity-50 disabled:grayscale transition-all"
+                    className="w-full h-16 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center text-neutral-900 dark:text-white font-bold text-xl shadow-[0_10px_40px_-10px_rgba(236,72,153,0.7)] disabled:opacity-50 disabled:grayscale transition-all"
                 >
                     {loading ? "Хадгалж байна..." : (step === 4 ? "Бэлэн боллоо" : "Үргэлжлүүлэх")}
                 </motion.button>

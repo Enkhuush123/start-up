@@ -211,7 +211,7 @@ export default function FizzPage() {
   };
 
   return (
-    <div className="relative w-full h-[100dvh] overflow-hidden bg-neutral-950">
+    <div className="relative w-full h-[100dvh] overflow-hidden bg-neutral-50 dark:bg-neutral-950">
       <Map
         mapboxAccessToken={MAPBOX_TOKEN}
         initialViewState={{
@@ -231,9 +231,9 @@ export default function FizzPage() {
             anchor="bottom"
           >
             <div className="relative flex flex-col items-center">
-              <div className="w-14 h-14 rounded-full border-2 border-white overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.8)] z-10 relative bg-neutral-900">
-                <div className="w-full h-full bg-neutral-800 flex items-center justify-center">
-                  <User className="text-white w-6 h-6" />
+              <div className="w-14 h-14 rounded-full border-2 border-white overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.8)] z-10 relative bg-white dark:bg-neutral-900">
+                <div className="w-full h-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                  <User className="text-neutral-900 dark:text-white w-6 h-6" />
                 </div>
               </div>
               <div className="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full mt-[-8px] border border-white shadow-xl z-20">
@@ -254,7 +254,7 @@ export default function FizzPage() {
             anchor="bottom"
           >
             <div className="relative flex flex-col items-center">
-              <div className="w-14 h-14 rounded-full border-2 border-pink-500 overflow-hidden shadow-[0_0_20px_rgba(236,72,153,0.8)] z-10 relative bg-neutral-900">
+              <div className="w-14 h-14 rounded-full border-2 border-pink-500 overflow-hidden shadow-[0_0_20px_rgba(236,72,153,0.8)] z-10 relative bg-white dark:bg-neutral-900">
                 {friend.image ? (
                   <img
                     src={friend.image}
@@ -262,13 +262,13 @@ export default function FizzPage() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full bg-neutral-800 flex items-center justify-center">
+                  <div className="w-full h-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
                     <User className="text-neutral-500 w-6 h-6" />
                   </div>
                 )}
               </div>
-              <div className="bg-neutral-900/90 backdrop-blur-md px-3 py-1 rounded-full mt-[-8px] border border-neutral-700 shadow-xl z-20">
-                <span className="text-[11px] font-extrabold text-white tracking-wider">
+              <div className="bg-white dark:bg-neutral-900/90 backdrop-blur-md px-3 py-1 rounded-full mt-[-8px] border border-neutral-700 shadow-xl z-20">
+                <span className="text-[11px] font-extrabold text-neutral-900 dark:text-white tracking-wider">
                   {friend.name || "Нэргүй"}
                 </span>
               </div>
@@ -283,11 +283,11 @@ export default function FizzPage() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setShowRequests(true)}
-          className="relative bg-neutral-900/60 backdrop-blur-xl border border-neutral-700/50 p-4 rounded-full shadow-xl flex items-center justify-center text-white"
+          className="relative bg-white dark:bg-neutral-900/60 backdrop-blur-xl border border-neutral-700/50 p-4 rounded-full shadow-xl flex items-center justify-center text-neutral-900 dark:text-white"
         >
           <Bell
             size={24}
-            className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+            className="text-neutral-900 dark:text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
           />
           {pendingRequests.length > 0 && (
             <div className="absolute top-0 right-0 w-4 h-4 bg-rose-500 rounded-full flex items-center justify-center text-[9px] font-bold border border-neutral-900">
@@ -300,11 +300,11 @@ export default function FizzPage() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setShowAddFriend(true)}
-          className="bg-neutral-900/60 backdrop-blur-xl border border-neutral-700/50 p-4 rounded-full shadow-xl flex items-center justify-center text-white"
+          className="bg-white dark:bg-neutral-900/60 backdrop-blur-xl border border-neutral-700/50 p-4 rounded-full shadow-xl flex items-center justify-center text-neutral-900 dark:text-white"
         >
           <UserPlus
             size={24}
-            className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+            className="text-neutral-900 dark:text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
           />
         </motion.button>
 
@@ -313,11 +313,11 @@ export default function FizzPage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowStyleMenu(!showStyleMenu)}
-            className="bg-neutral-900/60 backdrop-blur-xl border border-neutral-700/50 p-4 rounded-full shadow-xl flex items-center justify-center text-white"
+            className="bg-white dark:bg-neutral-900/60 backdrop-blur-xl border border-neutral-700/50 p-4 rounded-full shadow-xl flex items-center justify-center text-neutral-900 dark:text-white"
           >
             <Layers
               size={24}
-              className={showStyleMenu ? "text-pink-400" : "text-white"}
+              className={showStyleMenu ? "text-pink-400" : "text-neutral-900 dark:text-white"}
             />
           </motion.button>
 
@@ -328,7 +328,7 @@ export default function FizzPage() {
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.8, x: 20 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="absolute top-16 right-0 bg-neutral-900/80 backdrop-blur-2xl border border-neutral-700/50 p-2 rounded-2xl shadow-2xl flex flex-col gap-1 min-w-[140px]"
+                className="absolute top-16 right-0 bg-white dark:bg-neutral-900/80 backdrop-blur-2xl border border-neutral-700/50 p-2 rounded-2xl shadow-2xl flex flex-col gap-1 min-w-[140px]"
               >
                 {MAP_STYLES.map((style) => {
                   const Icon = style.icon;
@@ -343,7 +343,7 @@ export default function FizzPage() {
                       className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-bold text-xs tracking-wide ${
                         isActive
                           ? "bg-pink-500/20 text-pink-400 border border-pink-500/30 shadow-[0_0_15px_rgba(236,72,153,0.2)]"
-                          : "text-neutral-300 hover:bg-neutral-800 hover:text-white border border-transparent"
+                          : "text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:bg-neutral-800 hover:text-neutral-900 dark:text-white border border-transparent"
                       }`}
                     >
                       <Icon size={16} />
@@ -370,15 +370,15 @@ export default function FizzPage() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="w-full max-w-sm bg-neutral-900/90 backdrop-blur-2xl border border-neutral-700/50 rounded-[2rem] p-6 shadow-2xl relative overflow-hidden"
+              className="w-full max-w-sm bg-white dark:bg-neutral-900/90 backdrop-blur-2xl border border-neutral-700/50 rounded-[2rem] p-6 shadow-2xl relative overflow-hidden"
             >
               <button
                 onClick={() => setShowRequests(false)}
-                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-neutral-800/80 rounded-full text-neutral-400 hover:text-white transition-colors z-10"
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800/80 rounded-full text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors z-10"
               >
                 ✕
               </button>
-              <h3 className="text-2xl font-extrabold text-white mb-6 tracking-tight">
+              <h3 className="text-2xl font-extrabold text-neutral-900 dark:text-white mb-6 tracking-tight">
                 Хүсэлтүүд
               </h3>
 
@@ -391,7 +391,7 @@ export default function FizzPage() {
                   {pendingRequests.map((req) => (
                     <div
                       key={req.id}
-                      className="flex items-center justify-between bg-neutral-950/60 p-3 rounded-2xl border border-neutral-800/80"
+                      className="flex items-center justify-between bg-neutral-50 dark:bg-neutral-950/60 p-3 rounded-2xl border border-neutral-200 dark:border-neutral-800/80"
                     >
                       <div className="flex items-center gap-3">
                         <img
@@ -402,7 +402,7 @@ export default function FizzPage() {
                           alt={req.name}
                           className="w-10 h-10 rounded-full object-cover"
                         />
-                        <span className="text-white font-bold text-sm">
+                        <span className="text-neutral-900 dark:text-white font-bold text-sm">
                           {req.name || "Нэргүй"}
                         </span>
                       </div>
@@ -442,21 +442,21 @@ export default function FizzPage() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="w-full max-w-sm bg-neutral-900/90 backdrop-blur-2xl border border-neutral-700/50 rounded-[2rem] p-6 shadow-2xl relative overflow-hidden"
+              className="w-full max-w-sm bg-white dark:bg-neutral-900/90 backdrop-blur-2xl border border-neutral-700/50 rounded-[2rem] p-6 shadow-2xl relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
               <button
                 onClick={() => setShowAddFriend(false)}
-                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-neutral-800/80 rounded-full text-neutral-400 hover:text-white transition-colors z-10"
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800/80 rounded-full text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors z-10"
               >
                 ✕
               </button>
 
-              <h3 className="text-2xl font-extrabold text-white mb-1 tracking-tight relative z-10">
+              <h3 className="text-2xl font-extrabold text-neutral-900 dark:text-white mb-1 tracking-tight relative z-10">
                 Найз нэмэх
               </h3>
-              <p className="text-neutral-400 text-sm font-medium mb-6 relative z-10">
+              <p className="text-neutral-500 dark:text-neutral-400 text-sm font-medium mb-6 relative z-10">
                 Найзынхаа урилгын кодыг оруулаад Fizz дээр холбогдоорой.
               </p>
 
@@ -466,7 +466,7 @@ export default function FizzPage() {
                   placeholder="Код оруулах (Ж: X7A9K)"
                   value={inviteCodeInput}
                   onChange={(e) => setInviteCodeInput(e.target.value)}
-                  className="w-full h-14 bg-neutral-950/80 border border-neutral-800 rounded-2xl px-5 text-white placeholder:text-neutral-600 focus:outline-none focus:border-pink-500 font-extrabold uppercase tracking-widest text-center"
+                  className="w-full h-14 bg-neutral-50 dark:bg-neutral-950/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl px-5 text-neutral-900 dark:text-white placeholder:text-neutral-600 focus:outline-none focus:border-pink-500 font-extrabold uppercase tracking-widest text-center"
                 />
 
                 {addStatus && (
@@ -487,23 +487,23 @@ export default function FizzPage() {
                   whileTap={{ scale: 0.98 }}
                   onClick={handleAddFriend}
                   disabled={loadingAdd || !inviteCodeInput.trim()}
-                  className="w-full h-14 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-[0_10px_30px_-10px_rgba(236,72,153,0.6)] transition-all disabled:opacity-50 disabled:grayscale"
+                  className="w-full h-14 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center text-neutral-900 dark:text-white font-bold text-lg shadow-[0_10px_30px_-10px_rgba(236,72,153,0.6)] transition-all disabled:opacity-50 disabled:grayscale"
                 >
                   {loadingAdd ? "Уншиж байна..." : "Хүсэлт илгээх"}
                 </motion.button>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-neutral-800/50 relative z-10">
+              <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800/50 relative z-10">
                 <p className="text-[11px] text-neutral-500 text-center uppercase tracking-widest font-extrabold mb-3">
                   Миний урилгын код
                 </p>
-                <div className="flex items-center justify-between bg-neutral-950/60 p-3 rounded-2xl border border-neutral-800/80">
+                <div className="flex items-center justify-between bg-neutral-50 dark:bg-neutral-950/60 p-3 rounded-2xl border border-neutral-200 dark:border-neutral-800/80">
                   <span className="text-pink-400 font-black tracking-widest text-2xl ml-3 drop-shadow-md">
                     {myInviteCode || "..."}
                   </span>
                   <button
                     onClick={copyToClipboard}
-                    className="p-3 bg-neutral-900 hover:bg-neutral-800 rounded-xl transition-colors text-neutral-400 hover:text-white"
+                    className="p-3 bg-white dark:bg-neutral-900 hover:bg-neutral-100 dark:bg-neutral-800 rounded-xl transition-colors text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:text-white"
                   >
                     <Copy size={20} />
                   </button>

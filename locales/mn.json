@@ -1,0 +1,16 @@
+{
+  "nav.discover": "Discover",
+  "nav.fizz": "Fizz",
+  "nav.messages": "Messages",
+  "nav.login": "Нэвтрэх",
+  "nav.signup": "Бүртгүүлэх",
+  "welcome.continue": "Үргэлжлүүлэх",
+  "welcome.signup": "Шинээр бүртгүүлэх",
+  "welcome.login": "Нэвтрэх",
+  "discover.like": "ТААЛАГДЛАА",
+  "discover.nope": "ҮГҮЙ",
+  "discover.anon": "Нэргүй",
+  "discover.dist": "км зайтай",
+  "discover.loading": "Ачааллаж байна...",
+  "discover.empty": "Одоогоор хүн олдсонгүй."
+}

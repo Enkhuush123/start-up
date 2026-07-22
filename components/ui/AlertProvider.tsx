@@ -66,7 +66,7 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
               initial={{ scale: 0.9, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
-              className="relative w-full max-w-sm bg-neutral-900/90 backdrop-blur-xl border border-neutral-700/50 rounded-3xl p-6 shadow-2xl flex flex-col items-center text-center overflow-hidden"
+              className="relative w-full max-w-sm bg-white dark:bg-neutral-900/90 backdrop-blur-xl border border-neutral-700/50 rounded-3xl p-6 shadow-2xl flex flex-col items-center text-center overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -78,11 +78,11 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
                 )}
               </div>
 
-              <h3 className="text-xl font-extrabold text-white mb-2 relative z-10">
+              <h3 className="text-xl font-extrabold text-neutral-900 dark:text-white mb-2 relative z-10">
                 {alert.title || (alert.type === "success" ? "Амжилттай" : alert.type === "error" ? "Алдаа" : "Мэдэгдэл")}
               </h3>
               
-              <p className="text-neutral-400 text-sm font-medium mb-8 relative z-10">
+              <p className="text-neutral-500 dark:text-neutral-400 text-sm font-medium mb-8 relative z-10">
                 {alert.message}
               </p>
 
@@ -91,13 +91,13 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
                   <>
                     <button
                       onClick={handleCancel}
-                      className="flex-1 py-3 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-2xl transition-colors"
+                      className="flex-1 py-3 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-700 text-neutral-900 dark:text-white font-bold rounded-2xl transition-colors"
                     >
                       {alert.cancelText || "Үгүй"}
                     </button>
                     <button
                       onClick={handleConfirm}
-                      className="flex-1 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold rounded-2xl shadow-[0_5px_20px_rgba(236,72,153,0.4)] hover:shadow-[0_5px_25px_rgba(236,72,153,0.6)] transition-all"
+                      className="flex-1 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-neutral-900 dark:text-white font-bold rounded-2xl shadow-[0_5px_20px_rgba(236,72,153,0.4)] hover:shadow-[0_5px_25px_rgba(236,72,153,0.6)] transition-all"
                     >
                       {alert.confirmText || "Тийм"}
                     </button>
@@ -105,7 +105,7 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
                 ) : (
                   <button
                     onClick={closeAlert}
-                    className="w-full py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold rounded-2xl shadow-[0_5px_20px_rgba(236,72,153,0.4)] hover:shadow-[0_5px_25px_rgba(236,72,153,0.6)] transition-all"
+                    className="w-full py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-neutral-900 dark:text-white font-bold rounded-2xl shadow-[0_5px_20px_rgba(236,72,153,0.4)] hover:shadow-[0_5px_25px_rgba(236,72,153,0.6)] transition-all"
                   >
                     {alert.confirmText || "Ойлголоо"}
                   </button>

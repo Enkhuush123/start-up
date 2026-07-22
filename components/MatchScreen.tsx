@@ -60,8 +60,8 @@ export default function MatchScreen({ currentUserPhoto, matchedUser, onClose }: 
         <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 italic tracking-tighter mb-4 drop-shadow-[0_0_25px_rgba(236,72,153,0.5)]">
           It&apos;s a Match!
         </h1>
-        <p className="text-neutral-300 text-lg md:text-xl font-medium mb-12">
-          Та болон <span className="font-bold text-white">{matchedName}</span> бие биедээ таалагдлаа.
+        <p className="text-neutral-600 dark:text-neutral-300 text-lg md:text-xl font-medium mb-12">
+          Та болон <span className="font-bold text-neutral-900 dark:text-white">{matchedName}</span> бие биедээ таалагдлаа.
         </p>
 
         <div className="flex items-center justify-center gap-4 md:gap-8 mb-16 relative">
@@ -81,7 +81,7 @@ export default function MatchScreen({ currentUserPhoto, matchedUser, onClose }: 
               transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.6 }}
               className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center border-4 border-black shadow-[0_0_30px_rgba(236,72,153,0.8)]"
             >
-              <Heart className="text-white fill-white" size={32} />
+              <Heart className="text-neutral-900 dark:text-white fill-white" size={32} />
             </motion.div>
           </div>
 
@@ -101,7 +101,7 @@ export default function MatchScreen({ currentUserPhoto, matchedUser, onClose }: 
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
             onClick={() => router.push("/chat")}
-            className="w-full py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-black text-lg flex items-center justify-center gap-3 shadow-[0_10px_30px_-10px_rgba(236,72,153,0.6)] hover:scale-105 transition-all"
+            className="w-full py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 text-neutral-900 dark:text-white font-black text-lg flex items-center justify-center gap-3 shadow-[0_10px_30px_-10px_rgba(236,72,153,0.6)] hover:scale-105 transition-all"
           >
             <MessageCircle size={24} /> Зурвас бичих
           </motion.button>
@@ -111,7 +111,7 @@ export default function MatchScreen({ currentUserPhoto, matchedUser, onClose }: 
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9 }}
             onClick={onClose}
-            className="w-full py-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-lg transition-all"
+            className="w-full py-4 rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white font-bold text-lg transition-all"
           >
             Үргэлжлүүлэн хайх
           </motion.button>

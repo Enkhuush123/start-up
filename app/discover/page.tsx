@@ -8,6 +8,7 @@ import { getPotentialMatches, recordSwipe } from "@/app/actions/discover";
 import { getUserProfile } from "@/app/actions/profile";
 import { useRouter } from "next/navigation";
 import MatchScreen from "@/components/MatchScreen";
+import { useLanguage } from "@/components/LanguageProvider";
 
 type UserType = {
     id: string;
@@ -29,6 +30,7 @@ export default function DiscoverPage() {
     const [currentUserPhoto, setCurrentUserPhoto] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [matchData, setMatchData] = useState<UserType | null>(null);
+    const { t } = useLanguage();
 
     const [activePhotoIndex, setActivePhotoIndex] = useState(0);
 
@@ -118,7 +120,7 @@ export default function DiscoverPage() {
 
     if (loading) {
         return (
-            <div className="flex h-screen items-center justify-center bg-neutral-950">
+            <div className="flex h-screen items-center justify-center bg-neutral-50 dark:bg-neutral-950">
                 <div className="w-16 h-16 border-4 border-pink-500/20 border-t-pink-500 rounded-full animate-spin" />
             </div>
         );
@@ -141,11 +143,11 @@ export default function DiscoverPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="text-center flex flex-col items-center bg-white/[0.02] p-10 rounded-[3rem] border border-white/[0.05] shadow-2xl backdrop-blur-3xl"
                 >
-                    <div className="w-24 h-24 bg-neutral-900 rounded-full flex items-center justify-center mb-6 shadow-inner">
+                    <div className="w-24 h-24 bg-white dark:bg-neutral-900 rounded-full flex items-center justify-center mb-6 shadow-inner">
                         <Sparkles size={40} className="text-pink-500 animate-pulse" />
                     </div>
-                    <h2 className="text-2xl font-extrabold text-white mb-2">Одоогоор хүн алга байна</h2>
-                    <p className="text-neutral-500 font-medium">Таны эргэн тойронд шинэ хүмүүс гарч ирэхийг хүлээгээрэй.</p>
+                    <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white mb-2">Одоогоор хүн алга байна</h2>
+                    <p className="text-sm font-medium mt-2">{t("discover.empty")}</p>
                 </motion.div>
             ) : (
                 <div className="relative w-full max-w-[420px] h-[65vh] max-h-[600px] min-h-[420px] perspective-1000">
@@ -165,9 +167,9 @@ export default function DiscoverPage() {
                                     initial={isFront ? {} : { scale: 0.92, opacity: 0.8, y: 30, z: -50 }}
                                     animate={{ scale: isFront ? 1 : 0.92, opacity: isFront ? 1 : 0.8, y: isFront ? 0 : 30, z: isFront ? 0 : -50 }}
                                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                                    className={`absolute inset-0 rounded-[2.5rem] overflow-hidden bg-neutral-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/[0.05] ${isFront ? "z-20 cursor-grab active:cursor-grabbing" : "z-10"}`}
+                                    className={`absolute inset-0 rounded-[2.5rem] overflow-hidden bg-white dark:bg-neutral-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/[0.05] ${isFront ? "z-20 cursor-grab active:cursor-grabbing" : "z-10"}`}
                                 >
-                                    <div className="relative w-full h-full bg-neutral-950">
+                                    <div className="relative w-full h-full bg-neutral-50 dark:bg-neutral-950">
                                         <img 
                                             src={currentPhoto} 
                                             alt={user.name || "Хэрэглэгч"} 
@@ -195,11 +197,11 @@ export default function DiscoverPage() {
 
                                         {isFront && (
                                             <>
-                                                <motion.div style={{ opacity: likeOpacity }} className="absolute top-16 left-8 border-[6px] border-emerald-500 text-emerald-500 text-5xl font-black px-6 py-2 rounded-2xl rotate-[-15deg] z-40 bg-black/20 backdrop-blur-sm shadow-[0_0_30px_rgba(16,185,129,0.3)] pointer-events-none">
-                                                    LIKE
+                                                <motion.div style={{ opacity: likeOpacity }} className="absolute top-16 left-8 border-[6px] border-emerald-500 text-emerald-500 text-5xl font-black px-6 py-2 rounded-2xl rotate-[-15deg] z-40 bg-white/20 dark:bg-black/20 backdrop-blur-sm shadow-[0_0_30px_rgba(16,185,129,0.3)] pointer-events-none">
+                                                    {t("discover.like")}
                                                 </motion.div>
-                                                <motion.div style={{ opacity: nopeOpacity }} className="absolute top-16 right-8 border-[6px] border-rose-500 text-rose-500 text-5xl font-black px-6 py-2 rounded-2xl rotate-[15deg] z-40 bg-black/20 backdrop-blur-sm shadow-[0_0_30px_rgba(244,63,94,0.3)] pointer-events-none">
-                                                    NOPE
+                                                <motion.div style={{ opacity: nopeOpacity }} className="absolute top-16 right-8 border-[6px] border-rose-500 text-rose-500 text-5xl font-black px-6 py-2 rounded-2xl rotate-[15deg] z-40 bg-white/20 dark:bg-black/20 backdrop-blur-sm shadow-[0_0_30px_rgba(244,63,94,0.3)] pointer-events-none">
+                                                    {t("discover.nope")}
                                                 </motion.div>
                                             </>
                                         )}
@@ -208,23 +210,23 @@ export default function DiscoverPage() {
                                             <div className="flex items-end justify-between mb-4">
                                                 <div>
                                                     <h1 className="text-4xl font-black text-white flex items-center gap-3 drop-shadow-lg">
-                                                        {user.name || "Нэргүй"} <span className="text-2xl font-medium text-white/80">{user.age}</span>
+                                                        {user.name || t("discover.anon")} <span className="text-2xl font-medium text-white/80">{user.age}</span>
                                                     </h1>
                                                     <div className="flex items-center gap-2 text-white/70 text-sm font-bold mt-2 drop-shadow-md">
                                                         <MapPin size={16} className="text-pink-500" /> 
-                                                        {user.distanceKm != null ? `${user.distanceKm} км зайтай` : `${Math.floor(Math.random() * 10 + 2)} км зайтай`}
+                                                        {user.distanceKm != null ? `${user.distanceKm} ${t("discover.dist")}` : `${Math.floor(Math.random() * 10 + 2)} ${t("discover.dist")}`}
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div className="flex flex-wrap gap-2 pointer-events-auto">
                                                 {user.interests.slice(0, 5).map((interest, i) => (
-                                                    <span key={i} className="px-3.5 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold text-white border border-white/20 shadow-lg">
+                                                    <span key={i} className="px-3.5 py-1.5 bg-black/10 dark:bg-white/10 backdrop-blur-md rounded-full text-xs font-bold text-neutral-900 dark:text-white border border-black/20 dark:border-white/20 shadow-lg">
                                                         {interest}
                                                     </span>
                                                 ))}
                                                 {user.interests.length > 5 && (
-                                                    <span className="px-3.5 py-1.5 bg-white/5 backdrop-blur-md rounded-full text-xs font-bold text-white/70 border border-white/10">
+                                                    <span className="px-3.5 py-1.5 bg-black/5 dark:bg-white/5 backdrop-blur-md rounded-full text-xs font-bold text-neutral-900 dark:text-white/70 border border-black/10 dark:border-white/10">
                                                         +{user.interests.length - 5}
                                                     </span>
                                                 )}
@@ -244,7 +246,7 @@ export default function DiscoverPage() {
                         whileHover={{ scale: 1.15 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => manualSwipe(false)}
-                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-neutral-900 border-2 border-neutral-800 flex items-center justify-center text-rose-500 shadow-[0_15px_35px_-10px_rgba(244,63,94,0.4)] hover:border-rose-500/50 transition-colors"
+                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-rose-500 shadow-[0_15px_35px_-10px_rgba(244,63,94,0.4)] hover:border-rose-500/50 transition-colors"
                     >
                         <X className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={3} />
                     </motion.button>
@@ -253,7 +255,7 @@ export default function DiscoverPage() {
                         whileHover={{ scale: 1.15 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => manualSwipe(true)}
-                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-neutral-900 border-2 border-neutral-800 flex items-center justify-center text-emerald-500 shadow-[0_15px_35px_-10px_rgba(16,185,129,0.4)] hover:border-emerald-500/50 transition-colors"
+                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-emerald-500 shadow-[0_15px_35px_-10px_rgba(16,185,129,0.4)] hover:border-emerald-500/50 transition-colors"
                     >
                         <Heart className="w-8 h-8 sm:w-10 sm:h-10 fill-emerald-500" strokeWidth={3} />
                     </motion.button>

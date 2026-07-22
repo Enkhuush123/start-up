@@ -180,7 +180,7 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-950 text-pink-500 font-bold">
+      <div className="min-h-screen flex items-center justify-center bg-neutral-50 dark:bg-neutral-950 text-pink-500 font-bold">
         Уншиж байна...
       </div>
     );
@@ -189,12 +189,12 @@ export default function ProfilePage() {
   const primaryPhoto = profile.photos.length > 0 ? profile.photos[0] : null;
 
   return (
-    <div className="min-h-[100dvh] pt-28 pb-32 px-4 md:px-8 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-neutral-950 to-neutral-950 flex justify-center selection:bg-pink-500/30 text-white">
+    <div className="min-h-[100dvh] pt-28 pb-32 px-4 md:px-8 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-neutral-950 to-neutral-950 flex justify-center selection:bg-pink-500/30 text-neutral-900 dark:text-white">
       <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
         <div className="lg:col-span-4 flex flex-col items-center space-y-8">
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="relative group cursor-pointer w-56 h-56 rounded-[2.5rem] bg-neutral-900/50 border-2 border-neutral-800/80 overflow-hidden shadow-[0_0_40px_rgba(236,72,153,0.15)] hover:shadow-[0_0_60px_rgba(236,72,153,0.3)] hover:border-pink-500/50 transition-all duration-500"
+            className="relative group cursor-pointer w-56 h-56 rounded-[2.5rem] bg-white dark:bg-neutral-900/50 border-2 border-neutral-200 dark:border-neutral-800/80 overflow-hidden shadow-[0_0_40px_rgba(236,72,153,0.15)] hover:shadow-[0_0_60px_rgba(236,72,153,0.3)] hover:border-pink-500/50 transition-all duration-500"
             onClick={() => fileInputRef.current?.click()}
           >
             {primaryPhoto ? (
@@ -210,14 +210,14 @@ export default function ProfilePage() {
               />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute bottom-6 right-6 w-14 h-14 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center text-white shadow-xl opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-300">
+            <div className="absolute bottom-6 right-6 w-14 h-14 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center text-neutral-900 dark:text-white shadow-xl opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-300">
               <Camera size={26} />
             </div>
           </motion.div>
 
           <div className="w-full bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] p-6 sm:p-8 rounded-[2.5rem] text-center shadow-2xl relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-500/5" />
-            <p className="text-neutral-400 text-xs font-bold uppercase tracking-[0.3em] mb-4 relative z-10">
+            <p className="text-neutral-500 dark:text-neutral-400 text-xs font-bold uppercase tracking-[0.3em] mb-4 relative z-10">
               Миний урилгын код
             </p>
             <div className="flex items-center justify-center gap-4 relative z-10 bg-black/20 py-4 px-6 rounded-2xl">
@@ -226,7 +226,7 @@ export default function ProfilePage() {
               </span>
               <button
                 onClick={copyInviteCode}
-                className="text-neutral-400 hover:text-white hover:bg-white/10 transition-all p-2.5 rounded-xl bg-black/30"
+                className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:text-white hover:bg-black/10 dark:bg-white/10 transition-all p-2.5 rounded-xl bg-black/30"
               >
                 {copied ? (
                   <CheckCircle2 size={22} className="text-emerald-400" />
@@ -243,7 +243,7 @@ export default function ProfilePage() {
           <div className="flex flex-col gap-3">
             <button
               onClick={handleLogout}
-              className="w-full py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all duration-300"
+              className="w-full py-4 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 text-neutral-900 dark:text-white border border-black/10 dark:border-white/10 hover:border-black/20 dark:border-white/20 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all duration-300"
             >
               <LogOut size={22} /> Системээс гарах
             </button>
@@ -260,7 +260,7 @@ export default function ProfilePage() {
           <div className="bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] p-6 md:p-10 rounded-[2.5rem] shadow-2xl">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h2 className="text-2xl font-extrabold text-white flex items-center gap-3">
+                <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white flex items-center gap-3">
                   <Camera className="text-pink-500" size={28} />
                   Таны Зургууд
                 </h2>
@@ -283,7 +283,7 @@ export default function ProfilePage() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
                     key={`${photo}-${idx}`}
-                    className="relative aspect-[3/4] bg-neutral-900/50 rounded-2xl overflow-hidden group border border-white/5"
+                    className="relative aspect-[3/4] bg-white dark:bg-neutral-900/50 rounded-2xl overflow-hidden group border border-white/5"
                   >
                     <img
                       src={photo}
@@ -291,17 +291,17 @@ export default function ProfilePage() {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
 
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-white/40 dark:bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                     {idx === 0 && (
-                      <div className="absolute top-2 left-2 px-2 py-1 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-[10px] font-black rounded-lg uppercase tracking-wider shadow-lg">
+                      <div className="absolute top-2 left-2 px-2 py-1 bg-gradient-to-r from-pink-500 to-purple-500 text-neutral-900 dark:text-white text-[10px] font-black rounded-lg uppercase tracking-wider shadow-lg">
                         Үндсэн
                       </div>
                     )}
 
                     <button
                       onClick={() => removePhoto(idx)}
-                      className="absolute top-2 right-2 p-2 bg-rose-500/90 hover:bg-rose-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 shadow-lg"
+                      className="absolute top-2 right-2 p-2 bg-rose-500/90 hover:bg-rose-500 text-neutral-900 dark:text-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 shadow-lg"
                     >
                       <X size={14} strokeWidth={3} />
                     </button>
@@ -309,7 +309,7 @@ export default function ProfilePage() {
                     {idx !== 0 && (
                       <button
                         onClick={() => makePrimaryPhoto(idx)}
-                        className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 border border-white/20 whitespace-nowrap shadow-lg"
+                        className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/10 dark:bg-white/10 backdrop-blur-md hover:bg-white/20 text-neutral-900 dark:text-white rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 border border-black/20 dark:border-white/20 whitespace-nowrap shadow-lg"
                       >
                         Үндсэн болгох
                       </button>
@@ -319,7 +319,7 @@ export default function ProfilePage() {
               </AnimatePresence>
 
               {profile.photos.length < 10 && (
-                <label className="aspect-[3/4] bg-white/[0.02] border-2 border-dashed border-white/10 hover:border-pink-500/50 hover:bg-pink-500/5 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 group">
+                <label className="aspect-[3/4] bg-white/[0.02] border-2 border-dashed border-black/10 dark:border-white/10 hover:border-pink-500/50 hover:bg-pink-500/5 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 group">
                   <input
                     type="file"
                     className="hidden"
@@ -327,7 +327,7 @@ export default function ProfilePage() {
                     onChange={handlePhotoUpload}
                     ref={fileInputRef}
                   />
-                  <div className="w-12 h-12 rounded-full bg-white/5 group-hover:bg-pink-500/20 flex items-center justify-center mb-3 transition-colors">
+                  <div className="w-12 h-12 rounded-full bg-black/5 dark:bg-white/5 group-hover:bg-pink-500/20 flex items-center justify-center mb-3 transition-colors">
                     <Plus
                       size={24}
                       className="text-neutral-500 group-hover:text-pink-400 transition-colors"
@@ -343,9 +343,9 @@ export default function ProfilePage() {
 
           {/* Profile Details Section */}
           <div className="bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] p-6 md:p-10 rounded-[2.5rem] shadow-2xl">
-            <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/10">
+            <div className="flex items-center gap-3 mb-8 pb-6 border-b border-black/10 dark:border-white/10">
               <Edit2 className="text-purple-400" size={28} />
-              <h2 className="text-2xl md:text-3xl font-extrabold text-white">
+              <h2 className="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white">
                 Хувийн мэдээлэл
               </h2>
             </div>
@@ -353,7 +353,7 @@ export default function ProfilePage() {
             <div className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-neutral-400 ml-1 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-neutral-500 dark:text-neutral-400 ml-1 uppercase tracking-wider">
                     Нэр
                   </label>
                   <input
@@ -362,11 +362,11 @@ export default function ProfilePage() {
                     onChange={(e) =>
                       setProfile({ ...profile, name: e.target.value })
                     }
-                    className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-black/40 transition-all placeholder:text-neutral-700"
+                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all placeholder:text-neutral-700"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-neutral-400 ml-1 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-neutral-500 dark:text-neutral-400 ml-1 uppercase tracking-wider">
                     Нас
                   </label>
                   <input
@@ -375,13 +375,13 @@ export default function ProfilePage() {
                     onChange={(e) =>
                       setProfile({ ...profile, age: e.target.value })
                     }
-                    className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-black/40 transition-all"
+                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-neutral-400 ml-1 uppercase tracking-wider">
+                <label className="text-xs font-bold text-neutral-500 dark:text-neutral-400 ml-1 uppercase tracking-wider">
                   Миний тухай (Bio)
                 </label>
                 <textarea
@@ -391,17 +391,17 @@ export default function ProfilePage() {
                   }
                   rows={4}
                   placeholder="Өөрийнхөө тухай сонирхолтой зүйлсээ энд бичээрэй..."
-                  className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white font-medium focus:outline-none focus:border-purple-500 focus:bg-black/40 transition-all resize-none placeholder:text-neutral-700"
+                  className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-medium focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all resize-none placeholder:text-neutral-700"
                 />
               </div>
 
               <div className="space-y-4">
-                <label className="text-xs font-bold text-neutral-400 ml-1 uppercase tracking-wider flex items-center gap-2">
+                <label className="text-xs font-bold text-neutral-500 dark:text-neutral-400 ml-1 uppercase tracking-wider flex items-center gap-2">
                   <Star size={16} className="text-amber-400" />
                   Сонирхол (Interests)
                 </label>
 
-                <p className="text-neutral-400 text-sm font-medium mb-3">
+                <p className="text-neutral-500 dark:text-neutral-400 text-sm font-medium mb-3">
                   Хамгийн ихдээ 5 зүйл сонгох боломжтой.
                 </p>
 
@@ -416,7 +416,7 @@ export default function ProfilePage() {
                         className={`px-4 py-2.5 rounded-full text-sm font-bold border-2 transition-all ${
                           isSelected
                             ? "border-pink-500 bg-gradient-to-r from-pink-600/20 to-purple-600/20 text-pink-400 shadow-[0_0_15px_rgba(236,72,153,0.3)]"
-                            : "border-neutral-800 bg-neutral-900/50 text-neutral-400 hover:border-neutral-700 hover:text-neutral-300"
+                            : "border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 text-neutral-500 dark:text-neutral-400 hover:border-neutral-700 hover:text-neutral-600 dark:text-neutral-300"
                         }`}
                       >
                         {interest}
@@ -432,7 +432,7 @@ export default function ProfilePage() {
                   whileTap={{ scale: 0.98 }}
                   onClick={handleSave}
                   disabled={saving}
-                  className="w-full h-16 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center gap-3 text-white font-extrabold text-xl shadow-[0_10px_40px_-10px_rgba(168,85,247,0.8)] transition-all disabled:opacity-70 disabled:grayscale border border-white/20"
+                  className="w-full h-16 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center gap-3 text-neutral-900 dark:text-white font-extrabold text-xl shadow-[0_10px_40px_-10px_rgba(168,85,247,0.8)] transition-all disabled:opacity-70 disabled:grayscale border border-black/20 dark:border-white/20"
                 >
                   {saving ? (
                     "Түр хүлээнэ үү..."

@@ -108,19 +108,19 @@ export default function ChatPage() {
 
   if (loading) {
     return (
-      <div className="min-h-[100dvh] flex items-center justify-center bg-neutral-950">
+      <div className="min-h-[100dvh] flex items-center justify-center bg-neutral-50 dark:bg-neutral-950">
         <Loader2 className="w-10 h-10 text-pink-500 animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="relative w-full min-h-[100dvh] pt-20 bg-neutral-950 flex overflow-hidden">
+    <div className="relative w-full min-h-[100dvh] pt-20 bg-neutral-50 dark:bg-neutral-950 flex overflow-hidden">
       <div
-        className={`w-full md:w-96 flex-shrink-0 border-r border-neutral-800 bg-neutral-950 flex flex-col transition-transform duration-300 ${activeMatch ? "-translate-x-full md:translate-x-0 absolute md:relative z-10 h-[calc(100dvh-5rem)]" : "h-[calc(100dvh-5rem)]"}`}
+        className={`w-full md:w-96 flex-shrink-0 border-r border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 flex flex-col transition-transform duration-300 ${activeMatch ? "-translate-x-full md:translate-x-0 absolute md:relative z-10 h-[calc(100dvh-5rem)]" : "h-[calc(100dvh-5rem)]"}`}
       >
-        <div className="p-6 border-b border-neutral-800">
-          <h2 className="text-2xl font-extrabold text-white">Мессеж</h2>
+        <div className="p-6 border-b border-neutral-200 dark:border-neutral-800">
+          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white">Мессеж</h2>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 space-y-2">
@@ -141,9 +141,9 @@ export default function ChatPage() {
                 <div
                   key={match.id}
                   onClick={() => setActiveMatch(match)}
-                  className={`flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all ${isSelected ? "bg-pink-500/10 border border-pink-500/20" : "hover:bg-neutral-900 border border-transparent"}`}
+                  className={`flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all ${isSelected ? "bg-pink-500/10 border border-pink-500/20" : "hover:bg-white dark:bg-neutral-900 border border-transparent"}`}
                 >
-                  <div className="w-14 h-14 rounded-full bg-neutral-800 overflow-hidden flex-shrink-0 relative">
+                  <div className="w-14 h-14 rounded-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden flex-shrink-0 relative">
                     {avatar ? (
                       <img
                         src={avatar}
@@ -155,7 +155,7 @@ export default function ChatPage() {
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-white font-bold truncate">
+                    <h3 className="text-neutral-900 dark:text-white font-bold truncate">
                       {otherUser.name || "Нэргүй"}
                     </h3>
                     <p className="text-neutral-500 text-sm truncate">
@@ -174,15 +174,15 @@ export default function ChatPage() {
       >
         {activeMatch ? (
           <>
-            <div className="h-20 border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-md flex items-center px-4 md:px-8 gap-4 flex-shrink-0 z-30">
+            <div className="h-20 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950/80 backdrop-blur-md flex items-center px-4 md:px-8 gap-4 flex-shrink-0 z-30">
               <button
                 onClick={() => setActiveMatch(null)}
-                className="md:hidden p-2 text-neutral-400 hover:text-white transition-colors"
+                className="md:hidden p-2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors"
               >
                 <ArrowLeft size={24} />
               </button>
 
-              <div className="w-10 h-10 rounded-full bg-neutral-800 overflow-hidden flex-shrink-0">
+              <div className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden flex-shrink-0">
                 {activeMatch.otherUser.photos?.[0] ||
                 activeMatch.otherUser.avatarUrl ? (
                   <img
@@ -198,7 +198,7 @@ export default function ChatPage() {
                 )}
               </div>
               <div>
-                <h3 className="text-white font-bold">
+                <h3 className="text-neutral-900 dark:text-white font-bold">
                   {activeMatch.otherUser.name || "Нэргүй"}
                 </h3>
               </div>
@@ -213,7 +213,7 @@ export default function ChatPage() {
                     className={`flex ${isMe ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`max-w-[75%] px-5 py-3 rounded-2xl ${isMe ? "bg-gradient-to-tr from-pink-500 to-purple-600 text-white rounded-tr-sm shadow-[0_5px_20px_rgba(236,72,153,0.3)]" : "bg-neutral-800/80 text-white rounded-tl-sm border border-neutral-700/50"}`}
+                      className={`max-w-[75%] px-5 py-3 rounded-2xl ${isMe ? "bg-gradient-to-tr from-pink-500 to-purple-600 text-neutral-900 dark:text-white rounded-tr-sm shadow-[0_5px_20px_rgba(236,72,153,0.3)]" : "bg-neutral-100 dark:bg-neutral-800/80 text-neutral-900 dark:text-white rounded-tl-sm border border-neutral-700/50"}`}
                     >
                       <p className="font-medium text-[15px]">{msg.content}</p>
                     </div>
@@ -223,19 +223,19 @@ export default function ChatPage() {
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="p-4 md:p-6 bg-neutral-950 border-t border-neutral-800">
+            <div className="p-4 md:p-6 bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800">
               <form onSubmit={handleSend} className="flex gap-3">
                 <input
                   type="text"
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Мессеж бичих..."
-                  className="flex-1 h-14 bg-neutral-900 border border-neutral-800 rounded-full px-6 text-white focus:outline-none focus:border-pink-500 transition-colors"
+                  className="flex-1 h-14 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-full px-6 text-neutral-900 dark:text-white focus:outline-none focus:border-pink-500 transition-colors"
                 />
                 <button
                   type="submit"
                   disabled={!newMessage.trim() || sending}
-                  className="w-14 h-14 rounded-full bg-pink-500 flex items-center justify-center text-white disabled:opacity-50 disabled:bg-neutral-800 transition-colors flex-shrink-0"
+                  className="w-14 h-14 rounded-full bg-pink-500 flex items-center justify-center text-neutral-900 dark:text-white disabled:opacity-50 disabled:bg-neutral-100 dark:bg-neutral-800 transition-colors flex-shrink-0"
                 >
                   <Send
                     size={20}

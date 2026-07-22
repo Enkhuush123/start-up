@@ -1,0 +1,16 @@
+{
+  "nav.discover": "Discover",
+  "nav.fizz": "Fizz",
+  "nav.messages": "Messages",
+  "nav.login": "Log in",
+  "nav.signup": "Sign up",
+  "welcome.continue": "Continue",
+  "welcome.signup": "Create Account",
+  "welcome.login": "Log In",
+  "discover.like": "LIKE",
+  "discover.nope": "NOPE",
+  "discover.anon": "Anonymous",
+  "discover.dist": "km away",
+  "discover.loading": "Loading...",
+  "discover.empty": "No more people found."
+}

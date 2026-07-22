@@ -5,10 +5,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Heart, Map, MessageCircle, ArrowRight } from "lucide-react";
 import { checkSession } from "@/app/actions/session";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function WelcomePage() {
   const [session, setSession] = useState<{ userId: string } | null>(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
 
   useEffect(() => {
     checkSession().then((payload) => {
@@ -35,7 +37,7 @@ export default function WelcomePage() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-5xl font-extrabold text-white tracking-tight text-center mb-4 leading-tight drop-shadow-lg"
+          className="text-5xl font-extrabold text-neutral-900 dark:text-white tracking-tight text-center mb-4 leading-tight drop-shadow-lg"
         >
           Match.<br />Chat.<br />Fizz.
         </motion.h1>
@@ -53,19 +55,19 @@ export default function WelcomePage() {
           <div className="w-14 h-14 rounded-2xl bg-pink-500/20 flex items-center justify-center border border-pink-500/30 backdrop-blur-md">
             <Heart className="text-pink-400 w-6 h-6" />
           </div>
-          <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">Discover</span>
+          <span className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Discover</span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <div className="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center border border-purple-500/30 backdrop-blur-md">
             <MessageCircle className="text-purple-400 w-6 h-6" />
           </div>
-          <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">Chat</span>
+          <span className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Chat</span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30 backdrop-blur-md">
             <Map className="text-emerald-400 w-6 h-6" />
           </div>
-          <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">Fizz</span>
+          <span className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Fizz</span>
         </div>
       </motion.div>
 
@@ -78,20 +80,20 @@ export default function WelcomePage() {
         {!loading && (
           session ? (
             <Link href="/discover" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-lg font-bold text-white shadow-[0_10px_30px_rgba(236,72,153,0.4)] hover:scale-105 transition-all flex items-center justify-center gap-3">
-                Үргэлжлүүлэх <ArrowRight size={22} />
+              <button className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-lg font-bold text-neutral-900 dark:text-white shadow-[0_10px_30px_rgba(236,72,153,0.4)] hover:scale-105 transition-all flex items-center justify-center gap-3">
+                {t("welcome.continue")} <ArrowRight size={22} />
               </button>
             </Link>
           ) : (
             <>
               <Link href="/signup" className="w-full sm:w-auto">
-                <button className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-lg font-bold text-white shadow-[0_10px_30px_rgba(236,72,153,0.4)] hover:scale-105 transition-all">
-                  Шинээр бүртгүүлэх
+                <button className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-lg font-bold text-neutral-900 dark:text-white shadow-[0_10px_30px_rgba(236,72,153,0.4)] hover:scale-105 transition-all">
+                  {t("welcome.signup")}
                 </button>
               </Link>
               <Link href="/login" className="w-full sm:w-auto">
-                <button className="w-full sm:w-auto px-8 py-4 bg-neutral-900 border-2 border-neutral-800 rounded-full text-lg font-bold text-white hover:border-neutral-700 hover:bg-neutral-800 transition-all">
-                  Нэвтрэх
+                <button className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 rounded-full text-lg font-bold text-neutral-900 dark:text-white hover:border-neutral-700 hover:bg-neutral-100 dark:bg-neutral-800 transition-all">
+                  {t("welcome.login")}
                 </button>
               </Link>
             </>
