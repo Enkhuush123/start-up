@@ -39,6 +39,12 @@ export default function ProfilePage() {
     bio: "",
     age: "",
     gender: "",
+    height: "",
+    zodiacSign: "",
+    loveLanguage: "",
+    drinking: "",
+    smoking: "",
+    lookingFor: "",
     inviteCode: "",
     interests: [] as string[],
     photos: [] as string[],
@@ -63,6 +69,12 @@ export default function ProfilePage() {
           bio: data.bio || "",
           age: data.age?.toString() || "",
           gender: data.gender || "",
+          height: data.height?.toString() || "",
+          zodiacSign: data.zodiacSign || "",
+          loveLanguage: data.loveLanguage || "",
+          drinking: data.drinking || "",
+          smoking: data.smoking || "",
+          lookingFor: data.lookingFor || "",
           inviteCode: data.inviteCode || "",
           interests: data.interests || [],
           photos: data.photos || [],
@@ -81,6 +93,12 @@ export default function ProfilePage() {
       bio: profile.bio,
       age: parseInt(profile.age) || null,
       gender: profile.gender,
+      height: parseInt(profile.height) || null,
+      zodiacSign: profile.zodiacSign,
+      loveLanguage: profile.loveLanguage,
+      drinking: profile.drinking,
+      smoking: profile.smoking,
+      lookingFor: profile.lookingFor,
       interests: profile.interests,
       photos: profile.photos,
     });
@@ -384,6 +402,82 @@ export default function ProfilePage() {
                     }
                     className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all"
                   />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-neutral-500 dark:text-neutral-400 ml-1 uppercase tracking-wider">
+                    Өндөр (см)
+                  </label>
+                  <input
+                    type="number"
+                    value={profile.height}
+                    onChange={(e) =>
+                      setProfile({ ...profile, height: e.target.value })
+                    }
+                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-neutral-500 dark:text-neutral-400 ml-1 uppercase tracking-wider">
+                    Орд
+                  </label>
+                  <select
+                    value={profile.zodiacSign}
+                    onChange={(e) => setProfile({ ...profile, zodiacSign: e.target.value })}
+                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all appearance-none"
+                  >
+                    <option value="">Сонгох</option>
+                    <option value="Хонь">Хонь ♈</option>
+                    <option value="Үхэр">Үхэр ♉</option>
+                    <option value="Ихэр">Ихэр ♊</option>
+                    <option value="Мэлхий">Мэлхий ♋</option>
+                    <option value="Арслан">Арслан ♌</option>
+                    <option value="Охин">Охин ♍</option>
+                    <option value="Жинлүүр">Жинлүүр ♎</option>
+                    <option value="Хилэнц">Хилэнц ♏</option>
+                    <option value="Нум">Нум ♐</option>
+                    <option value="Матар">Матар ♑</option>
+                    <option value="Хумх">Хумх ♒</option>
+                    <option value="Загас">Загас ♓</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-neutral-500 dark:text-neutral-400 ml-1 uppercase tracking-wider">
+                    Хайрын хэл
+                  </label>
+                  <select
+                    value={profile.loveLanguage}
+                    onChange={(e) => setProfile({ ...profile, loveLanguage: e.target.value })}
+                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all appearance-none"
+                  >
+                    <option value="">Сонгох</option>
+                    <option value="Сайхан үгс">Сайхан үгс 🗣️</option>
+                    <option value="Хамт өнгөрүүлэх цаг">Хамт өнгөрүүлэх цаг ⏳</option>
+                    <option value="Бэлэг">Бэлэг 🎁</option>
+                    <option value="Тусламж дэмжлэг">Тусламж дэмжлэг 🤝</option>
+                    <option value="Хүрэлцэхүй">Хүрэлцэхүй 🫂</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-neutral-500 dark:text-neutral-400 ml-1 uppercase tracking-wider">
+                    Юу хайж байгаа вэ?
+                  </label>
+                  <select
+                    value={profile.lookingFor}
+                    onChange={(e) => setProfile({ ...profile, lookingFor: e.target.value })}
+                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all appearance-none"
+                  >
+                    <option value="">Сонгох</option>
+                    <option value="Үерхэл">Үерхэл ❤️</option>
+                    <option value="Найз">Найз нөхөд 🤝</option>
+                    <option value="Хөнгөн харилцаа">Хөнгөн харилцаа 🍷</option>
+                    <option value="Гэрлэлт">Гэрлэлт 💍</option>
+                  </select>
                 </div>
               </div>
 

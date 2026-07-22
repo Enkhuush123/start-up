@@ -25,6 +25,12 @@ export default function OnboardingPage() {
         name: "",
         age: "",
         gender: "",
+        height: "",
+        zodiacSign: "",
+        loveLanguage: "",
+        drinking: "",
+        smoking: "",
+        lookingFor: "",
         interests: [] as string[],
         photos: [] as string[],
     });
@@ -40,7 +46,7 @@ export default function OnboardingPage() {
     };
 
     const nextStep = async () => {
-        if (step < 4) {
+        if (step < 5) {
             setStep(step + 1);
         } else {
             setLoading(true);
@@ -51,6 +57,12 @@ export default function OnboardingPage() {
                     name: formData.name,
                     age: parseInt(formData.age) || 18,
                     gender: formData.gender,
+                    height: parseInt(formData.height) || undefined,
+                    zodiacSign: formData.zodiacSign,
+                    loveLanguage: formData.loveLanguage,
+                    drinking: formData.drinking,
+                    smoking: formData.smoking,
+                    lookingFor: formData.lookingFor,
                     interests: formData.interests,
                     photos: formData.photos
                 });
@@ -71,7 +83,7 @@ export default function OnboardingPage() {
                 <motion.div
                     className="h-full bg-gradient-to-r from-pink-500 to-purple-500 shadow-[0_0_15px_rgba(236,72,153,0.8)]"
                     initial={{ width: "25%" }}
-                    animate={{ width: `${(step / 4) * 100}%` }}
+                    animate={{ width: `${(step / 5) * 100}%` }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                 />
             </div>
@@ -159,6 +171,55 @@ export default function OnboardingPage() {
 
                     {step === 4 && (
                         <motion.div key="step4" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="space-y-6">
+                            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">Дэлгэрэнгүй</h2>
+                            
+                            <div className="space-y-4">
+                                <input
+                                    type="number"
+                                    placeholder="Өндөр (см)"
+                                    value={formData.height}
+                                    onChange={(e) => setFormData({ ...formData, height: e.target.value })}
+                                    className="w-full h-14 bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 focus:border-pink-500 outline-none placeholder:text-neutral-500 font-medium"
+                                />
+
+                                <select value={formData.zodiacSign} onChange={e => setFormData({...formData, zodiacSign: e.target.value})} className="w-full h-14 bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 focus:border-pink-500 outline-none font-medium">
+                                    <option value="" className="text-neutral-500">Орд сонгох</option>
+                                    <option value="Хонь">Хонь ♈</option>
+                                    <option value="Үхэр">Үхэр ♉</option>
+                                    <option value="Ихэр">Ихэр ♊</option>
+                                    <option value="Мэлхий">Мэлхий ♋</option>
+                                    <option value="Арслан">Арслан ♌</option>
+                                    <option value="Охин">Охин ♍</option>
+                                    <option value="Жинлүүр">Жинлүүр ♎</option>
+                                    <option value="Хилэнц">Хилэнц ♏</option>
+                                    <option value="Нум">Нум ♐</option>
+                                    <option value="Матар">Матар ♑</option>
+                                    <option value="Хумх">Хумх ♒</option>
+                                    <option value="Загас">Загас ♓</option>
+                                </select>
+
+                                <select value={formData.lookingFor} onChange={e => setFormData({...formData, lookingFor: e.target.value})} className="w-full h-14 bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 focus:border-pink-500 outline-none font-medium">
+                                    <option value="" className="text-neutral-500">Юу хайж байгаа вэ?</option>
+                                    <option value="Үерхэл">Үерхэл ❤️</option>
+                                    <option value="Найз">Найз нөхөд 🤝</option>
+                                    <option value="Хөнгөн харилцаа">Хөнгөн харилцаа 🍷</option>
+                                    <option value="Гэрлэлт">Гэрлэлт 💍</option>
+                                </select>
+
+                                <select value={formData.loveLanguage} onChange={e => setFormData({...formData, loveLanguage: e.target.value})} className="w-full h-14 bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 focus:border-pink-500 outline-none font-medium">
+                                    <option value="" className="text-neutral-500">Хайрын хэл</option>
+                                    <option value="Сайхан үгс">Сайхан үгс 🗣️</option>
+                                    <option value="Хамт өнгөрүүлэх цаг">Хамт өнгөрүүлэх цаг ⏳</option>
+                                    <option value="Бэлэг">Бэлэг 🎁</option>
+                                    <option value="Тусламж дэмжлэг">Тусламж дэмжлэг 🤝</option>
+                                    <option value="Хүрэлцэхүй">Хүрэлцэхүй 🫂</option>
+                                </select>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {step === 5 && (
+                        <motion.div key="step5" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="space-y-6">
                             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">Гоёмсог зургаа<br />оруулаарай</h2>
 
                             <label className="aspect-[3/4] w-full max-w-xs mx-auto bg-white dark:bg-neutral-900/40 backdrop-blur-xl border-2 border-dashed border-neutral-700 rounded-3xl flex flex-col items-center justify-center gap-4 hover:border-pink-500 hover:bg-neutral-100 dark:bg-neutral-800/50 transition-all cursor-pointer group relative overflow-hidden">

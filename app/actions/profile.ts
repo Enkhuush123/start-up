@@ -16,6 +16,12 @@ export async function updateUserProfile(userId: string, data: {
     gender?: string;
     interests?: string[];
     photos?: string[];
+    height?: number | null;
+    zodiacSign?: string;
+    loveLanguage?: string;
+    drinking?: string;
+    smoking?: string;
+    lookingFor?: string;
 }) {
   const avatarUrl = data.photos && data.photos.length > 0 ? data.photos[0] : undefined;
   

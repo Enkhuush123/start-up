@@ -8,6 +8,12 @@ export async function completeOnboarding(
         name: string;
         age: number;
         gender: string;
+        height?: number;
+        zodiacSign?: string;
+        loveLanguage?: string;
+        drinking?: string;
+        smoking?: string;
+        lookingFor?: string;
         interests: string[];
         photos?: string[];
     }
@@ -18,6 +24,12 @@ export async function completeOnboarding(
         name: data.name,
         age: data.age,
         gender: data.gender,
+        height: data.height,
+        zodiacSign: data.zodiacSign,
+        loveLanguage: data.loveLanguage,
+        drinking: data.drinking,
+        smoking: data.smoking,
+        lookingFor: data.lookingFor,
         interests: data.interests,
         inviteCode: inviteCode,
     };

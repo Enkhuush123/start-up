@@ -26,6 +26,13 @@ model User {
   avatarUrl String?
   age       Int?
   gender    String?
+  height    Int?
+  zodiacSign String?
+  loveLanguage String?
+  drinking   String?
+  smoking    String?
+  lookingFor String?
+  
   interests String[] @default([])
   photos    String[] @default([])
 

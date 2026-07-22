@@ -9,6 +9,7 @@ import { getUnreadMessageCount } from "@/app/actions/chat";
 import { getPendingRequestCount } from "@/app/actions/map";
 import { useTheme } from "@/components/ThemeProvider";
 import { useLanguage } from "@/components/LanguageProvider";
+import { getLoveFact } from "@/app/actions/ai";
 
 export default function TopNav() {
     const pathname = usePathname();
@@ -17,8 +18,14 @@ export default function TopNav() {
     const { lang, toggleLang, t } = useLanguage();
     const [unreadCount, setUnreadCount] = useState(0);
     const [mapRequestCount, setMapRequestCount] = useState(0);
+    const [loveFact, setLoveFact] = useState("Хайрын баримтууд...");
 
     useEffect(() => {
+        getLoveFact().then(fact => setLoveFact(fact));
+        const factInterval = setInterval(() => {
+            getLoveFact().then(fact => setLoveFact(fact));
+        }, 30000); // 30 seconds
+
         checkSession().then((payload) => {
             setSession(payload);
         }).catch(err => console.error("checkSession failed:", err));
@@ -62,7 +69,12 @@ export default function TopNav() {
                 <span className="text-xl font-extrabold tracking-tight text-neutral-900 dark:text-white hidden sm:block">Rizz & Fizz</span>
             </Link>
 
-            <div className="hidden md:flex items-center gap-10">
+            <div className="hidden lg:flex items-center gap-2 max-w-sm overflow-hidden bg-pink-500/10 px-4 py-2 rounded-full border border-pink-500/20 shadow-inner">
+                <Heart size={14} className="text-pink-500 flex-shrink-0 animate-pulse" fill="currentColor" />
+                <p className="text-xs text-neutral-600 dark:text-neutral-300 truncate font-medium">{loveFact}</p>
+            </div>
+
+            <div className="hidden md:flex items-center gap-8">
                 {navItems.map((item) => {
                     const isActive = pathname === item.href;
                     const Icon = item.icon;
@@ -88,6 +100,13 @@ export default function TopNav() {
                         </Link>
                     );
                 })}
+                <Link
+                    href="/cupid"
+                    className="relative flex items-center gap-2 text-sm font-bold transition-all text-pink-500 dark:text-pink-400 hover:text-pink-600 dark:hover:text-pink-300 drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]"
+                >
+                    <Heart size={18} strokeWidth={2.5} fill="currentColor" className="animate-pulse" />
+                    Cupid AI
+                </Link>
             </div>
 
             <div className="flex items-center gap-2 sm:gap-4">

@@ -3,9 +3,10 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, ArrowLeft, Loader2, User, MessageCircle } from "lucide-react";
+import { Send, ArrowLeft, Loader2, User, MessageCircle, Sparkles, MapPin } from "lucide-react";
 import { checkSession, logoutUser } from "@/app/actions/session";
 import { getMatches, getMessages, sendMessage } from "@/app/actions/chat";
+import { evaluateChat, suggestDateIdeas } from "@/app/actions/ai";
 
 type MatchType = {
   id: string;
@@ -45,6 +46,11 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [errorModal, setErrorModal] = useState<string | null>(null);
+
+  const [chatEmoji, setChatEmoji] = useState<string | null>(null);
+  const [evaluating, setEvaluating] = useState(false);
+  const [dateIdeas, setDateIdeas] = useState<string | null>(null);
+  const [suggestingDate, setSuggestingDate] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -112,6 +118,22 @@ export default function ChatPage() {
       }, 3000);
     }
     setSending(false);
+  };
+
+  const handleEvaluate = async () => {
+    if (!activeMatch) return;
+    setEvaluating(true);
+    const res = await evaluateChat(activeMatch.id);
+    setChatEmoji(res.emoji);
+    setEvaluating(false);
+  };
+
+  const handleDateIdeas = async () => {
+    if (!activeMatch) return;
+    setSuggestingDate(true);
+    const res = await suggestDateIdeas(activeMatch.id);
+    setDateIdeas(res.ideas || res.error || "Алдаа гарлаа.");
+    setSuggestingDate(false);
   };
 
   if (loading) {
@@ -205,14 +227,52 @@ export default function ChatPage() {
                   <User className="w-6 h-6 m-2 text-neutral-500" />
                 )}
               </div>
-              <div>
-                <h3 className="text-neutral-900 dark:text-white font-bold">
-                  {activeMatch.otherUser.name || "Нэргүй"}
-                </h3>
+              <div className="flex-1 flex justify-between items-center pr-2 md:pr-0">
+                <div>
+                  <h3 className="text-neutral-900 dark:text-white font-bold flex items-center gap-2">
+                    {activeMatch.otherUser.name || "Нэргүй"}
+                    {chatEmoji && <span className="text-xl animate-bounce">{chatEmoji}</span>}
+                  </h3>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleEvaluate}
+                    disabled={evaluating}
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-500/10 text-purple-500 hover:bg-purple-500/20 rounded-full text-xs font-bold transition-colors disabled:opacity-50"
+                  >
+                    {evaluating ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
+                    <span className="hidden sm:inline">Дүгнэх</span>
+                  </button>
+                  <button
+                    onClick={handleDateIdeas}
+                    disabled={suggestingDate}
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-pink-500/10 text-pink-500 hover:bg-pink-500/20 rounded-full text-xs font-bold transition-colors disabled:opacity-50"
+                  >
+                    {suggestingDate ? <Loader2 size={14} className="animate-spin" /> : <MapPin size={14} />}
+                    <span className="hidden sm:inline">Болзоо</span>
+                  </button>
+                </div>
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6">
+            <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 relative">
+              {dateIdeas && (
+                <div className="sticky top-0 z-10 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md p-4 rounded-2xl border border-pink-500/20 shadow-xl mb-6">
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="font-bold text-pink-500 flex items-center gap-2">
+                      <Sparkles size={16} /> Болзооны санаанууд
+                    </h4>
+                    <button onClick={() => setDateIdeas(null)} className="text-neutral-400 hover:text-neutral-600 dark:hover:text-white">
+                       ✕
+                    </button>
+                  </div>
+                  <div className="text-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap font-medium leading-relaxed">
+                    {dateIdeas}
+                  </div>
+                </div>
+              )}
+              
               {messages.map((msg, i) => {
                 const isMe = msg.senderId === userId;
                 return (
