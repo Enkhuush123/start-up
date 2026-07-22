@@ -45,6 +45,7 @@ export type UserMinAggregateOutputType = {
   username: string | null
   passwordHash: string | null
   isVerified: boolean | null
+  isBanned: boolean | null
   name: string | null
   bio: string | null
   avatarUrl: string | null
@@ -64,6 +65,7 @@ export type UserMaxAggregateOutputType = {
   username: string | null
   passwordHash: string | null
   isVerified: boolean | null
+  isBanned: boolean | null
   name: string | null
   bio: string | null
   avatarUrl: string | null
@@ -83,6 +85,7 @@ export type UserCountAggregateOutputType = {
   username: number
   passwordHash: number
   isVerified: number
+  isBanned: number
   name: number
   bio: number
   avatarUrl: number
@@ -118,6 +121,7 @@ export type UserMinAggregateInputType = {
   username?: true
   passwordHash?: true
   isVerified?: true
+  isBanned?: true
   name?: true
   bio?: true
   avatarUrl?: true
@@ -137,6 +141,7 @@ export type UserMaxAggregateInputType = {
   username?: true
   passwordHash?: true
   isVerified?: true
+  isBanned?: true
   name?: true
   bio?: true
   avatarUrl?: true
@@ -156,6 +161,7 @@ export type UserCountAggregateInputType = {
   username?: true
   passwordHash?: true
   isVerified?: true
+  isBanned?: true
   name?: true
   bio?: true
   avatarUrl?: true
@@ -264,6 +270,7 @@ export type UserGroupByOutputType = {
   username: string | null
   passwordHash: string | null
   isVerified: boolean
+  isBanned: boolean
   name: string | null
   bio: string | null
   avatarUrl: string | null
@@ -308,6 +315,7 @@ export type UserWhereInput = {
   username?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   isVerified?: Prisma.BoolFilter<"User"> | boolean
+  isBanned?: Prisma.BoolFilter<"User"> | boolean
   name?: Prisma.StringNullableFilter<"User"> | string | null
   bio?: Prisma.StringNullableFilter<"User"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
@@ -334,6 +342,7 @@ export type UserOrderByWithRelationInput = {
   username?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   isVerified?: Prisma.SortOrder
+  isBanned?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -364,6 +373,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   isVerified?: Prisma.BoolFilter<"User"> | boolean
+  isBanned?: Prisma.BoolFilter<"User"> | boolean
   name?: Prisma.StringNullableFilter<"User"> | string | null
   bio?: Prisma.StringNullableFilter<"User"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
@@ -389,6 +399,7 @@ export type UserOrderByWithAggregationInput = {
   username?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   isVerified?: Prisma.SortOrder
+  isBanned?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -418,6 +429,7 @@ export type UserScalarWhereWithAggregatesInput = {
   username?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   passwordHash?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  isBanned?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -439,6 +451,7 @@ export type UserCreateInput = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -465,6 +478,7 @@ export type UserUncheckedCreateInput = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -491,6 +505,7 @@ export type UserUpdateInput = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -517,6 +532,7 @@ export type UserUncheckedUpdateInput = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -543,6 +559,7 @@ export type UserCreateManyInput = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -564,6 +581,7 @@ export type UserUpdateManyMutationInput = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -585,6 +603,7 @@ export type UserUncheckedUpdateManyInput = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -614,6 +633,7 @@ export type UserCountOrderByAggregateInput = {
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
+  isBanned?: Prisma.SortOrder
   name?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
@@ -641,6 +661,7 @@ export type UserMaxOrderByAggregateInput = {
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
+  isBanned?: Prisma.SortOrder
   name?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
@@ -660,6 +681,7 @@ export type UserMinOrderByAggregateInput = {
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
+  isBanned?: Prisma.SortOrder
   name?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
@@ -810,6 +832,7 @@ export type UserCreateWithoutMatchesAsUser1Input = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -835,6 +858,7 @@ export type UserUncheckedCreateWithoutMatchesAsUser1Input = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -865,6 +889,7 @@ export type UserCreateWithoutMatchesAsUser2Input = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -890,6 +915,7 @@ export type UserUncheckedCreateWithoutMatchesAsUser2Input = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -931,6 +957,7 @@ export type UserUpdateWithoutMatchesAsUser1Input = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -956,6 +983,7 @@ export type UserUncheckedUpdateWithoutMatchesAsUser1Input = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -992,6 +1020,7 @@ export type UserUpdateWithoutMatchesAsUser2Input = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1017,6 +1046,7 @@ export type UserUncheckedUpdateWithoutMatchesAsUser2Input = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1042,6 +1072,7 @@ export type UserCreateWithoutFriendsAsUser1Input = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -1067,6 +1098,7 @@ export type UserUncheckedCreateWithoutFriendsAsUser1Input = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -1097,6 +1129,7 @@ export type UserCreateWithoutFriendsAsUser2Input = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -1122,6 +1155,7 @@ export type UserUncheckedCreateWithoutFriendsAsUser2Input = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -1163,6 +1197,7 @@ export type UserUpdateWithoutFriendsAsUser1Input = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1188,6 +1223,7 @@ export type UserUncheckedUpdateWithoutFriendsAsUser1Input = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1224,6 +1260,7 @@ export type UserUpdateWithoutFriendsAsUser2Input = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1249,6 +1286,7 @@ export type UserUncheckedUpdateWithoutFriendsAsUser2Input = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1274,6 +1312,7 @@ export type UserCreateWithoutMessagesSentInput = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -1299,6 +1338,7 @@ export type UserUncheckedCreateWithoutMessagesSentInput = {
   username?: string | null
   passwordHash?: string | null
   isVerified?: boolean
+  isBanned?: boolean
   name?: string | null
   bio?: string | null
   avatarUrl?: string | null
@@ -1340,6 +1380,7 @@ export type UserUpdateWithoutMessagesSentInput = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1365,6 +1406,7 @@ export type UserUncheckedUpdateWithoutMessagesSentInput = {
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1457,6 +1499,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   username?: boolean
   passwordHash?: boolean
   isVerified?: boolean
+  isBanned?: boolean
   name?: boolean
   bio?: boolean
   avatarUrl?: boolean
@@ -1484,6 +1527,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   username?: boolean
   passwordHash?: boolean
   isVerified?: boolean
+  isBanned?: boolean
   name?: boolean
   bio?: boolean
   avatarUrl?: boolean
@@ -1505,6 +1549,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   username?: boolean
   passwordHash?: boolean
   isVerified?: boolean
+  isBanned?: boolean
   name?: boolean
   bio?: boolean
   avatarUrl?: boolean
@@ -1526,6 +1571,7 @@ export type UserSelectScalar = {
   username?: boolean
   passwordHash?: boolean
   isVerified?: boolean
+  isBanned?: boolean
   name?: boolean
   bio?: boolean
   avatarUrl?: boolean
@@ -1540,7 +1586,7 @@ export type UserSelectScalar = {
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "phone" | "username" | "passwordHash" | "isVerified" | "name" | "bio" | "avatarUrl" | "age" | "gender" | "interests" | "photos" | "inviteCode" | "lat" | "lng" | "lastActive" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "phone" | "username" | "passwordHash" | "isVerified" | "isBanned" | "name" | "bio" | "avatarUrl" | "age" | "gender" | "interests" | "photos" | "inviteCode" | "lat" | "lng" | "lastActive" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   matchesAsUser1?: boolean | Prisma.User$matchesAsUser1Args<ExtArgs>
   matchesAsUser2?: boolean | Prisma.User$matchesAsUser2Args<ExtArgs>
@@ -1568,6 +1614,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     username: string | null
     passwordHash: string | null
     isVerified: boolean
+    isBanned: boolean
     name: string | null
     bio: string | null
     avatarUrl: string | null
@@ -2014,6 +2061,7 @@ export interface UserFieldRefs {
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly isVerified: Prisma.FieldRef<"User", 'Boolean'>
+  readonly isBanned: Prisma.FieldRef<"User", 'Boolean'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly bio: Prisma.FieldRef<"User", 'String'>
   readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
