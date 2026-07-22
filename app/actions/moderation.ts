@@ -11,7 +11,7 @@ export async function checkMessageContent(content: string): Promise<boolean> {
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
     const prompt = `
 Та бол чатны аюулгүй байдлыг хянах систем юм. 
@@ -29,11 +29,13 @@ export async function checkMessageContent(content: string): Promise<boolean> {
     if (text.includes("YES")) {
       return true; // Is bad
     }
-    
+
     return false; // Is clean
   } catch (error) {
     console.error("Moderation AI Error:", error);
-    throw new Error(error instanceof Error ? error.message : "Unknown AI Error");
+    throw new Error(
+      error instanceof Error ? error.message : "Unknown AI Error",
+    );
   }
 }
 
@@ -41,7 +43,7 @@ export async function applyBan(userId: string) {
   try {
     await prisma.user.update({
       where: { id: userId },
-      data: { isBanned: true }
+      data: { isBanned: true },
     });
   } catch (error) {
     console.error("Failed to ban user:", error);
