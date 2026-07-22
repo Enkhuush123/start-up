@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
-import { join } from "path";
-import { randomUUID } from "crypto";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request: Request) {
   try {
@@ -15,13 +19,17 @@ export async function POST(request: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Convert file to base64 Data URI instead of saving to local disk
-    // This allows photo uploads to work on Vercel without S3/Blob storage
-    const mimeType = file.type || "image/jpeg";
     const base64String = buffer.toString("base64");
+    const mimeType = file.type || "image/jpeg";
     const dataUri = `data:${mimeType};base64,${base64String}`;
 
-    return NextResponse.json({ success: true, url: dataUri });
+    // Upload to Cloudinary
+    const uploadResponse = await cloudinary.uploader.upload(dataUri, {
+      folder: "rizz_and_fizz",
+      resource_type: "auto",
+    });
+
+    return NextResponse.json({ success: true, url: uploadResponse.secure_url });
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
