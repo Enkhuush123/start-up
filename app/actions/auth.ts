@@ -3,6 +3,9 @@
 import { prisma } from "@/lib/prisma";
 import { hashPassword, comparePassword } from "@/lib/hash";
 import { setSession } from "@/lib/session";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 export async function signupUser(data: {
@@ -12,20 +15,22 @@ export async function signupUser(data: {
 }) {
   const isEmail = data.emailOrPhone.includes("@");
   
+  if (!isEmail) {
+    return { error: "Зөвхөн Имэйл хаягаар бүртгүүлэх боломжтой." };
+  }
   
   const existing = await prisma.user.findFirst({
     where: {
       OR: [
         { username: data.username },
-        { email: isEmail ? data.emailOrPhone : undefined },
-        { phone: !isEmail ? data.emailOrPhone : undefined }
+        { email: data.emailOrPhone }
       ]
     }
   });
 
   if (existing) {
     if (existing.username === data.username) return { error: "Нэвтрэх нэр (Username) давхцаж байна." };
-    return { error: "Энэ бүртгэл (Утас/Имэйл) аль хэдийн бүртгэлтэй байна." };
+    return { error: "Энэ Имэйл хаяг аль хэдийн бүртгэлтэй байна." };
   }
 
   const hashedPassword = await hashPassword(data.passwordRaw);
@@ -52,9 +57,28 @@ export async function signupUser(data: {
   });
 
   
-  console.log(`[DEV ONLY] OTP CODE for ${data.emailOrPhone}: ${otpCode}`);
+  try {
+    await resend.emails.send({
+      from: "Rizz & Fizz <onboarding@resend.dev>",
+      to: data.emailOrPhone,
+      subject: "Rizz & Fizz баталгаажуулах код",
+      html: `
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; text-align: center;">
+          <h2>Rizz & Fizz тавтай морилно уу!</h2>
+          <p>Таны баталгаажуулах код доор байна:</p>
+          <div style="font-size: 32px; font-weight: bold; letter-spacing: 5px; padding: 20px; background: #f4f4f5; border-radius: 10px; margin: 20px 0;">
+            ${otpCode}
+          </div>
+          <p style="color: #666; font-size: 12px;">Энэхүү код 10 минутын дараа дуусна.</p>
+        </div>
+      `
+    });
+  } catch (error) {
+    console.error("Failed to send email:", error);
+    return { error: "Имэйл илгээхэд алдаа гарлаа. Та имэйл хаягаа шалгана уу." };
+  }
 
-  return { success: true, otpSentTo: data.emailOrPhone, devCode: otpCode };
+  return { success: true, otpSentTo: data.emailOrPhone };
 }
 
 

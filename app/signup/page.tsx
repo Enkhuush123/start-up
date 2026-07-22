@@ -115,10 +115,10 @@ export default function SignupPage() {
                                     className="w-full h-14 bg-neutral-50 dark:bg-neutral-950/50 border border-neutral-200 dark:border-neutral-800 rounded-2xl px-5 text-neutral-900 dark:text-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all font-medium"
                                 />
                                 <input
-                                    type="text"
-                                    placeholder="Имэйл эсвэл Утасны дугаар"
+                                    type="email"
+                                    placeholder="Имэйл хаяг"
                                     value={emailOrPhone}
-                                    onChange={(e) => setEmailOrPhone(e.target.value)}
+                                    onChange={(e) => setEmailOrPhone(e.target.value.toLowerCase().trim())}
                                     required
                                     className="w-full h-14 bg-neutral-50 dark:bg-neutral-950/50 border border-neutral-200 dark:border-neutral-800 rounded-2xl px-5 text-neutral-900 dark:text-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all font-medium"
                                 />
@@ -156,13 +156,6 @@ export default function SignupPage() {
                             >
                                 <div className="text-center mb-6">
                                     <p className="text-sm text-neutral-500 dark:text-neutral-400 font-medium">Бид <span className="text-neutral-900 dark:text-white font-bold">{emailOrPhone}</span> хаяг руу 6 оронтой код илгээсэн. Та кодоо оруулж баталгаажуулна уу.</p>
-                                    
-                                    {devCode && (
-                                        <div className="mt-4 p-3 border border-emerald-500/30 bg-emerald-500/10 rounded-xl">
-                                            <p className="text-xs text-emerald-500 font-bold uppercase mb-1">Developer Mode Only</p>
-                                            <p className="text-2xl font-black text-emerald-400 tracking-widest">{devCode}</p>
-                                        </div>
-                                    )}
                                 </div>
 
                                 <input

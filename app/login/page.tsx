@@ -76,7 +76,7 @@ export default function LoginPage() {
                         )}
                         <input
                             type="text"
-                            placeholder="Утас, Имэйл эсвэл Username"
+                            placeholder="Имэйл эсвэл Username"
                             value={identifier}
                             onChange={(e) => setIdentifier(e.target.value)}
                             required
@@ -96,7 +96,7 @@ export default function LoginPage() {
                             whileTap={{ scale: 0.98 }}
                             type="submit"
                             disabled={loading}
-                            className="w-full h-14 mt-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center gap-2 text-neutral-900 dark:text-white font-bold text-lg shadow-[0_10px_40px_-10px_rgba(236,72,153,0.5)] transition-all disabled:opacity-70 disabled:scale-100"
+                            className="w-full h-14 mt-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center gap-2 text-white font-bold text-lg shadow-[0_10px_40px_-10px_rgba(236,72,153,0.5)] transition-all disabled:opacity-70 disabled:scale-100"
                         >
                             {loading ? "Түр хүлээнэ үү..." : "Нэвтрэх"}
                             <ArrowRight size={20} className="mt-0.5" />
