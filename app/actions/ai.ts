@@ -116,6 +116,46 @@ export async function suggestDateIdeas(matchId: string) {
   }
 }
 
+export async function suggestIcebreaker(matchId: string) {
+  try {
+    const match = await prisma.match.findUnique({
+      where: { id: matchId },
+      include: {
+        user1: {
+          select: { name: true, interests: true, zodiacSign: true, bio: true },
+        },
+        user2: {
+          select: { name: true, interests: true, zodiacSign: true, bio: true },
+        },
+      },
+    });
+
+    if (!match) return { error: "Match not found." };
+
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+
+    const prompt = `
+    Чи бол Cupid AI, хосуудад зориулсан хөгжилтэй, сонирхол татам эхний мессеж (icebreaker) санал болгодог туслах.
+    Хоёр хүний мэдээлэл:
+    Хүн 1: ${match.user1.name}, сонирхол: ${match.user1.interests.join(", ")}, Орд: ${match.user1.zodiacSign}, Био: ${match.user1.bio}
+    Хүн 2: ${match.user2.name}, сонирхол: ${match.user2.interests.join(", ")}, Орд: ${match.user2.zodiacSign}, Био: ${match.user2.bio}
+
+    Энэ хоёр хүний сонирхол, орд, эсвэл био-г нь уншаад маш хөгжилтэй, ухаалаг эсвэл догь 3 өөр ЭХНИЙ МЕССЕЖ-ийг (Монгол хэлээр) санал болго. 
+    Маш богинохон бөгөөд хөгжилтэй байх хэрэгтэй.
+    Формат: Зөвхөн 1, 2, 3 гэж дугаарласан текст буцаана.
+    `;
+
+    const result = await model.generateContent(prompt);
+    const icebreakers = result.response.text();
+
+    return { icebreakers };
+  } catch (error) {
+    console.error("Suggest icebreaker error:", error);
+    return { error: "Алдаа гарлаа." };
+  }
+}
+
 export async function getHighCompatibilityMatches(userId: string) {
   try {
     const me = await prisma.user.findUnique({

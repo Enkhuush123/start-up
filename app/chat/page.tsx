@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Send, ArrowLeft, Loader2, User, MessageCircle, Sparkles, MapPin } from "lucide-react";
 import { checkSession, logoutUser } from "@/app/actions/session";
 import { getMatches, getMessages, sendMessage } from "@/app/actions/chat";
-import { evaluateChat, suggestDateIdeas } from "@/app/actions/ai";
+import { evaluateChat, suggestDateIdeas, suggestIcebreaker } from "@/app/actions/ai";
+import { supabase } from "@/lib/supabase";
 
 type MatchType = {
   id: string;
@@ -51,6 +52,9 @@ export default function ChatPage() {
   const [evaluating, setEvaluating] = useState(false);
   const [dateIdeas, setDateIdeas] = useState<string | null>(null);
   const [suggestingDate, setSuggestingDate] = useState(false);
+  
+  const [icebreakers, setIcebreakers] = useState<string | null>(null);
+  const [generatingIcebreaker, setGeneratingIcebreaker] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -79,11 +83,33 @@ export default function ChatPage() {
     };
 
     fetchMsgs();
-    const interval = setInterval(fetchMsgs, 3000);
+    
+    // Supabase Realtime Subscription for new messages
+    const channel = supabase
+      .channel(`chat-${activeMatch.id}`)
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'Message', filter: `matchId=eq.${activeMatch.id}` },
+        (payload) => {
+          if (isMounted) {
+            const newMsg = payload.new as MessageType;
+            // Prevent duplicate message rendering (we already add optimistic messages on send)
+            setMessages((prev) => {
+              if (prev.some(m => m.id === newMsg.id)) return prev;
+              return [...prev, newMsg];
+            });
+          }
+        }
+      )
+      .subscribe();
+      
+    // Fallback polling just in case Realtime isn't fully configured
+    const interval = setInterval(fetchMsgs, 10000);
 
     return () => {
       isMounted = false;
       clearInterval(interval);
+      supabase.removeChannel(channel);
     };
   }, [activeMatch, userId]);
 
@@ -118,6 +144,14 @@ export default function ChatPage() {
       }, 3000);
     }
     setSending(false);
+  };
+
+  const handleIcebreaker = async () => {
+    if (!activeMatch) return;
+    setGeneratingIcebreaker(true);
+    const res = await suggestIcebreaker(activeMatch.id);
+    setIcebreakers(res.icebreakers || res.error || "Алдаа гарлаа.");
+    setGeneratingIcebreaker(false);
   };
 
   const handleEvaluate = async () => {
@@ -202,8 +236,17 @@ export default function ChatPage() {
       <div
         className={`flex-1 flex flex-col bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-neutral-950 to-neutral-950 absolute md:relative w-full h-[calc(100dvh-5rem)] transition-transform duration-300 z-20 ${activeMatch ? "translate-x-0" : "translate-x-full md:translate-x-0"}`}
       >
-        {activeMatch ? (
-          <>
+        {(() => {
+          if (!activeMatch) return null;
+          
+          const messageCount = messages.length;
+          let blurClass = "blur-2xl";
+          if (messageCount >= 10) blurClass = "blur-none";
+          else if (messageCount >= 5) blurClass = "blur-md";
+          else if (messageCount >= 2) blurClass = "blur-sm";
+
+          return (
+            <>
             <div className="h-20 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950/80 backdrop-blur-md flex items-center px-4 md:px-8 gap-4 flex-shrink-0 z-30">
               <button
                 onClick={() => setActiveMatch(null)}
@@ -212,7 +255,7 @@ export default function ChatPage() {
                 <ArrowLeft size={24} />
               </button>
 
-              <div className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden flex-shrink-0">
+              <div className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden flex-shrink-0 relative">
                 {activeMatch.otherUser.photos?.[0] ||
                 activeMatch.otherUser.avatarUrl ? (
                   <img
@@ -220,11 +263,16 @@ export default function ChatPage() {
                       activeMatch.otherUser.photos?.[0] ||
                       activeMatch.otherUser.avatarUrl || undefined
                     }
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full object-cover transition-all duration-1000 ${blurClass}`}
                     alt=""
                   />
                 ) : (
-                  <User className="w-6 h-6 m-2 text-neutral-500" />
+                  <User className={`w-6 h-6 m-2 text-neutral-500 transition-all duration-1000 ${blurClass}`} />
+                )}
+                {blurClass !== "blur-none" && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/10 text-[10px] text-white font-bold">
+                    {10 - messageCount}
+                  </div>
                 )}
               </div>
               <div className="flex-1 flex justify-between items-center pr-2 md:pr-0">
@@ -242,7 +290,7 @@ export default function ChatPage() {
                     className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-500/10 text-purple-500 hover:bg-purple-500/20 rounded-full text-xs font-bold transition-colors disabled:opacity-50"
                   >
                     {evaluating ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
-                    <span className="inline">Дүгнэх</span>
+                    <span className="hidden sm:inline">Дүгнэх</span>
                   </button>
                   <button
                     onClick={handleDateIdeas}
@@ -250,13 +298,39 @@ export default function ChatPage() {
                     className="flex items-center gap-1.5 px-3 py-1.5 bg-pink-500/10 text-pink-500 hover:bg-pink-500/20 rounded-full text-xs font-bold transition-colors disabled:opacity-50"
                   >
                     {suggestingDate ? <Loader2 size={14} className="animate-spin" /> : <MapPin size={14} />}
-                    <span className="inline">Болзоо</span>
+                    <span className="hidden sm:inline">Болзоо</span>
                   </button>
+                  {messages.length < 5 && (
+                    <button
+                      onClick={handleIcebreaker}
+                      disabled={generatingIcebreaker}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 rounded-full text-xs font-bold transition-colors disabled:opacity-50"
+                    >
+                      {generatingIcebreaker ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
+                      <span className="hidden sm:inline">Wingman</span>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 relative">
+              {icebreakers && (
+                <div className="sticky top-0 z-10 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md p-4 rounded-2xl border border-blue-500/20 shadow-xl mb-6">
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="font-bold text-blue-500 flex items-center gap-2">
+                      <Sparkles size={16} /> AI Мөс хагалагч
+                    </h4>
+                    <button onClick={() => setIcebreakers(null)} className="text-neutral-400 hover:text-neutral-600 dark:hover:text-white">
+                       ✕
+                    </button>
+                  </div>
+                  <div className="text-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap font-medium leading-relaxed">
+                    {icebreakers}
+                  </div>
+                </div>
+              )}
+
               {dateIdeas && (
                 <div className="sticky top-0 z-10 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md p-4 rounded-2xl border border-pink-500/20 shadow-xl mb-6">
                   <div className="flex justify-between items-start mb-2">
@@ -313,7 +387,8 @@ export default function ChatPage() {
               </form>
             </div>
           </>
-        ) : (
+          );
+        })() || (
           <div className="hidden md:flex flex-1 items-center justify-center flex-col gap-4">
             <div className="w-24 h-24 rounded-full bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center">
               <MessageCircle className="w-10 h-10 text-neutral-300 dark:text-neutral-700" />
