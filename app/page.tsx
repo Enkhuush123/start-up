@@ -43,9 +43,6 @@ export default function WelcomePage() {
           Match.<br />Chat.<br />Rizz.
         </motion.h1>
 
-
-      </div>
-
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
