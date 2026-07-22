@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Heart, Map, MessageCircle, ArrowRight } from "lucide-react";
+import { Heart, Map, MessageCircle, ArrowRight, Sparkles, EyeOff, MapPin, Camera, Star } from "lucide-react";
 import { checkSession } from "@/app/actions/session";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -20,9 +20,10 @@ export default function WelcomePage() {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-between min-h-[100dvh] overflow-hidden bg-transparent z-10 px-6 py-12">
-
-      <div className="flex-1 flex flex-col items-center justify-center w-full mt-10">
+    <div className="relative flex flex-col items-center justify-start min-h-screen overflow-y-auto bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-white pb-24">
+      
+      {/* Hero Section */}
+      <div className="relative flex flex-col items-center justify-center w-full min-h-[80vh] px-6 py-12 pt-24">
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -39,7 +40,7 @@ export default function WelcomePage() {
           transition={{ delay: 0.3 }}
           className="text-5xl font-extrabold text-neutral-900 dark:text-white tracking-tight text-center mb-4 leading-tight drop-shadow-lg"
         >
-          Match.<br />Chat.<br />Fizz.
+          Match.<br />Chat.<br />Rizz.
         </motion.h1>
 
 
@@ -67,7 +68,7 @@ export default function WelcomePage() {
           <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30 backdrop-blur-md">
             <Map className="text-emerald-400 w-6 h-6" />
           </div>
-          <span className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Fizz</span>
+          <span className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Rizz</span>
         </div>
       </motion.div>
 
@@ -100,7 +101,85 @@ export default function WelcomePage() {
           )
         )}
       </motion.div>
+      </div>
 
+      {/* Features Section (Bento Grid) */}
+      <div className="w-full max-w-5xl px-6 py-12 flex flex-col gap-6 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Feature 1: Blind Date */}
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="col-span-1 md:col-span-2 lg:col-span-2 bg-gradient-to-br from-pink-500/10 to-purple-500/10 border border-pink-500/20 p-8 rounded-3xl relative overflow-hidden group"
+          >
+            <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-40 transition-opacity">
+              <EyeOff size={120} className="text-pink-500" />
+            </div>
+            <div className="relative z-10 w-14 h-14 bg-pink-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-pink-500/30">
+              <EyeOff size={28} />
+            </div>
+            <h3 className="text-2xl font-bold mb-3 relative z-10">🙈 Сохор болзоо (Blind Date)</h3>
+            <p className="text-neutral-600 dark:text-neutral-300 relative z-10 font-medium leading-relaxed max-w-md">
+              Гадаад төрх бус, дотоод ертөнцийг нь түрүүлж тань. Зураг бүдэгхэн эхэлж, та хоёр чатлах тусам бага багаар тодорсоор 100% харагдах болно.
+            </p>
+          </motion.div>
+
+          {/* Feature 2: Map */}
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="col-span-1 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 p-8 rounded-3xl relative overflow-hidden group"
+          >
+            <div className="relative z-10 w-14 h-14 bg-emerald-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/30">
+              <MapPin size={28} />
+            </div>
+            <h3 className="text-xl font-bold mb-3 relative z-10">📍 Газрын зураг</h3>
+            <p className="text-neutral-600 dark:text-neutral-300 relative z-10 font-medium leading-relaxed">
+              Таны эргэн тойронд, нэг клубд эсвэл нэг кафед яг одоо хэн байгааг газрын зураг дээрээс шууд хараад танилцаарай.
+            </p>
+          </motion.div>
+
+          {/* Feature 3: Zodiac */}
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="col-span-1 bg-gradient-to-br from-indigo-500/10 to-blue-500/10 border border-indigo-500/20 p-8 rounded-3xl relative overflow-hidden group"
+          >
+            <div className="relative z-10 w-14 h-14 bg-indigo-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-indigo-500/30">
+              <Star size={28} />
+            </div>
+            <h3 className="text-xl font-bold mb-3 relative z-10">✨ Ордны зохицол</h3>
+            <p className="text-neutral-600 dark:text-neutral-300 relative z-10 font-medium leading-relaxed">
+              Хилэнц, Мэлхий хоёр хэр сайн тохирох бол? AI та хоёрын ордны зохицлыг %-иар шууд тооцоолж харуулна.
+            </p>
+          </motion.div>
+
+          {/* Feature 4: Wingman */}
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="col-span-1 bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/20 p-8 rounded-3xl relative overflow-hidden group"
+          >
+            <div className="relative z-10 w-14 h-14 bg-orange-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-orange-500/30">
+              <Sparkles size={28} />
+            </div>
+            <h3 className="text-xl font-bold mb-3 relative z-10">🤖 AI Wingman</h3>
+            <p className="text-neutral-600 dark:text-neutral-300 relative z-10 font-medium leading-relaxed">
+              Чат эхлүүлэх үг олдохгүй байна уу? Манай AI Wingman танд хамгийн сонирхолтой сэдвүүдийг санал болгох болно.
+            </p>
+          </motion.div>
+
+          {/* Feature 5: Photo Rater */}
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="col-span-1 md:col-span-2 lg:col-span-1 bg-gradient-to-br from-rose-500/10 to-pink-500/10 border border-rose-500/20 p-8 rounded-3xl relative overflow-hidden group"
+          >
+            <div className="relative z-10 w-14 h-14 bg-rose-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-rose-500/30">
+              <Camera size={28} />
+            </div>
+            <h3 className="text-xl font-bold mb-3 relative z-10">📸 Зургийн зөвлөх</h3>
+            <p className="text-neutral-600 dark:text-neutral-300 relative z-10 font-medium leading-relaxed">
+              Энэ зургаараа хэр олон хүнтэй таарах бол? AI таны зургийг шүүгээд, илүү сайжруулах гоё зөвлөгөөнүүдийг өгнө.
+            </p>
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

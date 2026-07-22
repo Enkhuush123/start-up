@@ -27,7 +27,7 @@ export default function LoadingScreen() {
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 className="relative z-10 mt-8 text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 tracking-widest uppercase"
             >
-                Start-UO
+                Rizz
             </motion.h1>
             <motion.p 
                 animate={{ opacity: [0.3, 0.7, 0.3] }}

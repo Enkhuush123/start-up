@@ -77,7 +77,7 @@ const MAP_STYLES = [
   },
 ];
 
-export default function FizzPage() {
+export default function RizzPage() {
   const router = useRouter();
   const { showAlert } = useAlert();
   const [userId, setUserId] = useState<string | null>(null);
@@ -457,7 +457,7 @@ export default function FizzPage() {
                 Найз нэмэх
               </h3>
               <p className="text-neutral-500 dark:text-neutral-400 text-sm font-medium mb-6 relative z-10">
-                Найзынхаа урилгын кодыг оруулаад Fizz дээр холбогдоорой.
+                Найзынхаа урилгын кодыг оруулаад Rizz дээр холбогдоорой.
               </p>
 
               <div className="space-y-4 relative z-10">

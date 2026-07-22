@@ -12,8 +12,8 @@ import { LanguageProvider } from "@/components/LanguageProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Rizz & Fizz App",
-  description: "Web dating and map tracking app",
+  title: "Rizz App",
+  description: "Dating and matching app",
 };
 
 export default function RootLayout({

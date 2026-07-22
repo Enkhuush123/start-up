@@ -63,12 +63,12 @@ export async function signupUser(data: {
 
   try {
     const info = await transporter.sendMail({
-      from: `"Rizz & Fizz" <${process.env.GMAIL_USER}>`,
+      from: `"Rizz" <${process.env.GMAIL_USER}>`,
       to: data.emailOrPhone,
-      subject: "Rizz & Fizz баталгаажуулах код",
+      subject: "Rizz баталгаажуулах код",
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; text-align: center;">
-          <h2>Rizz & Fizz тавтай морилно уу!</h2>
+        <div style="font-family: sans-serif; text-align: center; padding: 20px;">
+          <h2>Rizz-д тавтай морилно уу!</h2>
           <p>Таны баталгаажуулах код доор байна:</p>
           <div style="font-size: 32px; font-weight: bold; letter-spacing: 5px; padding: 20px; background: #f4f4f5; border-radius: 10px; margin: 20px 0;">
             ${otpCode}
