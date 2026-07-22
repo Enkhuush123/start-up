@@ -11,7 +11,7 @@ export async function checkMessageContent(content: string): Promise<boolean> {
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
     const prompt = `
 Та бол чатны аюулгүй байдлыг хянах систем юм. 
