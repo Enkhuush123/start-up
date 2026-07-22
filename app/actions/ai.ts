@@ -29,17 +29,20 @@ export async function evaluateChat(matchId: string) {
       take: 15,
       include: {
         sender: { select: { name: true } },
-      }
+      },
     });
 
     if (messages.length < 3) {
       return { emoji: "😶", description: "Чат эхлээгүй байна" };
     }
 
-    const conversation = messages.reverse().map(m => `${m.sender.name}: ${m.content}`).join("\n");
+    const conversation = messages
+      .reverse()
+      .map((m) => `${m.sender.name}: ${m.content}`)
+      .join("\n");
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
     const prompt = `
     Энэхүү харилцан яриаг уншаад хосуудын харилцаа ямархуу байгааг 1 ширхэг EMOJI-гоор дүгнэнэ үү.
@@ -55,7 +58,7 @@ export async function evaluateChat(matchId: string) {
 
     const result = await model.generateContent(prompt);
     const emoji = result.response.text().trim().substring(0, 2);
-    
+
     return { emoji };
   } catch (error) {
     console.error("Chat eval error:", error);
@@ -68,15 +71,29 @@ export async function suggestDateIdeas(matchId: string) {
     const match = await prisma.match.findUnique({
       where: { id: matchId },
       include: {
-        user1: { select: { name: true, interests: true, lookingFor: true, loveLanguage: true } },
-        user2: { select: { name: true, interests: true, lookingFor: true, loveLanguage: true } },
-      }
+        user1: {
+          select: {
+            name: true,
+            interests: true,
+            lookingFor: true,
+            loveLanguage: true,
+          },
+        },
+        user2: {
+          select: {
+            name: true,
+            interests: true,
+            lookingFor: true,
+            loveLanguage: true,
+          },
+        },
+      },
     });
 
     if (!match) return { error: "Match found not." };
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
     const prompt = `
     Чи бол Cupid AI, хосуудад зориулсан шилдэг болзооны газруудыг санал болгодог туслах.
@@ -91,7 +108,7 @@ export async function suggestDateIdeas(matchId: string) {
 
     const result = await model.generateContent(prompt);
     const ideas = result.response.text();
-    
+
     return { ideas };
   } catch (error) {
     console.error("Suggest date error:", error);
@@ -104,7 +121,7 @@ export async function getHighCompatibilityMatches(userId: string) {
     const me = await prisma.user.findUnique({
       where: { id: userId },
     });
-    
+
     if (!me) return [];
 
     // Find other users
@@ -126,18 +143,21 @@ export async function getHighCompatibilityMatches(userId: string) {
         drinking: true,
         smoking: true,
         interests: true,
-      }
+      },
     });
 
-    const matches = others.map(other => {
+    const matches = others.map((other) => {
       let score = 0;
       let totalFields = 0;
 
       // Interests match
       if (me.interests.length > 0 && other.interests.length > 0) {
         totalFields += 3; // Weight interests higher
-        const common = me.interests.filter(i => other.interests.includes(i));
-        score += (common.length / Math.max(me.interests.length, other.interests.length)) * 3;
+        const common = me.interests.filter((i) => other.interests.includes(i));
+        score +=
+          (common.length /
+            Math.max(me.interests.length, other.interests.length)) *
+          3;
       }
 
       if (me.lookingFor && other.lookingFor) {
@@ -166,20 +186,25 @@ export async function getHighCompatibilityMatches(userId: string) {
         score += 0.5; // Neutral baseline for astrology
       }
 
-      const matchPercentage = totalFields === 0 ? 0 : Math.round((score / totalFields) * 100);
+      const matchPercentage =
+        totalFields === 0 ? 0 : Math.round((score / totalFields) * 100);
 
       return {
         ...other,
-        matchPercentage
+        matchPercentage,
       };
     });
 
     // Return only those >= 80% (or top matched if none >= 80% to avoid empty state)
-    let topMatches = matches.filter(m => m.matchPercentage >= 75).sort((a, b) => b.matchPercentage - a.matchPercentage);
-    
+    let topMatches = matches
+      .filter((m) => m.matchPercentage >= 75)
+      .sort((a, b) => b.matchPercentage - a.matchPercentage);
+
     if (topMatches.length === 0) {
-        // Fallback: Just return highest if strictly 80% is too hard
-        topMatches = matches.sort((a, b) => b.matchPercentage - a.matchPercentage).slice(0, 5);
+      // Fallback: Just return highest if strictly 80% is too hard
+      topMatches = matches
+        .sort((a, b) => b.matchPercentage - a.matchPercentage)
+        .slice(0, 5);
     }
 
     return topMatches;

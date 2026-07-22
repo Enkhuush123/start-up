@@ -28,12 +28,14 @@ export type AggregateUser = {
 
 export type UserAvgAggregateOutputType = {
   age: number | null
+  height: number | null
   lat: number | null
   lng: number | null
 }
 
 export type UserSumAggregateOutputType = {
   age: number | null
+  height: number | null
   lat: number | null
   lng: number | null
 }
@@ -51,6 +53,12 @@ export type UserMinAggregateOutputType = {
   avatarUrl: string | null
   age: number | null
   gender: string | null
+  height: number | null
+  zodiacSign: string | null
+  loveLanguage: string | null
+  drinking: string | null
+  smoking: string | null
+  lookingFor: string | null
   inviteCode: string | null
   lat: number | null
   lng: number | null
@@ -71,6 +79,12 @@ export type UserMaxAggregateOutputType = {
   avatarUrl: string | null
   age: number | null
   gender: string | null
+  height: number | null
+  zodiacSign: string | null
+  loveLanguage: string | null
+  drinking: string | null
+  smoking: string | null
+  lookingFor: string | null
   inviteCode: string | null
   lat: number | null
   lng: number | null
@@ -91,6 +105,12 @@ export type UserCountAggregateOutputType = {
   avatarUrl: number
   age: number
   gender: number
+  height: number
+  zodiacSign: number
+  loveLanguage: number
+  drinking: number
+  smoking: number
+  lookingFor: number
   interests: number
   photos: number
   inviteCode: number
@@ -104,12 +124,14 @@ export type UserCountAggregateOutputType = {
 
 export type UserAvgAggregateInputType = {
   age?: true
+  height?: true
   lat?: true
   lng?: true
 }
 
 export type UserSumAggregateInputType = {
   age?: true
+  height?: true
   lat?: true
   lng?: true
 }
@@ -127,6 +149,12 @@ export type UserMinAggregateInputType = {
   avatarUrl?: true
   age?: true
   gender?: true
+  height?: true
+  zodiacSign?: true
+  loveLanguage?: true
+  drinking?: true
+  smoking?: true
+  lookingFor?: true
   inviteCode?: true
   lat?: true
   lng?: true
@@ -147,6 +175,12 @@ export type UserMaxAggregateInputType = {
   avatarUrl?: true
   age?: true
   gender?: true
+  height?: true
+  zodiacSign?: true
+  loveLanguage?: true
+  drinking?: true
+  smoking?: true
+  lookingFor?: true
   inviteCode?: true
   lat?: true
   lng?: true
@@ -167,6 +201,12 @@ export type UserCountAggregateInputType = {
   avatarUrl?: true
   age?: true
   gender?: true
+  height?: true
+  zodiacSign?: true
+  loveLanguage?: true
+  drinking?: true
+  smoking?: true
+  lookingFor?: true
   interests?: true
   photos?: true
   inviteCode?: true
@@ -276,6 +316,12 @@ export type UserGroupByOutputType = {
   avatarUrl: string | null
   age: number | null
   gender: string | null
+  height: number | null
+  zodiacSign: string | null
+  loveLanguage: string | null
+  drinking: string | null
+  smoking: string | null
+  lookingFor: string | null
   interests: string[]
   photos: string[]
   inviteCode: string | null
@@ -321,6 +367,12 @@ export type UserWhereInput = {
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   age?: Prisma.IntNullableFilter<"User"> | number | null
   gender?: Prisma.StringNullableFilter<"User"> | string | null
+  height?: Prisma.IntNullableFilter<"User"> | number | null
+  zodiacSign?: Prisma.StringNullableFilter<"User"> | string | null
+  loveLanguage?: Prisma.StringNullableFilter<"User"> | string | null
+  drinking?: Prisma.StringNullableFilter<"User"> | string | null
+  smoking?: Prisma.StringNullableFilter<"User"> | string | null
+  lookingFor?: Prisma.StringNullableFilter<"User"> | string | null
   interests?: Prisma.StringNullableListFilter<"User">
   photos?: Prisma.StringNullableListFilter<"User">
   inviteCode?: Prisma.StringNullableFilter<"User"> | string | null
@@ -348,6 +400,12 @@ export type UserOrderByWithRelationInput = {
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   age?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
+  height?: Prisma.SortOrderInput | Prisma.SortOrder
+  zodiacSign?: Prisma.SortOrderInput | Prisma.SortOrder
+  loveLanguage?: Prisma.SortOrderInput | Prisma.SortOrder
+  drinking?: Prisma.SortOrderInput | Prisma.SortOrder
+  smoking?: Prisma.SortOrderInput | Prisma.SortOrder
+  lookingFor?: Prisma.SortOrderInput | Prisma.SortOrder
   interests?: Prisma.SortOrder
   photos?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -379,6 +437,12 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   age?: Prisma.IntNullableFilter<"User"> | number | null
   gender?: Prisma.StringNullableFilter<"User"> | string | null
+  height?: Prisma.IntNullableFilter<"User"> | number | null
+  zodiacSign?: Prisma.StringNullableFilter<"User"> | string | null
+  loveLanguage?: Prisma.StringNullableFilter<"User"> | string | null
+  drinking?: Prisma.StringNullableFilter<"User"> | string | null
+  smoking?: Prisma.StringNullableFilter<"User"> | string | null
+  lookingFor?: Prisma.StringNullableFilter<"User"> | string | null
   interests?: Prisma.StringNullableListFilter<"User">
   photos?: Prisma.StringNullableListFilter<"User">
   lat?: Prisma.FloatNullableFilter<"User"> | number | null
@@ -405,6 +469,12 @@ export type UserOrderByWithAggregationInput = {
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   age?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
+  height?: Prisma.SortOrderInput | Prisma.SortOrder
+  zodiacSign?: Prisma.SortOrderInput | Prisma.SortOrder
+  loveLanguage?: Prisma.SortOrderInput | Prisma.SortOrder
+  drinking?: Prisma.SortOrderInput | Prisma.SortOrder
+  smoking?: Prisma.SortOrderInput | Prisma.SortOrder
+  lookingFor?: Prisma.SortOrderInput | Prisma.SortOrder
   interests?: Prisma.SortOrder
   photos?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -435,6 +505,12 @@ export type UserScalarWhereWithAggregatesInput = {
   avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   age?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   gender?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  height?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  zodiacSign?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  loveLanguage?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  drinking?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  smoking?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  lookingFor?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   interests?: Prisma.StringNullableListFilter<"User">
   photos?: Prisma.StringNullableListFilter<"User">
   inviteCode?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -457,6 +533,12 @@ export type UserCreateInput = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -484,6 +566,12 @@ export type UserUncheckedCreateInput = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -511,6 +599,12 @@ export type UserUpdateInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -538,6 +632,12 @@ export type UserUncheckedUpdateInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -565,6 +665,12 @@ export type UserCreateManyInput = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -587,6 +693,12 @@ export type UserUpdateManyMutationInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -609,6 +721,12 @@ export type UserUncheckedUpdateManyInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -639,6 +757,12 @@ export type UserCountOrderByAggregateInput = {
   avatarUrl?: Prisma.SortOrder
   age?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  height?: Prisma.SortOrder
+  zodiacSign?: Prisma.SortOrder
+  loveLanguage?: Prisma.SortOrder
+  drinking?: Prisma.SortOrder
+  smoking?: Prisma.SortOrder
+  lookingFor?: Prisma.SortOrder
   interests?: Prisma.SortOrder
   photos?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
@@ -650,6 +774,7 @@ export type UserCountOrderByAggregateInput = {
 
 export type UserAvgOrderByAggregateInput = {
   age?: Prisma.SortOrder
+  height?: Prisma.SortOrder
   lat?: Prisma.SortOrder
   lng?: Prisma.SortOrder
 }
@@ -667,6 +792,12 @@ export type UserMaxOrderByAggregateInput = {
   avatarUrl?: Prisma.SortOrder
   age?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  height?: Prisma.SortOrder
+  zodiacSign?: Prisma.SortOrder
+  loveLanguage?: Prisma.SortOrder
+  drinking?: Prisma.SortOrder
+  smoking?: Prisma.SortOrder
+  lookingFor?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
   lat?: Prisma.SortOrder
   lng?: Prisma.SortOrder
@@ -687,6 +818,12 @@ export type UserMinOrderByAggregateInput = {
   avatarUrl?: Prisma.SortOrder
   age?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  height?: Prisma.SortOrder
+  zodiacSign?: Prisma.SortOrder
+  loveLanguage?: Prisma.SortOrder
+  drinking?: Prisma.SortOrder
+  smoking?: Prisma.SortOrder
+  lookingFor?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
   lat?: Prisma.SortOrder
   lng?: Prisma.SortOrder
@@ -696,6 +833,7 @@ export type UserMinOrderByAggregateInput = {
 
 export type UserSumOrderByAggregateInput = {
   age?: Prisma.SortOrder
+  height?: Prisma.SortOrder
   lat?: Prisma.SortOrder
   lng?: Prisma.SortOrder
 }
@@ -838,6 +976,12 @@ export type UserCreateWithoutMatchesAsUser1Input = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -864,6 +1008,12 @@ export type UserUncheckedCreateWithoutMatchesAsUser1Input = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -895,6 +1045,12 @@ export type UserCreateWithoutMatchesAsUser2Input = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -921,6 +1077,12 @@ export type UserUncheckedCreateWithoutMatchesAsUser2Input = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -963,6 +1125,12 @@ export type UserUpdateWithoutMatchesAsUser1Input = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -989,6 +1157,12 @@ export type UserUncheckedUpdateWithoutMatchesAsUser1Input = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1026,6 +1200,12 @@ export type UserUpdateWithoutMatchesAsUser2Input = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1052,6 +1232,12 @@ export type UserUncheckedUpdateWithoutMatchesAsUser2Input = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1078,6 +1264,12 @@ export type UserCreateWithoutFriendsAsUser1Input = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1104,6 +1296,12 @@ export type UserUncheckedCreateWithoutFriendsAsUser1Input = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1135,6 +1333,12 @@ export type UserCreateWithoutFriendsAsUser2Input = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1161,6 +1365,12 @@ export type UserUncheckedCreateWithoutFriendsAsUser2Input = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1203,6 +1413,12 @@ export type UserUpdateWithoutFriendsAsUser1Input = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1229,6 +1445,12 @@ export type UserUncheckedUpdateWithoutFriendsAsUser1Input = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1266,6 +1488,12 @@ export type UserUpdateWithoutFriendsAsUser2Input = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1292,6 +1520,12 @@ export type UserUncheckedUpdateWithoutFriendsAsUser2Input = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1318,6 +1552,12 @@ export type UserCreateWithoutMessagesSentInput = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1344,6 +1584,12 @@ export type UserUncheckedCreateWithoutMessagesSentInput = {
   avatarUrl?: string | null
   age?: number | null
   gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1386,6 +1632,12 @@ export type UserUpdateWithoutMessagesSentInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1412,6 +1664,12 @@ export type UserUncheckedUpdateWithoutMessagesSentInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1505,6 +1763,12 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   avatarUrl?: boolean
   age?: boolean
   gender?: boolean
+  height?: boolean
+  zodiacSign?: boolean
+  loveLanguage?: boolean
+  drinking?: boolean
+  smoking?: boolean
+  lookingFor?: boolean
   interests?: boolean
   photos?: boolean
   inviteCode?: boolean
@@ -1533,6 +1797,12 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   avatarUrl?: boolean
   age?: boolean
   gender?: boolean
+  height?: boolean
+  zodiacSign?: boolean
+  loveLanguage?: boolean
+  drinking?: boolean
+  smoking?: boolean
+  lookingFor?: boolean
   interests?: boolean
   photos?: boolean
   inviteCode?: boolean
@@ -1555,6 +1825,12 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   avatarUrl?: boolean
   age?: boolean
   gender?: boolean
+  height?: boolean
+  zodiacSign?: boolean
+  loveLanguage?: boolean
+  drinking?: boolean
+  smoking?: boolean
+  lookingFor?: boolean
   interests?: boolean
   photos?: boolean
   inviteCode?: boolean
@@ -1577,6 +1853,12 @@ export type UserSelectScalar = {
   avatarUrl?: boolean
   age?: boolean
   gender?: boolean
+  height?: boolean
+  zodiacSign?: boolean
+  loveLanguage?: boolean
+  drinking?: boolean
+  smoking?: boolean
+  lookingFor?: boolean
   interests?: boolean
   photos?: boolean
   inviteCode?: boolean
@@ -1586,7 +1868,7 @@ export type UserSelectScalar = {
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "phone" | "username" | "passwordHash" | "isVerified" | "isBanned" | "name" | "bio" | "avatarUrl" | "age" | "gender" | "interests" | "photos" | "inviteCode" | "lat" | "lng" | "lastActive" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "phone" | "username" | "passwordHash" | "isVerified" | "isBanned" | "name" | "bio" | "avatarUrl" | "age" | "gender" | "height" | "zodiacSign" | "loveLanguage" | "drinking" | "smoking" | "lookingFor" | "interests" | "photos" | "inviteCode" | "lat" | "lng" | "lastActive" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   matchesAsUser1?: boolean | Prisma.User$matchesAsUser1Args<ExtArgs>
   matchesAsUser2?: boolean | Prisma.User$matchesAsUser2Args<ExtArgs>
@@ -1620,6 +1902,12 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     avatarUrl: string | null
     age: number | null
     gender: string | null
+    height: number | null
+    zodiacSign: string | null
+    loveLanguage: string | null
+    drinking: string | null
+    smoking: string | null
+    lookingFor: string | null
     interests: string[]
     photos: string[]
     inviteCode: string | null
@@ -2067,6 +2355,12 @@ export interface UserFieldRefs {
   readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
   readonly age: Prisma.FieldRef<"User", 'Int'>
   readonly gender: Prisma.FieldRef<"User", 'String'>
+  readonly height: Prisma.FieldRef<"User", 'Int'>
+  readonly zodiacSign: Prisma.FieldRef<"User", 'String'>
+  readonly loveLanguage: Prisma.FieldRef<"User", 'String'>
+  readonly drinking: Prisma.FieldRef<"User", 'String'>
+  readonly smoking: Prisma.FieldRef<"User", 'String'>
+  readonly lookingFor: Prisma.FieldRef<"User", 'String'>
   readonly interests: Prisma.FieldRef<"User", 'String[]'>
   readonly photos: Prisma.FieldRef<"User", 'String[]'>
   readonly inviteCode: Prisma.FieldRef<"User", 'String'>
