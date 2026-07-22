@@ -5,6 +5,7 @@ import { motion, useMotionValue, useTransform, AnimatePresence, PanInfo, animate
 import { X, Heart, Sparkles, MapPin } from "lucide-react";
 import { checkSession } from "@/app/actions/session";
 import { getPotentialMatches, recordSwipe } from "@/app/actions/discover";
+import { updateLocation } from "@/app/actions/map";
 import { getUserProfile } from "@/app/actions/profile";
 import { useRouter } from "next/navigation";
 import MatchScreen from "@/components/MatchScreen";
@@ -51,10 +52,29 @@ export default function DiscoverPage() {
                     setCurrentUserPhoto(profile.photos?.[0] || profile.avatarUrl || DUMMY_IMAGE);
                 }
                 
-                const matches = (await getPotentialMatches(session.userId)) as unknown as UserType[];
-                setUsers(matches);
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        async (position) => {
+                            await updateLocation(session.userId, position.coords.latitude, position.coords.longitude);
+                            const matches = (await getPotentialMatches(session.userId)) as unknown as UserType[];
+                            setUsers(matches);
+                            setLoading(false);
+                        },
+                        async () => {
+                            const matches = (await getPotentialMatches(session.userId)) as unknown as UserType[];
+                            setUsers(matches);
+                            setLoading(false);
+                        },
+                        { timeout: 5000, maximumAge: 60000 }
+                    );
+                } else {
+                    const matches = (await getPotentialMatches(session.userId)) as unknown as UserType[];
+                    setUsers(matches);
+                    setLoading(false);
+                }
+            } else {
+                setLoading(false);
             }
-            setLoading(false);
         }
         loadUsers();
     }, []);
@@ -212,9 +232,11 @@ export default function DiscoverPage() {
                                                     <h1 className="text-4xl font-black text-white flex items-center gap-3 drop-shadow-lg">
                                                         {user.name || t("discover.anon")} <span className="text-2xl font-medium text-white/80">{user.age}</span>
                                                     </h1>
-                                                    <div className="flex items-center gap-2 text-white/70 text-sm font-bold mt-2 drop-shadow-md">
-                                                        <MapPin size={16} className="text-pink-500" /> 
-                                                        {user.distanceKm != null ? `${user.distanceKm} ${t("discover.dist")}` : `${Math.floor(Math.random() * 10 + 2)} ${t("discover.dist")}`}
+                                                    <div className="flex items-center gap-2 bg-black/40 backdrop-blur-xl px-4 py-2 rounded-full border border-white/10 shadow-lg mt-2">
+                                                        <MapPin size={16} className="text-purple-400" />
+                                                        <span className="text-white text-sm font-bold tracking-wider">
+                                                            {user.distanceKm != null ? `${user.distanceKm} ${t("discover.dist")}` : `< 5 ${t("discover.dist")}`}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
