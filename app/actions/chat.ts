@@ -78,10 +78,14 @@ export async function sendMessage(matchId: string, senderId: string, content: st
     if (!content.trim()) return null;
     
     // AI Moderation Check
-    const isBad = await checkMessageContent(content);
-    if (isBad) {
-        await applyBan(senderId);
-        return { error: "Ёс бус мессеж илгээсэн тул таны эрхийг хаалаа." };
+    try {
+        const isBad = await checkMessageContent(content);
+        if (isBad) {
+            await applyBan(senderId);
+            return { error: "Ёс бус мессеж илгээсэн тул таны эрхийг хаалаа." };
+        }
+    } catch (e: any) {
+        return { error: "AI Moderation Error: " + (e.message || "Unknown error") };
     }
     
     const message = await prisma.message.create({
