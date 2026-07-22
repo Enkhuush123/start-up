@@ -27,7 +27,7 @@ export default function LoginScreen({ navigation }: any) {
 
         <TouchableOpacity 
           className="w-full bg-pink-500 py-4 rounded-full items-center shadow-lg shadow-pink-500/30"
-          onPress={() => navigation.navigate('Discover')}
+          onPress={() => navigation.replace('Main')}
         >
           <Text className="text-white font-bold text-lg">Нэвтрэх</Text>
         </TouchableOpacity>

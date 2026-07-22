@@ -1,6 +1,19 @@
 const { getDefaultConfig } = require("expo/metro-config");
-const { withNativeWind } = require("nativewind/metro");
+const path = require("path");
 
-const config = getDefaultConfig(__dirname);
+const projectRoot = __dirname;
+const workspaceRoot = path.resolve(projectRoot, "..");
 
-module.exports = withNativeWind(config, { input: "./global.css" });
+const config = getDefaultConfig(projectRoot);
+
+// Watch all files in the monorepo so Metro can find hoisted dependencies
+config.watchFolders = [workspaceRoot];
+config.resolver.nodeModulesPaths = [
+  path.resolve(projectRoot, "node_modules"),
+  path.resolve(workspaceRoot, "node_modules"),
+];
+
+// If using NativeWind v4, wrap the config:
+// const { withNativeWind } = require("nativewind/metro");
+// module.exports = withNativeWind(config, { input: "./global.css" });
+module.exports = config;
