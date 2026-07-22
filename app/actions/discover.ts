@@ -1,8 +1,10 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function getPotentialMatches(userId: string) {
+    noStore();
 
     const swipedUserIds = await prisma.match.findMany({
         where: { user1Id: userId },
@@ -59,13 +61,26 @@ export async function getPotentialMatches(userId: string) {
 export async function recordSwipe(userId: string, targetUserId: string, isLike: boolean) {
     const status = isLike ? "pending" : "rejected";
 
-    await prisma.match.create({
-        data: {
-            user1Id: userId,
-            user2Id: targetUserId,
-            status: status
-        }
-    });
+    try {
+        await prisma.match.upsert({
+            where: {
+                user1Id_user2Id: {
+                    user1Id: userId,
+                    user2Id: targetUserId
+                }
+            },
+            update: {
+                status: status
+            },
+            create: {
+                user1Id: userId,
+                user2Id: targetUserId,
+                status: status
+            }
+        });
+    } catch (e) {
+        console.error("Swipe record error:", e);
+    }
 
 
     if (isLike) {
