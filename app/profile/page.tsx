@@ -142,11 +142,11 @@ export default function ProfilePage() {
           photos: [...prev.photos, data.url],
         }));
       } else {
-        showAlert({ message: "Зураг хуулахад алдаа гарлаа.", type: "error" });
+        alert("Зураг хуулахад алдаа: " + (data.error || "Unknown"));
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      showAlert({ message: "Алдаа гарлаа.", type: "error" });
+      alert("Алдаа гарлаа: " + err.message);
     }
   };
 

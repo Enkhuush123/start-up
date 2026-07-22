@@ -30,8 +30,8 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ success: true, url: uploadResponse.secure_url });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Upload error:", error);
-    return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ success: false, error: error.message || "Internal Server Error" }, { status: 500 });
   }
 }

@@ -58,7 +58,7 @@ export async function signupUser(data: {
 
   
   try {
-    await resend.emails.send({
+    const response = await resend.emails.send({
       from: "Rizz & Fizz <onboarding@resend.dev>",
       to: data.emailOrPhone,
       subject: "Rizz & Fizz баталгаажуулах код",
@@ -73,7 +73,12 @@ export async function signupUser(data: {
         </div>
       `
     });
-  } catch (error) {
+
+    if (response.error) {
+      console.error("Resend API Error:", response.error);
+      return { error: "Имэйл илгээхэд алдаа гарлаа: " + response.error.message };
+    }
+  } catch (error: any) {
     console.error("Failed to send email:", error);
     return { error: "Имэйл илгээхэд алдаа гарлаа. Та имэйл хаягаа шалгана уу." };
   }

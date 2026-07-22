@@ -177,10 +177,10 @@ export default function OnboardingPage() {
                                             if (data.success) {
                                                 setFormData(prev => ({ ...prev, photos: [data.url] }));
                                             } else {
-                                                showAlert({ message: "Зураг хуулахад алдаа гарлаа.", type: "error" });
+                                                alert("Зураг хуулахад алдаа: " + (data.error || "Unknown"));
                                             }
-                                        } catch {
-                                            showAlert({ message: "Алдаа гарлаа.", type: "error" });
+                                        } catch (e: any) {
+                                            alert("Алдаа гарлаа: " + e.message);
                                         } finally {
                                             setLoading(false);
                                         }
