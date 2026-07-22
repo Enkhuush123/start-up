@@ -59,6 +59,7 @@ export type UserMinAggregateOutputType = {
   drinking: string | null
   smoking: string | null
   lookingFor: string | null
+  isBlindDateMode: boolean | null
   inviteCode: string | null
   lat: number | null
   lng: number | null
@@ -85,6 +86,7 @@ export type UserMaxAggregateOutputType = {
   drinking: string | null
   smoking: string | null
   lookingFor: string | null
+  isBlindDateMode: boolean | null
   inviteCode: string | null
   lat: number | null
   lng: number | null
@@ -111,6 +113,7 @@ export type UserCountAggregateOutputType = {
   drinking: number
   smoking: number
   lookingFor: number
+  isBlindDateMode: number
   interests: number
   photos: number
   inviteCode: number
@@ -155,6 +158,7 @@ export type UserMinAggregateInputType = {
   drinking?: true
   smoking?: true
   lookingFor?: true
+  isBlindDateMode?: true
   inviteCode?: true
   lat?: true
   lng?: true
@@ -181,6 +185,7 @@ export type UserMaxAggregateInputType = {
   drinking?: true
   smoking?: true
   lookingFor?: true
+  isBlindDateMode?: true
   inviteCode?: true
   lat?: true
   lng?: true
@@ -207,6 +212,7 @@ export type UserCountAggregateInputType = {
   drinking?: true
   smoking?: true
   lookingFor?: true
+  isBlindDateMode?: true
   interests?: true
   photos?: true
   inviteCode?: true
@@ -322,6 +328,7 @@ export type UserGroupByOutputType = {
   drinking: string | null
   smoking: string | null
   lookingFor: string | null
+  isBlindDateMode: boolean
   interests: string[]
   photos: string[]
   inviteCode: string | null
@@ -373,6 +380,7 @@ export type UserWhereInput = {
   drinking?: Prisma.StringNullableFilter<"User"> | string | null
   smoking?: Prisma.StringNullableFilter<"User"> | string | null
   lookingFor?: Prisma.StringNullableFilter<"User"> | string | null
+  isBlindDateMode?: Prisma.BoolFilter<"User"> | boolean
   interests?: Prisma.StringNullableListFilter<"User">
   photos?: Prisma.StringNullableListFilter<"User">
   inviteCode?: Prisma.StringNullableFilter<"User"> | string | null
@@ -406,6 +414,7 @@ export type UserOrderByWithRelationInput = {
   drinking?: Prisma.SortOrderInput | Prisma.SortOrder
   smoking?: Prisma.SortOrderInput | Prisma.SortOrder
   lookingFor?: Prisma.SortOrderInput | Prisma.SortOrder
+  isBlindDateMode?: Prisma.SortOrder
   interests?: Prisma.SortOrder
   photos?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -443,6 +452,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   drinking?: Prisma.StringNullableFilter<"User"> | string | null
   smoking?: Prisma.StringNullableFilter<"User"> | string | null
   lookingFor?: Prisma.StringNullableFilter<"User"> | string | null
+  isBlindDateMode?: Prisma.BoolFilter<"User"> | boolean
   interests?: Prisma.StringNullableListFilter<"User">
   photos?: Prisma.StringNullableListFilter<"User">
   lat?: Prisma.FloatNullableFilter<"User"> | number | null
@@ -475,6 +485,7 @@ export type UserOrderByWithAggregationInput = {
   drinking?: Prisma.SortOrderInput | Prisma.SortOrder
   smoking?: Prisma.SortOrderInput | Prisma.SortOrder
   lookingFor?: Prisma.SortOrderInput | Prisma.SortOrder
+  isBlindDateMode?: Prisma.SortOrder
   interests?: Prisma.SortOrder
   photos?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -511,6 +522,7 @@ export type UserScalarWhereWithAggregatesInput = {
   drinking?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   smoking?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   lookingFor?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  isBlindDateMode?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   interests?: Prisma.StringNullableListFilter<"User">
   photos?: Prisma.StringNullableListFilter<"User">
   inviteCode?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -539,6 +551,7 @@ export type UserCreateInput = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -572,6 +585,7 @@ export type UserUncheckedCreateInput = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -605,6 +619,7 @@ export type UserUpdateInput = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -638,6 +653,7 @@ export type UserUncheckedUpdateInput = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -671,6 +687,7 @@ export type UserCreateManyInput = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -699,6 +716,7 @@ export type UserUpdateManyMutationInput = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -727,6 +745,7 @@ export type UserUncheckedUpdateManyInput = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -763,6 +782,7 @@ export type UserCountOrderByAggregateInput = {
   drinking?: Prisma.SortOrder
   smoking?: Prisma.SortOrder
   lookingFor?: Prisma.SortOrder
+  isBlindDateMode?: Prisma.SortOrder
   interests?: Prisma.SortOrder
   photos?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
@@ -798,6 +818,7 @@ export type UserMaxOrderByAggregateInput = {
   drinking?: Prisma.SortOrder
   smoking?: Prisma.SortOrder
   lookingFor?: Prisma.SortOrder
+  isBlindDateMode?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
   lat?: Prisma.SortOrder
   lng?: Prisma.SortOrder
@@ -824,6 +845,7 @@ export type UserMinOrderByAggregateInput = {
   drinking?: Prisma.SortOrder
   smoking?: Prisma.SortOrder
   lookingFor?: Prisma.SortOrder
+  isBlindDateMode?: Prisma.SortOrder
   inviteCode?: Prisma.SortOrder
   lat?: Prisma.SortOrder
   lng?: Prisma.SortOrder
@@ -982,6 +1004,7 @@ export type UserCreateWithoutMatchesAsUser1Input = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1014,6 +1037,7 @@ export type UserUncheckedCreateWithoutMatchesAsUser1Input = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1051,6 +1075,7 @@ export type UserCreateWithoutMatchesAsUser2Input = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1083,6 +1108,7 @@ export type UserUncheckedCreateWithoutMatchesAsUser2Input = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1131,6 +1157,7 @@ export type UserUpdateWithoutMatchesAsUser1Input = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1163,6 +1190,7 @@ export type UserUncheckedUpdateWithoutMatchesAsUser1Input = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1206,6 +1234,7 @@ export type UserUpdateWithoutMatchesAsUser2Input = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1238,6 +1267,7 @@ export type UserUncheckedUpdateWithoutMatchesAsUser2Input = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1270,6 +1300,7 @@ export type UserCreateWithoutFriendsAsUser1Input = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1302,6 +1333,7 @@ export type UserUncheckedCreateWithoutFriendsAsUser1Input = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1339,6 +1371,7 @@ export type UserCreateWithoutFriendsAsUser2Input = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1371,6 +1404,7 @@ export type UserUncheckedCreateWithoutFriendsAsUser2Input = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1419,6 +1453,7 @@ export type UserUpdateWithoutFriendsAsUser1Input = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1451,6 +1486,7 @@ export type UserUncheckedUpdateWithoutFriendsAsUser1Input = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1494,6 +1530,7 @@ export type UserUpdateWithoutFriendsAsUser2Input = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1526,6 +1563,7 @@ export type UserUncheckedUpdateWithoutFriendsAsUser2Input = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1558,6 +1596,7 @@ export type UserCreateWithoutMessagesSentInput = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1590,6 +1629,7 @@ export type UserUncheckedCreateWithoutMessagesSentInput = {
   drinking?: string | null
   smoking?: string | null
   lookingFor?: string | null
+  isBlindDateMode?: boolean
   interests?: Prisma.UserCreateinterestsInput | string[]
   photos?: Prisma.UserCreatephotosInput | string[]
   inviteCode?: string | null
@@ -1638,6 +1678,7 @@ export type UserUpdateWithoutMessagesSentInput = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1670,6 +1711,7 @@ export type UserUncheckedUpdateWithoutMessagesSentInput = {
   drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   interests?: Prisma.UserUpdateinterestsInput | string[]
   photos?: Prisma.UserUpdatephotosInput | string[]
   inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1769,6 +1811,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   drinking?: boolean
   smoking?: boolean
   lookingFor?: boolean
+  isBlindDateMode?: boolean
   interests?: boolean
   photos?: boolean
   inviteCode?: boolean
@@ -1803,6 +1846,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   drinking?: boolean
   smoking?: boolean
   lookingFor?: boolean
+  isBlindDateMode?: boolean
   interests?: boolean
   photos?: boolean
   inviteCode?: boolean
@@ -1831,6 +1875,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   drinking?: boolean
   smoking?: boolean
   lookingFor?: boolean
+  isBlindDateMode?: boolean
   interests?: boolean
   photos?: boolean
   inviteCode?: boolean
@@ -1859,6 +1904,7 @@ export type UserSelectScalar = {
   drinking?: boolean
   smoking?: boolean
   lookingFor?: boolean
+  isBlindDateMode?: boolean
   interests?: boolean
   photos?: boolean
   inviteCode?: boolean
@@ -1868,7 +1914,7 @@ export type UserSelectScalar = {
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "phone" | "username" | "passwordHash" | "isVerified" | "isBanned" | "name" | "bio" | "avatarUrl" | "age" | "gender" | "height" | "zodiacSign" | "loveLanguage" | "drinking" | "smoking" | "lookingFor" | "interests" | "photos" | "inviteCode" | "lat" | "lng" | "lastActive" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "phone" | "username" | "passwordHash" | "isVerified" | "isBanned" | "name" | "bio" | "avatarUrl" | "age" | "gender" | "height" | "zodiacSign" | "loveLanguage" | "drinking" | "smoking" | "lookingFor" | "isBlindDateMode" | "interests" | "photos" | "inviteCode" | "lat" | "lng" | "lastActive" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   matchesAsUser1?: boolean | Prisma.User$matchesAsUser1Args<ExtArgs>
   matchesAsUser2?: boolean | Prisma.User$matchesAsUser2Args<ExtArgs>
@@ -1908,6 +1954,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     drinking: string | null
     smoking: string | null
     lookingFor: string | null
+    isBlindDateMode: boolean
     interests: string[]
     photos: string[]
     inviteCode: string | null
@@ -2361,6 +2408,7 @@ export interface UserFieldRefs {
   readonly drinking: Prisma.FieldRef<"User", 'String'>
   readonly smoking: Prisma.FieldRef<"User", 'String'>
   readonly lookingFor: Prisma.FieldRef<"User", 'String'>
+  readonly isBlindDateMode: Prisma.FieldRef<"User", 'Boolean'>
   readonly interests: Prisma.FieldRef<"User", 'String[]'>
   readonly photos: Prisma.FieldRef<"User", 'String[]'>
   readonly inviteCode: Prisma.FieldRef<"User", 'String'>

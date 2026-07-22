@@ -93,6 +93,7 @@ export const UserScalarFieldEnum = {
   drinking: 'drinking',
   smoking: 'smoking',
   lookingFor: 'lookingFor',
+  isBlindDateMode: 'isBlindDateMode',
   interests: 'interests',
   photos: 'photos',
   inviteCode: 'inviteCode',

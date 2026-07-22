@@ -15,15 +15,31 @@ import {
   Plus,
   Star,
 } from "lucide-react";
-import imageCompression from 'browser-image-compression';
+import imageCompression from "browser-image-compression";
 import { checkSession, logoutUser } from "@/app/actions/session";
-import { getUserProfile, updateUserProfile, deleteAccount } from "@/app/actions/profile";
+import {
+  getUserProfile,
+  updateUserProfile,
+  deleteAccount,
+} from "@/app/actions/profile";
 import { useAlert } from "@/components/ui/AlertProvider";
 
 const INTERESTS_LIST = [
-    "Аялал ✈️", "Кофе ☕", "Фитнес 🏋️‍♂️", "Хөгжим 🎵", "Уран зураг 🎨",
-    "Ном 📖", "Гэрэл зураг 📸", "Кино 🍿", "Бүжиг 💃", "Хоол 🍕",
-    "Тоглоом 🎮", "Амьтад 🐶", "Спорт 🏀", "Загвар 👗", "Шөнөөр зугаалах 🌙"
+  "Аялал ✈️",
+  "Кофе ☕",
+  "Фитнес 🏋️‍♂️",
+  "Хөгжим 🎵",
+  "Уран зураг 🎨",
+  "Ном 📖",
+  "Гэрэл зураг 📸",
+  "Кино 🍿",
+  "Бүжиг 💃",
+  "Хоол 🍕",
+  "Тоглоом 🎮",
+  "Амьтад 🐶",
+  "Спорт 🏀",
+  "Загвар 👗",
+  "Шөнөөр зугаалах 🌙",
 ];
 
 export default function ProfilePage() {
@@ -33,6 +49,12 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [photoRating, setPhotoRating] = useState<{
+    score: number;
+    feedback: string;
+  } | null>(null);
+  const [ratingPhotoUrl, setRatingPhotoUrl] = useState<string | null>(null);
+  const [ratingLoading, setRatingLoading] = useState(false);
 
   const [profile, setProfile] = useState({
     name: "",
@@ -46,10 +68,10 @@ export default function ProfilePage() {
     smoking: "",
     lookingFor: "",
     inviteCode: "",
+    isBlindDateMode: false,
     interests: [] as string[],
     photos: [] as string[],
   });
-
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -76,6 +98,7 @@ export default function ProfilePage() {
           smoking: data.smoking || "",
           lookingFor: data.lookingFor || "",
           inviteCode: data.inviteCode || "",
+          isBlindDateMode: data.isBlindDateMode || false,
           interests: data.interests || [],
           photos: data.photos || [],
         });
@@ -99,11 +122,12 @@ export default function ProfilePage() {
       drinking: profile.drinking,
       smoking: profile.smoking,
       lookingFor: profile.lookingFor,
+      isBlindDateMode: profile.isBlindDateMode,
       interests: profile.interests,
       photos: profile.photos,
     });
     setSaving(false);
-    showAlert({ message: "Профайл амжилттай хадгалагдлаа!", type: "success" });
+    showAlert({ message: "Амжилттай хадгалагдлаа!", type: "success" });
   };
 
   const handleLogout = async () => {
@@ -115,18 +139,22 @@ export default function ProfilePage() {
     if (!userId) return;
     showAlert({
       title: "Анхааруулга",
-      message: "Та бүртгэлээ устгахдаа итгэлтэй байна уу? Энэ үйлдэл буцаагдахгүй бөгөөд таны бүх мэдээлэл устах болно.",
+      message:
+        "Та бүртгэлээ устгахдаа итгэлтэй байна уу? Энэ үйлдэл буцаагдахгүй бөгөөд таны бүх мэдээлэл устах болно.",
       type: "confirm",
       confirmText: "Устгах",
       onConfirm: async () => {
         const res = await deleteAccount(userId);
         if (res.success) {
-            await logoutUser();
-            window.location.href = "/";
+          await logoutUser();
+          window.location.href = "/";
         } else {
-            showAlert({ message: "Бүртгэл устгахад алдаа гарлаа.", type: "error" });
+          showAlert({
+            message: "Бүртгэл устгахад алдаа гарлаа.",
+            type: "error",
+          });
         }
-      }
+      },
     });
   };
 
@@ -138,11 +166,39 @@ export default function ProfilePage() {
     }
   };
 
+  const handleRatePhoto = async (photoUrl: string) => {
+    setRatingPhotoUrl(photoUrl);
+    setRatingLoading(true);
+    setPhotoRating(null);
+    try {
+      const res = await fetch("/api/ai/photo-rater", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageUrl: photoUrl }),
+      });
+      const data = await res.json();
+      if (data.score) {
+        setPhotoRating(data);
+      } else {
+        showAlert({
+          message: data.error || "Үнэлгээ хийхэд алдаа гарлаа",
+          type: "error",
+        });
+      }
+    } catch (e) {
+      showAlert({ message: "Алдаа гарлаа", type: "error" });
+    }
+    setRatingLoading(false);
+  };
+
   const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (profile.photos.length >= 10) {
-      showAlert({ message: "Хамгийн ихдээ 10 зураг оруулах боломжтой!", type: "info" });
+      showAlert({
+        message: "Хамгийн ихдээ 10 зураг оруулах боломжтой!",
+        type: "info",
+      });
       return;
     }
 
@@ -153,7 +209,7 @@ export default function ProfilePage() {
         useWebWorker: true,
       };
       const compressedFile = await imageCompression(file, options);
-      
+
       const formData = new FormData();
       formData.append("file", compressedFile);
       const res = await fetch("/api/upload", {
@@ -171,7 +227,9 @@ export default function ProfilePage() {
       }
     } catch (err) {
       console.error(err);
-      alert("Алдаа гарлаа: " + (err instanceof Error ? err.message : "Unknown"));
+      alert(
+        "Алдаа гарлаа: " + (err instanceof Error ? err.message : "Unknown"),
+      );
     }
   };
 
@@ -194,12 +252,15 @@ export default function ProfilePage() {
   };
 
   const toggleInterest = (interest: string) => {
-    setProfile(prev => {
-        if (prev.interests.includes(interest)) {
-            return { ...prev, interests: prev.interests.filter(i => i !== interest) };
-        }
-        if (prev.interests.length >= 5) return prev;
-        return { ...prev, interests: [...prev.interests, interest] };
+    setProfile((prev) => {
+      if (prev.interests.includes(interest)) {
+        return {
+          ...prev,
+          interests: prev.interests.filter((i) => i !== interest),
+        };
+      }
+      if (prev.interests.length >= 5) return prev;
+      return { ...prev, interests: [...prev.interests, interest] };
     });
   };
 
@@ -334,11 +395,21 @@ export default function ProfilePage() {
                     {idx !== 0 && (
                       <button
                         onClick={() => makePrimaryPhoto(idx)}
-                        className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/50 hover:bg-black/70 text-white rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 border border-white/20 whitespace-nowrap shadow-lg"
+                        className="absolute bottom-2 left-2 px-3 py-1.5 bg-black/50 hover:bg-black/70 text-white rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 border border-white/20 whitespace-nowrap shadow-lg"
                       >
-                        Үндсэн болгох
+                        Үндсэн
                       </button>
                     )}
+
+                    <button
+                      onClick={() => handleRatePhoto(photo)}
+                      disabled={ratingLoading && ratingPhotoUrl === photo}
+                      className="absolute bottom-2 right-2 px-2 py-1.5 bg-gradient-to-r from-indigo-500 to-purple-500 hover:scale-105 text-white rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 border border-white/20 whitespace-nowrap shadow-lg flex items-center gap-1"
+                    >
+                      {ratingLoading && ratingPhotoUrl === photo
+                        ? "Уншиж байна..."
+                        : "✨ AI Үнэлгээ"}
+                    </button>
                   </motion.div>
                 ))}
               </AnimatePresence>
@@ -425,7 +496,9 @@ export default function ProfilePage() {
                   </label>
                   <select
                     value={profile.zodiacSign}
-                    onChange={(e) => setProfile({ ...profile, zodiacSign: e.target.value })}
+                    onChange={(e) =>
+                      setProfile({ ...profile, zodiacSign: e.target.value })
+                    }
                     className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all appearance-none"
                   >
                     <option value="">Сонгох</option>
@@ -452,12 +525,16 @@ export default function ProfilePage() {
                   </label>
                   <select
                     value={profile.loveLanguage}
-                    onChange={(e) => setProfile({ ...profile, loveLanguage: e.target.value })}
+                    onChange={(e) =>
+                      setProfile({ ...profile, loveLanguage: e.target.value })
+                    }
                     className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all appearance-none"
                   >
                     <option value="">Сонгох</option>
                     <option value="Сайхан үгс">Сайхан үгс 🗣️</option>
-                    <option value="Хамт өнгөрүүлэх цаг">Хамт өнгөрүүлэх цаг ⏳</option>
+                    <option value="Хамт өнгөрүүлэх цаг">
+                      Хамт өнгөрүүлэх цаг ⏳
+                    </option>
                     <option value="Бэлэг">Бэлэг 🎁</option>
                     <option value="Тусламж дэмжлэг">Тусламж дэмжлэг 🤝</option>
                     <option value="Хүрэлцэхүй">Хүрэлцэхүй 🫂</option>
@@ -469,7 +546,9 @@ export default function ProfilePage() {
                   </label>
                   <select
                     value={profile.lookingFor}
-                    onChange={(e) => setProfile({ ...profile, lookingFor: e.target.value })}
+                    onChange={(e) =>
+                      setProfile({ ...profile, lookingFor: e.target.value })
+                    }
                     className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all appearance-none"
                   >
                     <option value="">Сонгох</option>
@@ -479,6 +558,31 @@ export default function ProfilePage() {
                     <option value="Гэрлэлт">Гэрлэлт 💍</option>
                   </select>
                 </div>
+              </div>
+
+              <div className="flex items-center justify-between bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4">
+                <div>
+                  <h4 className="text-neutral-900 dark:text-white font-bold text-lg">
+                    Сохор болзоо горим 🙈
+                  </h4>
+                  <p className="text-neutral-500 dark:text-neutral-400 text-sm mt-1">
+                    Чат эхлэх үед зурагнууд бүдэг харагдана.
+                  </p>
+                </div>
+                <button
+                  onClick={() =>
+                    setProfile({
+                      ...profile,
+                      isBlindDateMode: !profile.isBlindDateMode,
+                    })
+                  }
+                  className={`w-14 h-8 rounded-full p-1 transition-colors ${profile.isBlindDateMode ? "bg-pink-500" : "bg-neutral-300 dark:bg-neutral-700"}`}
+                >
+                  <motion.div
+                    animate={{ x: profile.isBlindDateMode ? 24 : 0 }}
+                    className="w-6 h-6 rounded-full bg-white shadow-md"
+                  />
+                </button>
               </div>
 
               <div className="space-y-2">
@@ -548,6 +652,59 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {photoRating && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-white dark:bg-neutral-900 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl relative border border-white/10"
+            >
+              <button
+                onClick={() => setPhotoRating(null)}
+                className="absolute top-4 right-4 p-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+              >
+                <X size={20} className="text-neutral-500" />
+              </button>
+
+              <div className="text-center mb-6 mt-2">
+                <div className="w-20 h-20 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/30">
+                  <Star size={32} className="text-white fill-white" />
+                </div>
+                <h3 className="text-2xl font-black text-neutral-900 dark:text-white">
+                  AI Үнэлгээ
+                </h3>
+                <p className="text-neutral-500 dark:text-neutral-400 mt-1">
+                  Таны зураг Dating апп дээр хэр амжилттай байх вэ?
+                </p>
+              </div>
+
+              <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-2xl p-6 text-center border border-black/5 dark:border-white/5">
+                <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 mb-2">
+                  {photoRating.score} / 100
+                </div>
+                <p className="text-neutral-700 dark:text-neutral-300 font-medium leading-relaxed mt-4">
+                  &quot;{photoRating.feedback}&quot;
+                </p>
+              </div>
+
+              <button
+                onClick={() => setPhotoRating(null)}
+                className="w-full mt-6 py-4 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold hover:scale-[1.02] transition-transform"
+              >
+                Ойлголоо, баярлалаа!
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

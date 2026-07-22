@@ -18,6 +18,10 @@ type MatchType = {
     avatarUrl: string | null;
     photos: string[];
     lastActive: Date | null;
+    isBlindDateMode: boolean;
+  };
+  currentUser: {
+    isBlindDateMode: boolean;
   };
   lastMessage: {
     id: string;
@@ -240,10 +244,14 @@ export default function ChatPage() {
           if (!activeMatch) return null;
           
           const messageCount = messages.length;
-          let blurClass = "blur-2xl";
-          if (messageCount >= 10) blurClass = "blur-none";
-          else if (messageCount >= 5) blurClass = "blur-md";
-          else if (messageCount >= 2) blurClass = "blur-sm";
+          let blurClass = "blur-none";
+          
+          if (activeMatch.currentUser?.isBlindDateMode || activeMatch.otherUser?.isBlindDateMode) {
+              blurClass = "blur-2xl";
+              if (messageCount >= 10) blurClass = "blur-none";
+              else if (messageCount >= 5) blurClass = "blur-md";
+              else if (messageCount >= 2) blurClass = "blur-sm";
+          }
 
           return (
             <>
@@ -319,7 +327,7 @@ export default function ChatPage() {
                 <div className="sticky top-0 z-10 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md p-4 rounded-2xl border border-blue-500/20 shadow-xl mb-6">
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-bold text-blue-500 flex items-center gap-2">
-                      <Sparkles size={16} /> AI Мөс хагалагч
+                      <Sparkles size={16} /> Wingman
                     </h4>
                     <button onClick={() => setIcebreakers(null)} className="text-neutral-400 hover:text-neutral-600 dark:hover:text-white">
                        ✕

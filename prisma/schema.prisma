@@ -33,6 +33,8 @@ model User {
   smoking    String?
   lookingFor String?
   
+  isBlindDateMode Boolean @default(false)
+  
   interests String[] @default([])
   photos    String[] @default([])
 

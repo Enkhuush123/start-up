@@ -14,7 +14,7 @@ export async function getPotentialMatches(userId: string) {
 
     const currentUser = await prisma.user.findUnique({
         where: { id: userId },
-        select: { lat: true, lng: true }
+        select: { lat: true, lng: true, zodiacSign: true }
     });
 
     const users = await prisma.user.findMany({
@@ -35,8 +35,21 @@ export async function getPotentialMatches(userId: string) {
         return Math.round(R * c);
     };
 
+    const getZodiacScore = (sign1?: string | null, sign2?: string | null) => {
+        if (!sign1 || !sign2) return null;
+        const sorted = [sign1, sign2].sort();
+        let hash = 0;
+        const str = sorted.join("-");
+        for (let i = 0; i < str.length; i++) {
+            hash = ((hash << 5) - hash) + str.charCodeAt(i);
+            hash |= 0;
+        }
+        return 60 + (Math.abs(hash) % 40);
+    };
+
     return users.map(u => ({
         ...u,
+        zodiacCompatibility: getZodiacScore(currentUser?.zodiacSign, u.zodiacSign),
         distanceKm: (currentUser?.lat && currentUser?.lng && u.lat && u.lng)
             ? getDistance(currentUser.lat, currentUser.lng, u.lat, u.lng)
             : null

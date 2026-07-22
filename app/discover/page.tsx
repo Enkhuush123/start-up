@@ -25,6 +25,8 @@ type UserType = {
     lookingFor: string | null;
     drinking: string | null;
     smoking: string | null;
+    bio?: string | null;
+    zodiacCompatibility?: number | null;
     distanceKm?: number | null;
 };
 
@@ -35,6 +37,7 @@ export default function DiscoverPage() {
     const [users, setUsers] = useState<UserType[]>([]);
     const [currentUserId, setCurrentUserId] = useState<string | null>(null);
     const [currentUserPhoto, setCurrentUserPhoto] = useState<string | null>(null);
+    const [currentUserProfile, setCurrentUserProfile] = useState<{name: string, zodiac: string} | null>(null);
     const [loading, setLoading] = useState(true);
     const [matchData, setMatchData] = useState<UserType | null>(null);
     const { t } = useLanguage();
@@ -56,6 +59,10 @@ export default function DiscoverPage() {
                 const profile = await getUserProfile(session.userId);
                 if (profile) {
                     setCurrentUserPhoto(profile.photos?.[0] || profile.avatarUrl || DUMMY_IMAGE);
+                    setCurrentUserProfile({ 
+                        name: profile.name || "Би", 
+                        zodiac: profile.zodiacSign || "" 
+                    });
                 }
                 
                 if (navigator.geolocation) {
@@ -233,7 +240,7 @@ export default function DiscoverPage() {
                                         )}
 
                                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent flex flex-col justify-end p-5 sm:p-8 pb-6 sm:pb-10 pointer-events-none">
-                                            <div className="flex items-end justify-between mb-4">
+                                            <div className="flex items-end justify-between mb-3">
                                                 <div>
                                                     <h1 className="text-3xl sm:text-4xl font-black text-white flex items-center gap-2 sm:gap-3 drop-shadow-lg">
                                                         {user.name || t("discover.anon")} <span className="text-xl sm:text-2xl font-medium text-white/80">{user.age}</span>
@@ -246,6 +253,24 @@ export default function DiscoverPage() {
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            {user.bio && (
+                                                <p className="text-white/90 text-sm sm:text-base font-medium mb-4 line-clamp-2 drop-shadow-md">
+                                                    {user.bio}
+                                                </p>
+                                            )}
+
+                                            {user.zodiacCompatibility && currentUserProfile?.zodiac && user.zodiacSign && (
+                                                <div className="mb-3 px-3 py-2 bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30 rounded-xl backdrop-blur-md shadow-lg pointer-events-auto">
+                                                    <div className="flex items-center gap-2 text-white text-sm font-bold">
+                                                        <Sparkles size={16} className="text-pink-400" />
+                                                        <span>{currentUserProfile.name} ({currentUserProfile.zodiac}) & {user.name} ({user.zodiacSign})</span>
+                                                    </div>
+                                                    <div className="text-pink-300 font-black text-lg mt-0.5">
+                                                        {user.zodiacCompatibility}% Зохицолтой ✨
+                                                    </div>
+                                                </div>
+                                            )}
 
                                             <div className="flex flex-wrap gap-1.5 sm:gap-2 pointer-events-auto mb-2 sm:mb-3 max-h-[80px] sm:max-h-none overflow-y-auto no-scrollbar">
                                                 {user.height && (

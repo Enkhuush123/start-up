@@ -22,6 +22,7 @@ export async function updateUserProfile(userId: string, data: {
     drinking?: string;
     smoking?: string;
     lookingFor?: string;
+    isBlindDateMode?: boolean;
 }) {
   const avatarUrl = data.photos && data.photos.length > 0 ? data.photos[0] : undefined;
   

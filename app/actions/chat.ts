@@ -13,8 +13,8 @@ export async function getMatches(userId: string) {
             status: "accepted"
         },
         include: {
-            user1: { select: { id: true, name: true, photos: true, lastActive: true, avatarUrl: true } },
-            user2: { select: { id: true, name: true, photos: true, lastActive: true, avatarUrl: true } },
+            user1: { select: { id: true, name: true, photos: true, lastActive: true, avatarUrl: true, isBlindDateMode: true } },
+            user2: { select: { id: true, name: true, photos: true, lastActive: true, avatarUrl: true, isBlindDateMode: true } },
             messages: {
                 orderBy: { createdAt: "desc" },
                 take: 1
@@ -48,6 +48,7 @@ export async function getMatches(userId: string) {
             id: canonicalMatch.id,
             createdAt: canonicalMatch.createdAt,
             otherUser,
+            currentUser: isUser1 ? match.user1 : match.user2,
             lastMessage
         });
     }
