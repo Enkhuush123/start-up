@@ -73,10 +73,10 @@ export default function TopNav() {
 
             <button 
                 onClick={() => setShowFactModal(true)}
-                className="hidden lg:flex items-center gap-2 max-w-xs cursor-pointer hover:bg-pink-500/20 transition-colors bg-pink-500/10 px-4 py-2 rounded-full border border-pink-500/20 shadow-inner"
+                className="flex items-center gap-2 max-w-xs cursor-pointer hover:bg-pink-500/20 transition-colors bg-pink-500/10 p-2 lg:px-4 lg:py-2 rounded-full border border-pink-500/20 shadow-inner"
             >
-                <Heart size={14} className="text-pink-500 flex-shrink-0 animate-pulse" fill="currentColor" />
-                <p className="text-xs text-neutral-600 dark:text-neutral-300 truncate font-medium">{loveFact}</p>
+                <Heart size={16} className="text-pink-500 flex-shrink-0 animate-pulse" fill="currentColor" />
+                <p className="hidden lg:block text-xs text-neutral-600 dark:text-neutral-300 truncate font-medium">{loveFact}</p>
             </button>
 
             <div className="hidden md:flex items-center gap-8">
@@ -197,6 +197,12 @@ export default function TopNav() {
                         </Link>
                     );
                 })}
+                <Link
+                    href="/cupid"
+                    className={`relative flex flex-col items-center justify-center w-16 h-full transition-all ${pathname === "/cupid" ? "text-pink-500" : "text-neutral-500 hover:text-pink-500"}`}
+                >
+                    <Heart size={24} strokeWidth={pathname === "/cupid" ? 2.5 : 2} className={pathname === "/cupid" ? "fill-current animate-pulse" : ""} />
+                </Link>
             </div>
         )}
         </>

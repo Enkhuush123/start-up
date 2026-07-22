@@ -242,7 +242,7 @@ export default function ChatPage() {
                     className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-500/10 text-purple-500 hover:bg-purple-500/20 rounded-full text-xs font-bold transition-colors disabled:opacity-50"
                   >
                     {evaluating ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
-                    <span className="hidden sm:inline">Дүгнэх</span>
+                    <span className="inline">Дүгнэх</span>
                   </button>
                   <button
                     onClick={handleDateIdeas}
@@ -250,7 +250,7 @@ export default function ChatPage() {
                     className="flex items-center gap-1.5 px-3 py-1.5 bg-pink-500/10 text-pink-500 hover:bg-pink-500/20 rounded-full text-xs font-bold transition-colors disabled:opacity-50"
                   >
                     {suggestingDate ? <Loader2 size={14} className="animate-spin" /> : <MapPin size={14} />}
-                    <span className="hidden sm:inline">Болзоо</span>
+                    <span className="inline">Болзоо</span>
                   </button>
                 </div>
               </div>
