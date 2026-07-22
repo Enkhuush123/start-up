@@ -31,9 +31,9 @@ export async function checkMessageContent(content: string): Promise<boolean> {
     }
     
     return false; // Is clean
-  } catch (error: any) {
+  } catch (error) {
     console.error("Moderation AI Error:", error);
-    throw new Error(error.message || "Unknown AI Error");
+    throw new Error(error instanceof Error ? error.message : "Unknown AI Error");
   }
 }
 

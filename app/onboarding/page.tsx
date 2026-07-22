@@ -179,8 +179,8 @@ export default function OnboardingPage() {
                                             } else {
                                                 alert("Зураг хуулахад алдаа: " + (data.error || "Unknown"));
                                             }
-                                        } catch (e: any) {
-                                            alert("Алдаа гарлаа: " + e.message);
+                                        } catch (e) {
+                                            alert("Алдаа гарлаа: " + (e instanceof Error ? e.message : "Unknown"));
                                         } finally {
                                             setLoading(false);
                                         }

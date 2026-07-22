@@ -144,9 +144,9 @@ export default function ProfilePage() {
       } else {
         alert("Зураг хуулахад алдаа: " + (data.error || "Unknown"));
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
-      alert("Алдаа гарлаа: " + err.message);
+      alert("Алдаа гарлаа: " + (err instanceof Error ? err.message : "Unknown"));
     }
   };
 

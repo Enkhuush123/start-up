@@ -78,9 +78,9 @@ export async function signupUser(data: {
       `
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error("Failed to send email with nodemailer:", error);
-    return { error: "Имэйл илгээхэд алдаа гарлаа: " + (error.message || "Мэдэгдэхгүй алдаа") };
+    return { error: "Имэйл илгээхэд алдаа гарлаа: " + (error instanceof Error ? error.message : "Мэдэгдэхгүй алдаа") };
   }
 
   return { success: true, otpSentTo: data.emailOrPhone };

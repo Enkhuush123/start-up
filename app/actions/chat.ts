@@ -84,8 +84,8 @@ export async function sendMessage(matchId: string, senderId: string, content: st
             await applyBan(senderId);
             return { error: "Ёс бус мессеж илгээсэн тул таны эрхийг хаалаа." };
         }
-    } catch (e: any) {
-        return { error: "AI Moderation Error: " + (e.message || "Unknown error") };
+    } catch (e) {
+        return { error: "AI Moderation Error: " + (e instanceof Error ? e.message : "Unknown error") };
     }
     
     const message = await prisma.message.create({
