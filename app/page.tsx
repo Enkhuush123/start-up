@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Heart, Map, MessageCircle, ArrowRight, Sparkles, EyeOff, MapPin, Camera, Star } from "lucide-react";
+import { Heart, Map, MessageCircle, ArrowRight, Sparkles, EyeOff, MapPin, Camera, Star, Smile, Coffee } from "lucide-react";
 import { checkSession } from "@/app/actions/session";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -165,7 +165,7 @@ export default function WelcomePage() {
           {/* Feature 5: Photo Rater */}
           <motion.div 
             whileHover={{ scale: 1.02 }}
-            className="col-span-1 md:col-span-2 lg:col-span-1 bg-gradient-to-br from-rose-500/10 to-pink-500/10 border border-rose-500/20 p-8 rounded-3xl relative overflow-hidden group"
+            className="col-span-1 bg-gradient-to-br from-rose-500/10 to-pink-500/10 border border-rose-500/20 p-8 rounded-3xl relative overflow-hidden group"
           >
             <div className="relative z-10 w-14 h-14 bg-rose-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-rose-500/30">
               <Camera size={28} />
@@ -173,6 +173,37 @@ export default function WelcomePage() {
             <h3 className="text-xl font-bold mb-3 relative z-10">📸 Зургийн зөвлөх</h3>
             <p className="text-neutral-600 dark:text-neutral-300 relative z-10 font-medium leading-relaxed">
               Энэ зургаараа хэр олон хүнтэй таарах бол? AI таны зургийг шүүгээд, илүү сайжруулах гоё зөвлөгөөнүүдийг өгнө.
+            </p>
+          </motion.div>
+
+          {/* Feature 6: Emoji Rating */}
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="col-span-1 md:col-span-2 lg:col-span-2 bg-gradient-to-br from-yellow-500/10 to-amber-500/10 border border-yellow-500/20 p-8 rounded-3xl relative overflow-hidden group"
+          >
+            <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-40 transition-opacity">
+              <Smile size={120} className="text-yellow-500" />
+            </div>
+            <div className="relative z-10 w-14 h-14 bg-yellow-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-yellow-500/30">
+              <Smile size={28} />
+            </div>
+            <h3 className="text-2xl font-bold mb-3 relative z-10">🤩 Emoji Үнэлгээ</h3>
+            <p className="text-neutral-600 dark:text-neutral-300 relative z-10 font-medium leading-relaxed max-w-md">
+              Таны харилцаж байгаа хүн яг одоо ямар сэтгэл хөдлөлтэй байгааг AI чатнаас нь шинжилж, танд зөвхөн Emoji-гоор дүрсэлж харуулна.
+            </p>
+          </motion.div>
+
+          {/* Feature 7: Date Ideas */}
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="col-span-1 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 p-8 rounded-3xl relative overflow-hidden group"
+          >
+            <div className="relative z-10 w-14 h-14 bg-cyan-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-cyan-500/30">
+              <Coffee size={28} />
+            </div>
+            <h3 className="text-xl font-bold mb-3 relative z-10">☕️ Болзооны санаа</h3>
+            <p className="text-neutral-600 dark:text-neutral-300 relative z-10 font-medium leading-relaxed">
+              Та хоёрын хобби болон одоогийн байршилд яг тохирох төгс болзооны санааг манай AI автоматаар санал болгоно.
             </p>
           </motion.div>
         </div>
