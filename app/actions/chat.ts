@@ -24,19 +24,34 @@ export async function getMatches(userId: string) {
         }
     });
 
-    
-    return matches.map(match => {
+    // Deduplicate matches (mutual swipes create 2 rows in Match table)
+    const seen = new Set();
+    const dedupedMatches = [];
+
+    for (const match of matches) {
         const isUser1 = match.user1Id === userId;
         const otherUser = isUser1 ? match.user2 : match.user1;
-        const lastMessage = match.messages.length > 0 ? match.messages[0] : null;
 
-        return {
-            id: match.id,
-            createdAt: match.createdAt,
+        if (seen.has(otherUser.id)) continue;
+        seen.add(otherUser.id);
+
+        // Find the canonical match row (where user1Id < user2Id) to ensure both users use the SAME matchId for messages
+        const canonicalMatch = matches.find(m => 
+            (m.user1Id === userId && m.user2Id === otherUser.id && m.user1Id < m.user2Id) ||
+            (m.user1Id === otherUser.id && m.user2Id === userId && m.user1Id < m.user2Id)
+        ) || match;
+
+        const lastMessage = canonicalMatch.messages.length > 0 ? canonicalMatch.messages[0] : null;
+
+        dedupedMatches.push({
+            id: canonicalMatch.id,
+            createdAt: canonicalMatch.createdAt,
             otherUser,
             lastMessage
-        };
-    });
+        });
+    }
+
+    return dedupedMatches;
 }
 
 export async function getMessages(matchId: string, userId: string) {
