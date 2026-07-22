@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, ArrowLeft, Loader2, User, MessageCircle } from "lucide-react";
-import { checkSession } from "@/app/actions/session";
+import { checkSession, logoutUser } from "@/app/actions/session";
 import { getMatches, getMessages, sendMessage } from "@/app/actions/chat";
 
 type MatchType = {
@@ -106,7 +106,8 @@ export default function ChatPage() {
     const res = await sendMessage(activeMatch.id, userId, text);
     if (res && 'error' in res) {
       setErrorModal(res.error);
-      setTimeout(() => {
+      setTimeout(async () => {
+        await logoutUser();
         window.location.href = "/login";
       }, 3000);
     }
