@@ -176,7 +176,7 @@ export default function DiscoverPage() {
                     <p className="text-sm font-medium mt-2">{t("discover.empty")}</p>
                 </motion.div>
             ) : (
-                <div className="relative w-full max-w-[420px] h-[65vh] max-h-[600px] min-h-[420px] perspective-1000">
+                <div className="relative w-full max-w-[420px] h-[55vh] sm:h-[65vh] max-h-[600px] min-h-[350px] sm:min-h-[420px] perspective-1000 mt-2 sm:mt-0">
                     <AnimatePresence>
                         {users.slice(0, 2).map((user, index) => {
                             const isFront = index === 0;
@@ -232,22 +232,22 @@ export default function DiscoverPage() {
                                             </>
                                         )}
 
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-8 pb-10 pointer-events-none">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent flex flex-col justify-end p-5 sm:p-8 pb-6 sm:pb-10 pointer-events-none">
                                             <div className="flex items-end justify-between mb-4">
                                                 <div>
-                                                    <h1 className="text-4xl font-black text-white flex items-center gap-3 drop-shadow-lg">
-                                                        {user.name || t("discover.anon")} <span className="text-2xl font-medium text-white/80">{user.age}</span>
+                                                    <h1 className="text-3xl sm:text-4xl font-black text-white flex items-center gap-2 sm:gap-3 drop-shadow-lg">
+                                                        {user.name || t("discover.anon")} <span className="text-xl sm:text-2xl font-medium text-white/80">{user.age}</span>
                                                     </h1>
-                                                    <div className="flex items-center gap-2 bg-black/40 backdrop-blur-xl px-4 py-2 rounded-full border border-white/10 shadow-lg mt-2">
-                                                        <MapPin size={16} className="text-purple-400" />
-                                                        <span className="text-white text-sm font-bold tracking-wider">
+                                                    <div className="flex items-center gap-1.5 sm:gap-2 bg-black/40 backdrop-blur-xl px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/10 shadow-lg mt-2 w-fit">
+                                                        <MapPin size={14} className="text-purple-400 sm:w-4 sm:h-4" />
+                                                        <span className="text-white text-xs sm:text-sm font-bold tracking-wider">
                                                             {user.distanceKm != null ? `${user.distanceKm} ${t("discover.dist")}` : `< 5 ${t("discover.dist")}`}
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className="flex flex-wrap gap-2 pointer-events-auto mb-3">
+                                            <div className="flex flex-wrap gap-1.5 sm:gap-2 pointer-events-auto mb-2 sm:mb-3 max-h-[80px] sm:max-h-none overflow-y-auto no-scrollbar">
                                                 {user.height && (
                                                     <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/20 shadow-sm flex items-center gap-1">
                                                         📏 {user.height} см
@@ -280,7 +280,7 @@ export default function DiscoverPage() {
                                                 )}
                                             </div>
 
-                                            <div className="flex flex-wrap gap-2 pointer-events-auto">
+                                            <div className="flex flex-wrap gap-1.5 sm:gap-2 pointer-events-auto max-h-[40px] sm:max-h-none overflow-y-auto no-scrollbar">
                                                 {user.interests.slice(0, 5).map((interest, i) => (
                                                     <span key={i} className="px-3.5 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold text-white border border-white/20 shadow-lg">
                                                         {interest}
@@ -302,23 +302,23 @@ export default function DiscoverPage() {
             )}
 
             {users.length > 0 && (
-                <div className="flex gap-6 sm:gap-8 mt-6 sm:mt-12 relative z-30">
+                <div className="flex gap-4 sm:gap-8 mt-4 sm:mt-8 mb-20 md:mb-0 relative z-30">
                     <motion.button
                         whileHover={{ scale: 1.15 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => manualSwipe(false)}
-                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-rose-500 shadow-[0_15px_35px_-10px_rgba(244,63,94,0.4)] hover:border-rose-500/50 transition-colors"
+                        className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-rose-500 shadow-[0_15px_35px_-10px_rgba(244,63,94,0.4)] hover:border-rose-500/50 transition-colors"
                     >
-                        <X className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={3} />
+                        <X className="w-6 h-6 sm:w-10 sm:h-10" strokeWidth={3} />
                     </motion.button>
 
                     <motion.button
                         whileHover={{ scale: 1.15 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => manualSwipe(true)}
-                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-emerald-500 shadow-[0_15px_35px_-10px_rgba(16,185,129,0.4)] hover:border-emerald-500/50 transition-colors"
+                        className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-emerald-500 shadow-[0_15px_35px_-10px_rgba(16,185,129,0.4)] hover:border-emerald-500/50 transition-colors"
                     >
-                        <Heart className="w-8 h-8 sm:w-10 sm:h-10 fill-emerald-500" strokeWidth={3} />
+                        <Heart className="w-6 h-6 sm:w-10 sm:h-10 fill-emerald-500" strokeWidth={3} />
                     </motion.button>
                 </div>
             )}
