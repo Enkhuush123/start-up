@@ -549,10 +549,12 @@ export default function ProfilePage() {
                     className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-neutral-900 dark:text-white font-bold text-lg focus:outline-none focus:border-purple-500 focus:bg-white/40 dark:bg-black/40 transition-all appearance-none"
                   >
                     <option value="">Сонгох</option>
-                    <option value="Үерхэл">Үерхэл ❤️</option>
-                    <option value="Найз">Найз нөхөд 🤝</option>
-                    <option value="Хөнгөн харилцаа">Хөнгөн харилцаа 🍷</option>
-                    <option value="Гэрлэлт">Гэрлэлт 💍</option>
+                    <option value="Урт хугацааны харилцаа">Урт хугацааны харилцаа ❤️</option>
+                    <option value="Урт хугацаа ч байж магадгүй">Урт хугацаа ч байж магадгүй 🥂</option>
+                    <option value="Богино хугацааны харилцаа">Богино хугацааны харилцаа 🍷</option>
+                    <option value="Зөвхөн хөгжилдөх">Зөвхөн хөгжилдөх 🥳</option>
+                    <option value="Шинэ найзууд">Шинэ найзууд 🤝</option>
+                    <option value="Одоогоор сайн мэдэхгүй байна">Одоогоор сайн мэдэхгүй байна 🤔</option>
                   </select>
                 </div>
               </div>

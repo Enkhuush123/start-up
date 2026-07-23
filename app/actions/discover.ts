@@ -16,12 +16,16 @@ export async function getPotentialMatches(userId: string) {
 
     const currentUser = await prisma.user.findUnique({
         where: { id: userId },
-        select: { lat: true, lng: true, zodiacSign: true }
+        select: { lat: true, lng: true, zodiacSign: true, gender: true }
     });
+
+    const targetGender = currentUser?.gender === "Эрэгтэй" ? "Эмэгтэй" : 
+                         currentUser?.gender === "Эмэгтэй" ? "Эрэгтэй" : undefined;
 
     const users = await prisma.user.findMany({
         where: {
-            id: { notIn: excludeIds }
+            id: { notIn: excludeIds },
+            ...(targetGender ? { gender: targetGender } : {})
         },
         take: 10
     });

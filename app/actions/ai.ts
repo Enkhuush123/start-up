@@ -174,11 +174,15 @@ export async function getHighCompatibilityMatches(userId: string) {
     const excludeIds = swipedUserIds.map((m) => m.user2Id);
     excludeIds.push(userId);
 
+    const targetGender = me.gender === "Эрэгтэй" ? "Эмэгтэй" : 
+                         me.gender === "Эмэгтэй" ? "Эрэгтэй" : undefined;
+
     // Find other users
     const others = await prisma.user.findMany({
       where: {
         id: { notIn: excludeIds },
         isBanned: false,
+        ...(targetGender ? { gender: targetGender } : {})
       },
       select: {
         id: true,

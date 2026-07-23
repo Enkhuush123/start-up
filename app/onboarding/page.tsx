@@ -200,10 +200,12 @@ export default function OnboardingPage() {
 
                                 <select value={formData.lookingFor} onChange={e => setFormData({...formData, lookingFor: e.target.value})} className="w-full h-14 bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 focus:border-pink-500 outline-none font-medium">
                                     <option value="" className="text-neutral-500">Юу хайж байгаа вэ?</option>
-                                    <option value="Үерхэл">Үерхэл ❤️</option>
-                                    <option value="Найз">Найз нөхөд 🤝</option>
-                                    <option value="Хөнгөн харилцаа">Хөнгөн харилцаа 🍷</option>
-                                    <option value="Гэрлэлт">Гэрлэлт 💍</option>
+                                    <option value="Урт хугацааны харилцаа">Урт хугацааны харилцаа ❤️</option>
+                                    <option value="Урт хугацаа ч байж магадгүй">Урт хугацаа ч байж магадгүй 🥂</option>
+                                    <option value="Богино хугацааны харилцаа">Богино хугацааны харилцаа 🍷</option>
+                                    <option value="Зөвхөн хөгжилдөх">Зөвхөн хөгжилдөх 🥳</option>
+                                    <option value="Шинэ найзууд">Шинэ найзууд 🤝</option>
+                                    <option value="Одоогоор сайн мэдэхгүй байна">Одоогоор сайн мэдэхгүй байна 🤔</option>
                                 </select>
 
                                 <select value={formData.loveLanguage} onChange={e => setFormData({...formData, loveLanguage: e.target.value})} className="w-full h-14 bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 focus:border-pink-500 outline-none font-medium">
