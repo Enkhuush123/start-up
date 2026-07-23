@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import GlobalMatchNotifier from "@/components/GlobalMatchNotifier";
 import ActiveTracker from "@/components/ActiveTracker";
+import PushManager from "@/components/PushManager";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
           <LanguageProvider>
             <AlertProvider>
               <ActiveTracker />
+              <PushManager />
               <FloatingHearts />
               <TopNav />
               <GlobalMatchNotifier />

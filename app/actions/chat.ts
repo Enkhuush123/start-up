@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { checkMessageContent, applyBan } from "./moderation";
+import { sendPushNotification } from "@/app/actions/push";
 
 export async function getMatches(userId: string) {
     const matches = await prisma.match.findMany({
@@ -94,8 +95,34 @@ export async function sendMessage(matchId: string, senderId: string, content: st
             matchId,
             senderId,
             content
+        },
+        include: {
+            match: {
+                select: {
+                    user1Id: true,
+                    user2Id: true
+                }
+            },
+            sender: {
+                select: {
+                    name: true,
+                    username: true
+                }
+            }
         }
     });
+
+    // Send push notification asynchronously
+    const otherUserId = message.match.user1Id === senderId ? message.match.user2Id : message.match.user1Id;
+    const senderName = message.sender.name || message.sender.username || "Нэргүй хэрэглэгч";
+    
+    sendPushNotification(
+        otherUserId, 
+        `${senderName} танд мессеж илгээлээ`, 
+        content,
+        `/chat`
+    ).catch(e => console.error("Failed to send push:", e));
+
     return message;
 }
 

@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import MatchScreen from "@/components/MatchScreen";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useLanguage } from "@/components/LanguageProvider";
+import FizzMapPromoModal from "@/components/FizzMapPromoModal";
 
 type UserType = {
     id: string;
@@ -167,6 +168,7 @@ export default function DiscoverPage() {
                     />
                 )}
             </AnimatePresence>
+            <FizzMapPromoModal />
             {users.length === 0 ? (
                 <motion.div 
                     initial={{ opacity: 0, scale: 0.9 }}

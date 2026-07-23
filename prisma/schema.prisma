@@ -53,6 +53,8 @@ model User {
   friendsAsUser2 Friendship[] @relation("UserTwoFriends")
 
   messagesSent Message[] @relation("SentMessages")
+
+  pushSubscriptions PushSubscription[]
 }
 
 model VerificationToken {
@@ -106,4 +108,15 @@ model Message {
   sender User  @relation("SentMessages", fields: [senderId], references: [id])
 
   isRead Boolean @default(false)
+}
+
+model PushSubscription {
+  id        String   @id @default(uuid())
+  userId    String
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
