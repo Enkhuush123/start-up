@@ -30,6 +30,7 @@ type UserType = {
     bio?: string | null;
     zodiacCompatibility?: number | null;
     distanceKm?: number | null;
+    isBlindDateMode?: boolean;
 };
 
 const DUMMY_IMAGE = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000";
@@ -205,7 +206,7 @@ export default function DiscoverPage() {
                                         <img 
                                             src={currentPhoto} 
                                             alt={user.name || "Хэрэглэгч"} 
-                                            className="w-full h-full object-cover select-none pointer-events-none"
+                                            className={`w-full h-full object-cover select-none pointer-events-none transition-all duration-300 ${user.isBlindDateMode ? "blur-[30px] scale-110" : ""}`}
                                         />
 
                                         {/* Photo indicators */}
