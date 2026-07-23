@@ -76,6 +76,10 @@ function ChatContent() {
         router.push("/login");
         return;
       }
+      if (!session.onboardingComplete) {
+        router.push("/onboarding");
+        return;
+      }
       setUserId(session.userId);
       const data = await getMatches(session.userId);
       setMatches(data);

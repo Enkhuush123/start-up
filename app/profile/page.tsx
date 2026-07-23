@@ -83,6 +83,10 @@ export default function ProfilePage() {
         router.push("/login");
         return;
       }
+      if (!session.onboardingComplete) {
+        router.push("/onboarding");
+        return;
+      }
 
       setUserId(session.userId);
       const data = await getUserProfile(session.userId);

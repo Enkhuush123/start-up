@@ -58,6 +58,10 @@ export default function DiscoverPage() {
         async function loadUsers() {
             const session = await checkSession();
             if (session?.userId) {
+                if (!session.onboardingComplete) {
+                    router.push("/onboarding");
+                    return;
+                }
                 setCurrentUserId(session.userId);
                 
                 const profile = await getUserProfile(session.userId);

@@ -19,14 +19,18 @@ export default function CupidPage() {
     useEffect(() => {
         async function load() {
             const session = await checkSession();
-            if (!session?.userId) {
+            if (session?.userId) {
+                if (!session.onboardingComplete) {
+                    router.push("/onboarding");
+                    return;
+                }
+                setUserId(session.userId);
+                const data = await getHighCompatibilityMatches(session.userId);
+                setMatches(data);
+                setLoading(false);
+            } else {
                 window.location.href = "/login";
-                return;
             }
-            setUserId(session.userId);
-            const data = await getHighCompatibilityMatches(session.userId);
-            setMatches(data);
-            setLoading(false);
         }
         load();
     }, []);
