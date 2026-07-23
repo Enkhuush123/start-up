@@ -55,7 +55,8 @@ export const ModelName = {
   VerificationToken: 'VerificationToken',
   Match: 'Match',
   Friendship: 'Friendship',
-  Message: 'Message'
+  Message: 'Message',
+  PushSubscription: 'PushSubscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -122,7 +123,9 @@ export const MatchScalarFieldEnum = {
   user1Id: 'user1Id',
   user2Id: 'user2Id',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  user1SawMatch: 'user1SawMatch',
+  user2SawMatch: 'user2SawMatch'
 } as const
 
 export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
@@ -149,6 +152,18 @@ export const MessageScalarFieldEnum = {
 } as const
 
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const PushSubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  endpoint: 'endpoint',
+  p256dh: 'p256dh',
+  auth: 'auth',
+  createdAt: 'createdAt'
+} as const
+
+export type PushSubscriptionScalarFieldEnum = (typeof PushSubscriptionScalarFieldEnum)[keyof typeof PushSubscriptionScalarFieldEnum]
 
 
 export const SortOrder = {

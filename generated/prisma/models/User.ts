@@ -393,6 +393,7 @@ export type UserWhereInput = {
   friendsAsUser1?: Prisma.FriendshipListRelationFilter
   friendsAsUser2?: Prisma.FriendshipListRelationFilter
   messagesSent?: Prisma.MessageListRelationFilter
+  pushSubscriptions?: Prisma.PushSubscriptionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -427,6 +428,7 @@ export type UserOrderByWithRelationInput = {
   friendsAsUser1?: Prisma.FriendshipOrderByRelationAggregateInput
   friendsAsUser2?: Prisma.FriendshipOrderByRelationAggregateInput
   messagesSent?: Prisma.MessageOrderByRelationAggregateInput
+  pushSubscriptions?: Prisma.PushSubscriptionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -464,6 +466,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   friendsAsUser1?: Prisma.FriendshipListRelationFilter
   friendsAsUser2?: Prisma.FriendshipListRelationFilter
   messagesSent?: Prisma.MessageListRelationFilter
+  pushSubscriptions?: Prisma.PushSubscriptionListRelationFilter
 }, "id" | "email" | "phone" | "username" | "inviteCode">
 
 export type UserOrderByWithAggregationInput = {
@@ -564,6 +567,7 @@ export type UserCreateInput = {
   friendsAsUser1?: Prisma.FriendshipCreateNestedManyWithoutUser1Input
   friendsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   messagesSent?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -598,6 +602,7 @@ export type UserUncheckedCreateInput = {
   friendsAsUser1?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser1Input
   friendsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   messagesSent?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -632,6 +637,7 @@ export type UserUpdateInput = {
   friendsAsUser1?: Prisma.FriendshipUpdateManyWithoutUser1NestedInput
   friendsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   messagesSent?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -666,6 +672,7 @@ export type UserUncheckedUpdateInput = {
   friendsAsUser1?: Prisma.FriendshipUncheckedUpdateManyWithoutUser1NestedInput
   friendsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   messagesSent?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -985,6 +992,20 @@ export type UserUpdateOneRequiredWithoutMessagesSentNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMessagesSentInput, Prisma.UserUpdateWithoutMessagesSentInput>, Prisma.UserUncheckedUpdateWithoutMessagesSentInput>
 }
 
+export type UserCreateNestedOneWithoutPushSubscriptionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushSubscriptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPushSubscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushSubscriptionsInput
+  upsert?: Prisma.UserUpsertWithoutPushSubscriptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPushSubscriptionsInput, Prisma.UserUpdateWithoutPushSubscriptionsInput>, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+}
+
 export type UserCreateWithoutMatchesAsUser1Input = {
   id?: string
   email?: string | null
@@ -1016,6 +1037,7 @@ export type UserCreateWithoutMatchesAsUser1Input = {
   friendsAsUser1?: Prisma.FriendshipCreateNestedManyWithoutUser1Input
   friendsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   messagesSent?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMatchesAsUser1Input = {
@@ -1049,6 +1071,7 @@ export type UserUncheckedCreateWithoutMatchesAsUser1Input = {
   friendsAsUser1?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser1Input
   friendsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   messagesSent?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMatchesAsUser1Input = {
@@ -1087,6 +1110,7 @@ export type UserCreateWithoutMatchesAsUser2Input = {
   friendsAsUser1?: Prisma.FriendshipCreateNestedManyWithoutUser1Input
   friendsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   messagesSent?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMatchesAsUser2Input = {
@@ -1120,6 +1144,7 @@ export type UserUncheckedCreateWithoutMatchesAsUser2Input = {
   friendsAsUser1?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser1Input
   friendsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   messagesSent?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMatchesAsUser2Input = {
@@ -1169,6 +1194,7 @@ export type UserUpdateWithoutMatchesAsUser1Input = {
   friendsAsUser1?: Prisma.FriendshipUpdateManyWithoutUser1NestedInput
   friendsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   messagesSent?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMatchesAsUser1Input = {
@@ -1202,6 +1228,7 @@ export type UserUncheckedUpdateWithoutMatchesAsUser1Input = {
   friendsAsUser1?: Prisma.FriendshipUncheckedUpdateManyWithoutUser1NestedInput
   friendsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   messagesSent?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutMatchesAsUser2Input = {
@@ -1246,6 +1273,7 @@ export type UserUpdateWithoutMatchesAsUser2Input = {
   friendsAsUser1?: Prisma.FriendshipUpdateManyWithoutUser1NestedInput
   friendsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   messagesSent?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMatchesAsUser2Input = {
@@ -1279,6 +1307,7 @@ export type UserUncheckedUpdateWithoutMatchesAsUser2Input = {
   friendsAsUser1?: Prisma.FriendshipUncheckedUpdateManyWithoutUser1NestedInput
   friendsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   messagesSent?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFriendsAsUser1Input = {
@@ -1312,6 +1341,7 @@ export type UserCreateWithoutFriendsAsUser1Input = {
   matchesAsUser2?: Prisma.MatchCreateNestedManyWithoutUser2Input
   friendsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   messagesSent?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFriendsAsUser1Input = {
@@ -1345,6 +1375,7 @@ export type UserUncheckedCreateWithoutFriendsAsUser1Input = {
   matchesAsUser2?: Prisma.MatchUncheckedCreateNestedManyWithoutUser2Input
   friendsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   messagesSent?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFriendsAsUser1Input = {
@@ -1383,6 +1414,7 @@ export type UserCreateWithoutFriendsAsUser2Input = {
   matchesAsUser2?: Prisma.MatchCreateNestedManyWithoutUser2Input
   friendsAsUser1?: Prisma.FriendshipCreateNestedManyWithoutUser1Input
   messagesSent?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFriendsAsUser2Input = {
@@ -1416,6 +1448,7 @@ export type UserUncheckedCreateWithoutFriendsAsUser2Input = {
   matchesAsUser2?: Prisma.MatchUncheckedCreateNestedManyWithoutUser2Input
   friendsAsUser1?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser1Input
   messagesSent?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFriendsAsUser2Input = {
@@ -1465,6 +1498,7 @@ export type UserUpdateWithoutFriendsAsUser1Input = {
   matchesAsUser2?: Prisma.MatchUpdateManyWithoutUser2NestedInput
   friendsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   messagesSent?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFriendsAsUser1Input = {
@@ -1498,6 +1532,7 @@ export type UserUncheckedUpdateWithoutFriendsAsUser1Input = {
   matchesAsUser2?: Prisma.MatchUncheckedUpdateManyWithoutUser2NestedInput
   friendsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   messagesSent?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutFriendsAsUser2Input = {
@@ -1542,6 +1577,7 @@ export type UserUpdateWithoutFriendsAsUser2Input = {
   matchesAsUser2?: Prisma.MatchUpdateManyWithoutUser2NestedInput
   friendsAsUser1?: Prisma.FriendshipUpdateManyWithoutUser1NestedInput
   messagesSent?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFriendsAsUser2Input = {
@@ -1575,6 +1611,7 @@ export type UserUncheckedUpdateWithoutFriendsAsUser2Input = {
   matchesAsUser2?: Prisma.MatchUncheckedUpdateManyWithoutUser2NestedInput
   friendsAsUser1?: Prisma.FriendshipUncheckedUpdateManyWithoutUser1NestedInput
   messagesSent?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMessagesSentInput = {
@@ -1608,6 +1645,7 @@ export type UserCreateWithoutMessagesSentInput = {
   matchesAsUser2?: Prisma.MatchCreateNestedManyWithoutUser2Input
   friendsAsUser1?: Prisma.FriendshipCreateNestedManyWithoutUser1Input
   friendsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMessagesSentInput = {
@@ -1641,6 +1679,7 @@ export type UserUncheckedCreateWithoutMessagesSentInput = {
   matchesAsUser2?: Prisma.MatchUncheckedCreateNestedManyWithoutUser2Input
   friendsAsUser1?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser1Input
   friendsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMessagesSentInput = {
@@ -1690,6 +1729,7 @@ export type UserUpdateWithoutMessagesSentInput = {
   matchesAsUser2?: Prisma.MatchUpdateManyWithoutUser2NestedInput
   friendsAsUser1?: Prisma.FriendshipUpdateManyWithoutUser1NestedInput
   friendsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMessagesSentInput = {
@@ -1723,6 +1763,159 @@ export type UserUncheckedUpdateWithoutMessagesSentInput = {
   matchesAsUser2?: Prisma.MatchUncheckedUpdateManyWithoutUser2NestedInput
   friendsAsUser1?: Prisma.FriendshipUncheckedUpdateManyWithoutUser1NestedInput
   friendsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPushSubscriptionsInput = {
+  id?: string
+  email?: string | null
+  phone?: string | null
+  username?: string | null
+  passwordHash?: string | null
+  isVerified?: boolean
+  isBanned?: boolean
+  name?: string | null
+  bio?: string | null
+  avatarUrl?: string | null
+  age?: number | null
+  gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
+  isBlindDateMode?: boolean
+  interests?: Prisma.UserCreateinterestsInput | string[]
+  photos?: Prisma.UserCreatephotosInput | string[]
+  inviteCode?: string | null
+  lat?: number | null
+  lng?: number | null
+  lastActive?: Date | string
+  createdAt?: Date | string
+  matchesAsUser1?: Prisma.MatchCreateNestedManyWithoutUser1Input
+  matchesAsUser2?: Prisma.MatchCreateNestedManyWithoutUser2Input
+  friendsAsUser1?: Prisma.FriendshipCreateNestedManyWithoutUser1Input
+  friendsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
+  messagesSent?: Prisma.MessageCreateNestedManyWithoutSenderInput
+}
+
+export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
+  id?: string
+  email?: string | null
+  phone?: string | null
+  username?: string | null
+  passwordHash?: string | null
+  isVerified?: boolean
+  isBanned?: boolean
+  name?: string | null
+  bio?: string | null
+  avatarUrl?: string | null
+  age?: number | null
+  gender?: string | null
+  height?: number | null
+  zodiacSign?: string | null
+  loveLanguage?: string | null
+  drinking?: string | null
+  smoking?: string | null
+  lookingFor?: string | null
+  isBlindDateMode?: boolean
+  interests?: Prisma.UserCreateinterestsInput | string[]
+  photos?: Prisma.UserCreatephotosInput | string[]
+  inviteCode?: string | null
+  lat?: number | null
+  lng?: number | null
+  lastActive?: Date | string
+  createdAt?: Date | string
+  matchesAsUser1?: Prisma.MatchUncheckedCreateNestedManyWithoutUser1Input
+  matchesAsUser2?: Prisma.MatchUncheckedCreateNestedManyWithoutUser2Input
+  friendsAsUser1?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser1Input
+  friendsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
+  messagesSent?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+}
+
+export type UserCreateOrConnectWithoutPushSubscriptionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+}
+
+export type UserUpsertWithoutPushSubscriptionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPushSubscriptionsInput, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPushSubscriptionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPushSubscriptionsInput, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+}
+
+export type UserUpdateWithoutPushSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  interests?: Prisma.UserUpdateinterestsInput | string[]
+  photos?: Prisma.UserUpdatephotosInput | string[]
+  inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lastActive?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  matchesAsUser1?: Prisma.MatchUpdateManyWithoutUser1NestedInput
+  matchesAsUser2?: Prisma.MatchUpdateManyWithoutUser2NestedInput
+  friendsAsUser1?: Prisma.FriendshipUpdateManyWithoutUser1NestedInput
+  friendsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
+  messagesSent?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  zodiacSign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loveLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drinking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  smoking?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lookingFor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBlindDateMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  interests?: Prisma.UserUpdateinterestsInput | string[]
+  photos?: Prisma.UserUpdatephotosInput | string[]
+  inviteCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lastActive?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  matchesAsUser1?: Prisma.MatchUncheckedUpdateManyWithoutUser1NestedInput
+  matchesAsUser2?: Prisma.MatchUncheckedUpdateManyWithoutUser2NestedInput
+  friendsAsUser1?: Prisma.FriendshipUncheckedUpdateManyWithoutUser1NestedInput
+  friendsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
+  messagesSent?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
 }
 
 
@@ -1736,6 +1929,7 @@ export type UserCountOutputType = {
   friendsAsUser1: number
   friendsAsUser2: number
   messagesSent: number
+  pushSubscriptions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1744,6 +1938,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   friendsAsUser1?: boolean | UserCountOutputTypeCountFriendsAsUser1Args
   friendsAsUser2?: boolean | UserCountOutputTypeCountFriendsAsUser2Args
   messagesSent?: boolean | UserCountOutputTypeCountMessagesSentArgs
+  pushSubscriptions?: boolean | UserCountOutputTypeCountPushSubscriptionsArgs
 }
 
 /**
@@ -1791,6 +1986,13 @@ export type UserCountOutputTypeCountMessagesSentArgs<ExtArgs extends runtime.Typ
   where?: Prisma.MessageWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPushSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PushSubscriptionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1824,6 +2026,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   friendsAsUser1?: boolean | Prisma.User$friendsAsUser1Args<ExtArgs>
   friendsAsUser2?: boolean | Prisma.User$friendsAsUser2Args<ExtArgs>
   messagesSent?: boolean | Prisma.User$messagesSentArgs<ExtArgs>
+  pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1921,6 +2124,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   friendsAsUser1?: boolean | Prisma.User$friendsAsUser1Args<ExtArgs>
   friendsAsUser2?: boolean | Prisma.User$friendsAsUser2Args<ExtArgs>
   messagesSent?: boolean | Prisma.User$messagesSentArgs<ExtArgs>
+  pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1934,6 +2138,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     friendsAsUser1: Prisma.$FriendshipPayload<ExtArgs>[]
     friendsAsUser2: Prisma.$FriendshipPayload<ExtArgs>[]
     messagesSent: Prisma.$MessagePayload<ExtArgs>[]
+    pushSubscriptions: Prisma.$PushSubscriptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2361,6 +2566,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   friendsAsUser1<T extends Prisma.User$friendsAsUser1Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$friendsAsUser1Args<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   friendsAsUser2<T extends Prisma.User$friendsAsUser2Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$friendsAsUser2Args<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   messagesSent<T extends Prisma.User$messagesSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$messagesSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pushSubscriptions<T extends Prisma.User$pushSubscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pushSubscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2926,6 +3132,30 @@ export type User$messagesSentArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
+}
+
+/**
+ * User.pushSubscriptions
+ */
+export type User$pushSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PushSubscription
+   */
+  select?: Prisma.PushSubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PushSubscription
+   */
+  omit?: Prisma.PushSubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PushSubscriptionInclude<ExtArgs> | null
+  where?: Prisma.PushSubscriptionWhereInput
+  orderBy?: Prisma.PushSubscriptionOrderByWithRelationInput | Prisma.PushSubscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.PushSubscriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PushSubscriptionScalarFieldEnum | Prisma.PushSubscriptionScalarFieldEnum[]
 }
 
 /**

@@ -30,6 +30,8 @@ export type MatchMinAggregateOutputType = {
   user2Id: string | null
   status: string | null
   createdAt: Date | null
+  user1SawMatch: boolean | null
+  user2SawMatch: boolean | null
 }
 
 export type MatchMaxAggregateOutputType = {
@@ -38,6 +40,8 @@ export type MatchMaxAggregateOutputType = {
   user2Id: string | null
   status: string | null
   createdAt: Date | null
+  user1SawMatch: boolean | null
+  user2SawMatch: boolean | null
 }
 
 export type MatchCountAggregateOutputType = {
@@ -46,6 +50,8 @@ export type MatchCountAggregateOutputType = {
   user2Id: number
   status: number
   createdAt: number
+  user1SawMatch: number
+  user2SawMatch: number
   _all: number
 }
 
@@ -56,6 +62,8 @@ export type MatchMinAggregateInputType = {
   user2Id?: true
   status?: true
   createdAt?: true
+  user1SawMatch?: true
+  user2SawMatch?: true
 }
 
 export type MatchMaxAggregateInputType = {
@@ -64,6 +72,8 @@ export type MatchMaxAggregateInputType = {
   user2Id?: true
   status?: true
   createdAt?: true
+  user1SawMatch?: true
+  user2SawMatch?: true
 }
 
 export type MatchCountAggregateInputType = {
@@ -72,6 +82,8 @@ export type MatchCountAggregateInputType = {
   user2Id?: true
   status?: true
   createdAt?: true
+  user1SawMatch?: true
+  user2SawMatch?: true
   _all?: true
 }
 
@@ -153,6 +165,8 @@ export type MatchGroupByOutputType = {
   user2Id: string
   status: string
   createdAt: Date
+  user1SawMatch: boolean
+  user2SawMatch: boolean
   _count: MatchCountAggregateOutputType | null
   _min: MatchMinAggregateOutputType | null
   _max: MatchMaxAggregateOutputType | null
@@ -182,6 +196,8 @@ export type MatchWhereInput = {
   user2Id?: Prisma.StringFilter<"Match"> | string
   status?: Prisma.StringFilter<"Match"> | string
   createdAt?: Prisma.DateTimeFilter<"Match"> | Date | string
+  user1SawMatch?: Prisma.BoolFilter<"Match"> | boolean
+  user2SawMatch?: Prisma.BoolFilter<"Match"> | boolean
   user1?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   user2?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   messages?: Prisma.MessageListRelationFilter
@@ -193,6 +209,8 @@ export type MatchOrderByWithRelationInput = {
   user2Id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  user1SawMatch?: Prisma.SortOrder
+  user2SawMatch?: Prisma.SortOrder
   user1?: Prisma.UserOrderByWithRelationInput
   user2?: Prisma.UserOrderByWithRelationInput
   messages?: Prisma.MessageOrderByRelationAggregateInput
@@ -208,6 +226,8 @@ export type MatchWhereUniqueInput = Prisma.AtLeast<{
   user2Id?: Prisma.StringFilter<"Match"> | string
   status?: Prisma.StringFilter<"Match"> | string
   createdAt?: Prisma.DateTimeFilter<"Match"> | Date | string
+  user1SawMatch?: Prisma.BoolFilter<"Match"> | boolean
+  user2SawMatch?: Prisma.BoolFilter<"Match"> | boolean
   user1?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   user2?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   messages?: Prisma.MessageListRelationFilter
@@ -219,6 +239,8 @@ export type MatchOrderByWithAggregationInput = {
   user2Id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  user1SawMatch?: Prisma.SortOrder
+  user2SawMatch?: Prisma.SortOrder
   _count?: Prisma.MatchCountOrderByAggregateInput
   _max?: Prisma.MatchMaxOrderByAggregateInput
   _min?: Prisma.MatchMinOrderByAggregateInput
@@ -233,12 +255,16 @@ export type MatchScalarWhereWithAggregatesInput = {
   user2Id?: Prisma.StringWithAggregatesFilter<"Match"> | string
   status?: Prisma.StringWithAggregatesFilter<"Match"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Match"> | Date | string
+  user1SawMatch?: Prisma.BoolWithAggregatesFilter<"Match"> | boolean
+  user2SawMatch?: Prisma.BoolWithAggregatesFilter<"Match"> | boolean
 }
 
 export type MatchCreateInput = {
   id?: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
   user1: Prisma.UserCreateNestedOneWithoutMatchesAsUser1Input
   user2: Prisma.UserCreateNestedOneWithoutMatchesAsUser2Input
   messages?: Prisma.MessageCreateNestedManyWithoutMatchInput
@@ -250,6 +276,8 @@ export type MatchUncheckedCreateInput = {
   user2Id: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -257,6 +285,8 @@ export type MatchUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   user1?: Prisma.UserUpdateOneRequiredWithoutMatchesAsUser1NestedInput
   user2?: Prisma.UserUpdateOneRequiredWithoutMatchesAsUser2NestedInput
   messages?: Prisma.MessageUpdateManyWithoutMatchNestedInput
@@ -268,6 +298,8 @@ export type MatchUncheckedUpdateInput = {
   user2Id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   messages?: Prisma.MessageUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -277,12 +309,16 @@ export type MatchCreateManyInput = {
   user2Id: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
 }
 
 export type MatchUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type MatchUncheckedUpdateManyInput = {
@@ -291,6 +327,8 @@ export type MatchUncheckedUpdateManyInput = {
   user2Id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type MatchListRelationFilter = {
@@ -314,6 +352,8 @@ export type MatchCountOrderByAggregateInput = {
   user2Id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  user1SawMatch?: Prisma.SortOrder
+  user2SawMatch?: Prisma.SortOrder
 }
 
 export type MatchMaxOrderByAggregateInput = {
@@ -322,6 +362,8 @@ export type MatchMaxOrderByAggregateInput = {
   user2Id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  user1SawMatch?: Prisma.SortOrder
+  user2SawMatch?: Prisma.SortOrder
 }
 
 export type MatchMinOrderByAggregateInput = {
@@ -330,6 +372,8 @@ export type MatchMinOrderByAggregateInput = {
   user2Id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  user1SawMatch?: Prisma.SortOrder
+  user2SawMatch?: Prisma.SortOrder
 }
 
 export type MatchScalarRelationFilter = {
@@ -439,6 +483,8 @@ export type MatchCreateWithoutUser1Input = {
   id?: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
   user2: Prisma.UserCreateNestedOneWithoutMatchesAsUser2Input
   messages?: Prisma.MessageCreateNestedManyWithoutMatchInput
 }
@@ -448,6 +494,8 @@ export type MatchUncheckedCreateWithoutUser1Input = {
   user2Id: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -465,6 +513,8 @@ export type MatchCreateWithoutUser2Input = {
   id?: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
   user1: Prisma.UserCreateNestedOneWithoutMatchesAsUser1Input
   messages?: Prisma.MessageCreateNestedManyWithoutMatchInput
 }
@@ -474,6 +524,8 @@ export type MatchUncheckedCreateWithoutUser2Input = {
   user1Id: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -512,6 +564,8 @@ export type MatchScalarWhereInput = {
   user2Id?: Prisma.StringFilter<"Match"> | string
   status?: Prisma.StringFilter<"Match"> | string
   createdAt?: Prisma.DateTimeFilter<"Match"> | Date | string
+  user1SawMatch?: Prisma.BoolFilter<"Match"> | boolean
+  user2SawMatch?: Prisma.BoolFilter<"Match"> | boolean
 }
 
 export type MatchUpsertWithWhereUniqueWithoutUser2Input = {
@@ -534,6 +588,8 @@ export type MatchCreateWithoutMessagesInput = {
   id?: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
   user1: Prisma.UserCreateNestedOneWithoutMatchesAsUser1Input
   user2: Prisma.UserCreateNestedOneWithoutMatchesAsUser2Input
 }
@@ -544,6 +600,8 @@ export type MatchUncheckedCreateWithoutMessagesInput = {
   user2Id: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
 }
 
 export type MatchCreateOrConnectWithoutMessagesInput = {
@@ -566,6 +624,8 @@ export type MatchUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   user1?: Prisma.UserUpdateOneRequiredWithoutMatchesAsUser1NestedInput
   user2?: Prisma.UserUpdateOneRequiredWithoutMatchesAsUser2NestedInput
 }
@@ -576,6 +636,8 @@ export type MatchUncheckedUpdateWithoutMessagesInput = {
   user2Id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type MatchCreateManyUser1Input = {
@@ -583,6 +645,8 @@ export type MatchCreateManyUser1Input = {
   user2Id: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
 }
 
 export type MatchCreateManyUser2Input = {
@@ -590,12 +654,16 @@ export type MatchCreateManyUser2Input = {
   user1Id: string
   status?: string
   createdAt?: Date | string
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
 }
 
 export type MatchUpdateWithoutUser1Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   user2?: Prisma.UserUpdateOneRequiredWithoutMatchesAsUser2NestedInput
   messages?: Prisma.MessageUpdateManyWithoutMatchNestedInput
 }
@@ -605,6 +673,8 @@ export type MatchUncheckedUpdateWithoutUser1Input = {
   user2Id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   messages?: Prisma.MessageUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -613,12 +683,16 @@ export type MatchUncheckedUpdateManyWithoutUser1Input = {
   user2Id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type MatchUpdateWithoutUser2Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   user1?: Prisma.UserUpdateOneRequiredWithoutMatchesAsUser1NestedInput
   messages?: Prisma.MessageUpdateManyWithoutMatchNestedInput
 }
@@ -628,6 +702,8 @@ export type MatchUncheckedUpdateWithoutUser2Input = {
   user1Id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   messages?: Prisma.MessageUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -636,6 +712,8 @@ export type MatchUncheckedUpdateManyWithoutUser2Input = {
   user1Id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user1SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user2SawMatch?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -675,6 +753,8 @@ export type MatchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   user2Id?: boolean
   status?: boolean
   createdAt?: boolean
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
   user1?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   user2?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   messages?: boolean | Prisma.Match$messagesArgs<ExtArgs>
@@ -687,6 +767,8 @@ export type MatchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   user2Id?: boolean
   status?: boolean
   createdAt?: boolean
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
   user1?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   user2?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["match"]>
@@ -697,6 +779,8 @@ export type MatchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   user2Id?: boolean
   status?: boolean
   createdAt?: boolean
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
   user1?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   user2?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["match"]>
@@ -707,9 +791,11 @@ export type MatchSelectScalar = {
   user2Id?: boolean
   status?: boolean
   createdAt?: boolean
+  user1SawMatch?: boolean
+  user2SawMatch?: boolean
 }
 
-export type MatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user1Id" | "user2Id" | "status" | "createdAt", ExtArgs["result"]["match"]>
+export type MatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user1Id" | "user2Id" | "status" | "createdAt" | "user1SawMatch" | "user2SawMatch", ExtArgs["result"]["match"]>
 export type MatchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user1?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   user2?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -738,6 +824,8 @@ export type $MatchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     user2Id: string
     status: string
     createdAt: Date
+    user1SawMatch: boolean
+    user2SawMatch: boolean
   }, ExtArgs["result"]["match"]>
   composites: {}
 }
@@ -1169,6 +1257,8 @@ export interface MatchFieldRefs {
   readonly user2Id: Prisma.FieldRef<"Match", 'String'>
   readonly status: Prisma.FieldRef<"Match", 'String'>
   readonly createdAt: Prisma.FieldRef<"Match", 'DateTime'>
+  readonly user1SawMatch: Prisma.FieldRef<"Match", 'Boolean'>
+  readonly user2SawMatch: Prisma.FieldRef<"Match", 'Boolean'>
 }
     
 

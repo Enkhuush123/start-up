@@ -42,3 +42,8 @@ export type Friendship = Prisma.FriendshipModel
  * 
  */
 export type Message = Prisma.MessageModel
+/**
+ * Model PushSubscription
+ * 
+ */
+export type PushSubscription = Prisma.PushSubscriptionModel
