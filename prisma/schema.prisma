@@ -72,6 +72,9 @@ model Match {
   status    String   @default("pending")
   createdAt DateTime @default(now())
 
+  user1SawMatch Boolean @default(false)
+  user2SawMatch Boolean @default(false)
+
   user1    User      @relation("UserOneMatches", fields: [user1Id], references: [id])
   user2    User      @relation("UserTwoMatches", fields: [user2Id], references: [id])
   messages Message[]

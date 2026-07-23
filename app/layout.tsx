@@ -8,6 +8,8 @@ import FloatingHearts from "@/components/ui/FloatingHearts";
 import { AlertProvider } from "@/components/ui/AlertProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import GlobalMatchNotifier from "@/components/GlobalMatchNotifier";
+import ActiveTracker from "@/components/ActiveTracker";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,8 +29,10 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <AlertProvider>
+              <ActiveTracker />
               <FloatingHearts />
               <TopNav />
+              <GlobalMatchNotifier />
               <main className="z-10 relative">
                 {children}
               </main>

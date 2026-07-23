@@ -16,7 +16,7 @@ export async function getPotentialMatches(userId: string) {
 
     const currentUser = await prisma.user.findUnique({
         where: { id: userId },
-        select: { lat: true, lng: true, zodiacSign: true, gender: true }
+        select: { lat: true, lng: true, zodiacSign: true, gender: true, isBlindDateMode: true }
     });
 
     const targetGender = currentUser?.gender === "Эрэгтэй" ? "Эмэгтэй" : 
@@ -25,6 +25,7 @@ export async function getPotentialMatches(userId: string) {
     const users = await prisma.user.findMany({
         where: {
             id: { notIn: excludeIds },
+            isBlindDateMode: currentUser?.isBlindDateMode || false,
             ...(targetGender ? { gender: targetGender } : {})
         },
         take: 10
@@ -98,6 +99,7 @@ export async function recordSwipe(userId: string, targetUserId: string, isLike: 
         });
 
         if (mutual && mutual.status === "pending") {
+            // Update BOTH records to accepted
             await prisma.match.updateMany({
                 where: {
                     OR: [
@@ -107,6 +109,13 @@ export async function recordSwipe(userId: string, targetUserId: string, isLike: 
                 },
                 data: { status: "accepted" }
             });
+
+            // The current user (userId) is seeing the match instantly, so mark their record as seen
+            await prisma.match.updateMany({
+                where: { user1Id: userId, user2Id: targetUserId },
+                data: { user1SawMatch: true }
+            });
+
             return { isMatch: true };
         }
     }

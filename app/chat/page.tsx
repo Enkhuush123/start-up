@@ -62,6 +62,7 @@ export default function ChatPage() {
   const [generatingIcebreaker, setGeneratingIcebreaker] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     async function load() {
@@ -131,6 +132,9 @@ export default function ChatPage() {
     setSending(true);
     const text = newMessage;
     setNewMessage("");
+    if (textareaRef.current) {
+        textareaRef.current.style.height = '56px';
+    }
 
     const tempMsg = {
       id: Date.now().toString(),
@@ -234,7 +238,15 @@ export default function ChatPage() {
         </div>
       </div>
 
-      <div
+      <motion.div
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.2}
+        onDragEnd={(e, { offset, velocity }) => {
+            if (offset.x > 100 || velocity.x > 500) {
+                setActiveMatch(null);
+            }
+        }}
         className={`flex-1 flex flex-col bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-neutral-950 to-neutral-950 absolute md:relative w-full h-[calc(100dvh-5rem)] transition-transform duration-300 z-20 ${activeMatch ? "translate-x-0" : "translate-x-full md:translate-x-0"}`}
       >
         {(() => {
@@ -282,10 +294,22 @@ export default function ChatPage() {
               </div>
               <div className="flex-1 flex justify-between items-center pr-2 md:pr-0">
                 <div>
-                  <h3 className="text-neutral-900 dark:text-white font-bold flex items-center gap-2">
+                  <h3 className="text-neutral-900 dark:text-white font-bold flex items-center gap-2 leading-tight">
                     {activeMatch.otherUser.name || "Нэргүй"}
                     {chatEmoji && <span className="text-xl animate-bounce">{chatEmoji}</span>}
                   </h3>
+                  {activeMatch.otherUser.lastActive && (
+                      <div className="text-[11px] text-neutral-500 font-medium flex items-center gap-1.5 mt-1">
+                          {(() => {
+                              const diffMins = Math.floor((Date.now() - new Date(activeMatch.otherUser.lastActive).getTime()) / 60000);
+                              if (diffMins < 5) return <><span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Одоо идэвхтэй (Online)</>;
+                              if (diffMins < 60) return `Сүүлд орсон: ${diffMins} минутын өмнө`;
+                              const diffHours = Math.floor(diffMins / 60);
+                              if (diffHours < 24) return `Сүүлд орсон: ${diffHours} цагийн өмнө`;
+                              return `Сүүлд орсон: ${Math.floor(diffHours / 24)} өдрийн өмнө`;
+                          })()}
+                      </div>
+                  )}
                 </div>
                 
                 <div className="flex items-center gap-2">
@@ -354,30 +378,58 @@ export default function ChatPage() {
               
               {messages.map((msg, i) => {
                 const isMe = msg.senderId === userId;
+                
+                // Format time HH:MM
+                const date = new Date(msg.createdAt);
+                const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                // Basic seen indicator for the last message if I sent it
+                const isLast = i === messages.length - 1;
+                const showSeen = isLast && isMe && activeMatch?.lastMessage?.isRead;
+
                 return (
-                  <div
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     key={msg.id || i}
-                    className={`flex ${isMe ? "justify-end" : "justify-start"}`}
+                    className={`flex flex-col ${isMe ? "items-end" : "items-start"}`}
                   >
                     <div
-                      className={`max-w-[75%] px-5 py-3 rounded-2xl ${isMe ? "bg-gradient-to-tr from-pink-500 to-purple-600 text-neutral-900 dark:text-white rounded-tr-sm shadow-[0_5px_20px_rgba(236,72,153,0.3)]" : "bg-neutral-100 dark:bg-neutral-800/80 text-neutral-900 dark:text-white rounded-tl-sm border border-neutral-700/50"}`}
+                      className={`max-w-[75%] px-5 py-3 rounded-2xl relative group ${isMe ? "bg-gradient-to-tr from-pink-500 to-purple-600 text-white rounded-tr-sm shadow-[0_5px_20px_rgba(236,72,153,0.3)]" : "bg-neutral-100 dark:bg-neutral-800/80 text-neutral-900 dark:text-white rounded-tl-sm border border-neutral-700/50"}`}
                     >
-                      <p className="font-medium text-[15px]">{msg.content}</p>
+                      <p className="font-medium text-[15px] whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+                      <span className={`text-[10px] absolute -bottom-5 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap ${isMe ? "right-1 text-neutral-400" : "left-1 text-neutral-400"}`}>
+                        {timeStr}
+                      </span>
                     </div>
-                  </div>
+                    {showSeen && (
+                      <span className="text-[10px] text-neutral-400 font-bold mt-1 pr-1">Уншсан</span>
+                    )}
+                  </motion.div>
                 );
               })}
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="p-4 md:p-6 bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800">
-              <form onSubmit={handleSend} className="flex gap-3">
-                <input
-                  type="text"
+            <div className="p-4 md:p-6 bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800 pb-safe">
+              <form onSubmit={handleSend} className="flex gap-3 items-end">
+                <textarea
+                  ref={textareaRef}
                   value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
+                  onChange={(e) => {
+                    setNewMessage(e.target.value);
+                    e.target.style.height = '56px';
+                    e.target.style.height = Math.min(e.target.scrollHeight, 150) + 'px';
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleSend(e);
+                    }
+                  }}
                   placeholder="Мессеж бичих..."
-                  className="flex-1 h-14 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-full px-6 text-neutral-900 dark:text-white focus:outline-none focus:border-pink-500 transition-colors"
+                  rows={1}
+                  className="flex-1 min-h-[56px] max-h-[150px] bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-3xl py-4 px-6 text-neutral-900 dark:text-white focus:outline-none focus:border-pink-500 transition-colors resize-none overflow-y-auto leading-tight"
                 />
                 <button
                   type="submit"
@@ -401,7 +453,7 @@ export default function ChatPage() {
             <p className="text-neutral-500 font-medium">Чатлах хүнээ сонгоно уу</p>
           </div>
         )}
-      </div>
+      </motion.div>
 
       <AnimatePresence>
         {errorModal && (

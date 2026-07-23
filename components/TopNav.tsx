@@ -83,11 +83,12 @@ export default function TopNav() {
                 {navItems.map((item) => {
                     const isActive = pathname === item.href;
                     const Icon = item.icon;
+                    const isFizz = item.href === "/map";
                     return (
                         <Link
                             key={item.name}
                             href={item.href}
-                            className={`relative flex items-center gap-2 text-sm font-bold transition-all ${isActive ? "text-pink-500 drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]" : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:text-white"
+                            className={`relative flex items-center gap-2 text-sm font-bold transition-all px-4 py-2 rounded-full ${isActive ? (isFizz ? "text-emerald-500 bg-emerald-500/10 border border-emerald-500/30 drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]" : "text-pink-500 drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]") : (isFizz ? "text-emerald-500/80 hover:text-emerald-500 hover:bg-emerald-500/10 border border-emerald-500/20" : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:text-white")
                                 }`}
                         >
                             <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
@@ -176,14 +177,21 @@ export default function TopNav() {
                 {navItems.map((item) => {
                     const isActive = pathname === item.href;
                     const Icon = item.icon;
+                    const isFizz = item.href === "/map";
                     return (
                         <Link
                             key={item.name}
                             href={item.href}
-                            className={`relative flex flex-col items-center justify-center w-16 h-full transition-all ${isActive ? "text-pink-500" : "text-neutral-500 hover:text-neutral-900 dark:text-white"
+                            className={`relative flex flex-col items-center justify-center w-16 h-full transition-all ${isActive ? (isFizz ? "text-emerald-500" : "text-pink-500") : "text-neutral-500 hover:text-neutral-900 dark:text-white"
                                 }`}
                         >
-                            <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />
+                            {isFizz ? (
+                                <div className={`p-2 rounded-full flex flex-col items-center justify-center ${isActive ? 'bg-emerald-500/20 text-emerald-500' : 'text-emerald-500/80'}`}>
+                                   <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />
+                                </div>
+                            ) : (
+                                <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />
+                            )}
                             {item.name === "Messages" && unreadCount > 0 && (
                                 <span className="absolute top-2 right-2 min-w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center text-[10px] font-bold text-neutral-900 dark:text-white px-1 shadow-[0_0_10px_rgba(244,63,94,0.6)]">
                                     {unreadCount}
