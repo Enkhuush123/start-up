@@ -76,6 +76,16 @@ export default function OnboardingPage() {
         if (step > 1) setStep(step - 1);
     };
 
+    const isNextDisabled = () => {
+        if (loading) return true;
+        if (step === 1) return formData.name.length < 2;
+        if (step === 2) return !formData.age || !formData.gender;
+        if (step === 3) return formData.interests.length === 0;
+        if (step === 4) return !formData.height || !formData.zodiacSign || !formData.lookingFor || !formData.loveLanguage;
+        if (step === 5) return formData.photos.length === 0;
+        return false;
+    };
+
     return (
         <div className="relative flex flex-col min-h-[100dvh] bg-transparent text-neutral-900 dark:text-white overflow-hidden z-10">
 
@@ -278,10 +288,10 @@ export default function OnboardingPage() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={nextStep}
-                    disabled={(step === 1 && formData.name.length < 2) || loading}
+                    disabled={isNextDisabled()}
                     className="w-full h-16 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-[0_10px_40px_-10px_rgba(236,72,153,0.7)] disabled:opacity-50 disabled:grayscale transition-all"
                 >
-                    {loading ? "Хадгалж байна..." : (step === 4 ? "Бэлэн боллоо" : "Үргэлжлүүлэх")}
+                    {loading ? "Хадгалж байна..." : (step === 5 ? "Бэлэн боллоо" : "Үргэлжлүүлэх")}
                 </motion.button>
             </div>
 
