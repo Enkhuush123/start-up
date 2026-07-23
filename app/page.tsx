@@ -130,7 +130,7 @@ export default function WelcomePage() {
             </div>
             <h3 className="text-xl font-bold mb-3 relative z-10">📍 Газрын зураг</h3>
             <p className="text-neutral-600 dark:text-neutral-300 relative z-10 font-medium leading-relaxed">
-              Таны эргэн тойронд, нэг клубд эсвэл нэг кафед яг одоо хэн байгааг газрын зураг дээрээс шууд хараад танилцаарай.
+              Найзуудыгаа яг одоо хаана явж байгааг газрын зураг (Map) дээрээс харах боломжтой.
             </p>
           </motion.div>
 
