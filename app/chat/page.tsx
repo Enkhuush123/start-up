@@ -32,6 +32,9 @@ type MatchType = {
     senderId: string;
     isRead: boolean;
   } | null;
+  _count: {
+    messages: number;
+  };
 };
 
 type MessageType = {
@@ -206,6 +209,15 @@ export default function ChatPage() {
                   ? otherUser.photos[0]
                   : otherUser.avatarUrl;
 
+              const messageCount = match._count.messages;
+              let listBlurClass = "blur-none";
+              if (otherUser.isBlindDateMode || match.currentUser?.isBlindDateMode) {
+                  listBlurClass = "blur-2xl";
+                  if (messageCount >= 10) listBlurClass = "blur-none";
+                  else if (messageCount >= 5) listBlurClass = "blur-md";
+                  else if (messageCount >= 2) listBlurClass = "blur-sm";
+              }
+
               return (
                 <div
                   key={match.id}
@@ -217,7 +229,7 @@ export default function ChatPage() {
                       <img
                         src={avatar}
                         alt={otherUser.name || ""}
-                        className="w-full h-full object-cover"
+                        className={`w-full h-full object-cover transition-all duration-1000 ${listBlurClass}`}
                       />
                     ) : (
                       <User className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-neutral-500" />

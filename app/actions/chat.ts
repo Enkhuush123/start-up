@@ -19,6 +19,9 @@ export async function getMatches(userId: string) {
             messages: {
                 orderBy: { createdAt: "desc" },
                 take: 1
+            },
+            _count: {
+                select: { messages: true }
             }
         },
         orderBy: {
