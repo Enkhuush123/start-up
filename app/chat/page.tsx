@@ -196,7 +196,7 @@ function ChatContent() {
   return (
     <div className="relative w-full min-h-[100dvh] pt-20 bg-neutral-50 dark:bg-neutral-950 flex overflow-hidden">
       <div
-        className={`w-full md:w-96 flex-shrink-0 border-r border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 flex flex-col transition-transform duration-300 ${activeMatch ? "-translate-x-full md:translate-x-0 absolute md:relative z-10 h-[calc(100dvh-5rem)]" : "h-[calc(100dvh-5rem)]"}`}
+        className={`w-full md:w-96 flex-shrink-0 border-r border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 flex flex-col transition-transform duration-300 ${activeMatch ? "-translate-x-full md:translate-x-0 absolute md:relative z-10 h-[calc(100dvh-9rem)] md:h-[calc(100dvh-5rem)]" : "h-[calc(100dvh-9rem)] md:h-[calc(100dvh-5rem)]"}`}
       >
         <div className="p-6 border-b border-neutral-200 dark:border-neutral-800">
           <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white">Мессеж</h2>
@@ -266,7 +266,7 @@ function ChatContent() {
                 setActiveMatch(null);
             }
         }}
-        className={`flex-1 flex flex-col bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-neutral-950 to-neutral-950 absolute md:relative w-full h-[calc(100dvh-5rem)] transition-transform duration-300 z-20 ${activeMatch ? "translate-x-0" : "translate-x-full md:translate-x-0"}`}
+        className={`flex-1 flex flex-col bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-neutral-950 to-neutral-950 absolute md:relative w-full h-[calc(100dvh-9rem)] md:h-[calc(100dvh-5rem)] transition-transform duration-300 z-20 ${activeMatch ? "translate-x-0" : "translate-x-full md:translate-x-0"}`}
       >
         {(() => {
           if (!activeMatch) return null;
