@@ -53,7 +53,10 @@ export async function getMatches(userId: string) {
             createdAt: canonicalMatch.createdAt,
             otherUser,
             currentUser: isUser1 ? match.user1 : match.user2,
-            lastMessage
+            lastMessage,
+            _count: {
+                messages: canonicalMatch._count?.messages || 0
+            }
         });
     }
 
