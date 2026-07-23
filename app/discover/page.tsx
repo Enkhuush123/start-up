@@ -31,6 +31,7 @@ type UserType = {
     zodiacCompatibility?: number | null;
     distanceKm?: number | null;
     isBlindDateMode?: boolean;
+    matchId?: string;
 };
 
 const DUMMY_IMAGE = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000";
@@ -95,6 +96,20 @@ export default function DiscoverPage() {
         loadUsers();
     }, []);
 
+    // Auto-replenish cards when empty
+    useEffect(() => {
+        if (loading || users.length > 0 || !currentUserId) return;
+
+        const interval = setInterval(async () => {
+            const matches = (await getPotentialMatches(currentUserId)) as unknown as UserType[];
+            if (matches && matches.length > 0) {
+                setUsers(matches);
+            }
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, [users.length, loading, currentUserId]);
+
     const processSwipe = async (targetUser: UserType, isLike: boolean) => {
         if (!currentUserId) return;
         
@@ -103,7 +118,7 @@ export default function DiscoverPage() {
         
         const res = await recordSwipe(currentUserId, targetUser.id, isLike);
         if (res.isMatch) {
-            setMatchData(targetUser);
+            setMatchData({ ...targetUser, matchId: res.matchId });
         }
     };
 
@@ -165,6 +180,7 @@ export default function DiscoverPage() {
                     <MatchScreen
                         currentUserPhoto={currentUserPhoto}
                         matchedUser={matchData}
+                        matchId={(matchData as any).matchId}
                         onClose={() => setMatchData(null)}
                     />
                 )}

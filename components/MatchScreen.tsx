@@ -12,6 +12,7 @@ interface MatchScreenProps {
     photos: string[];
     avatarUrl: string | null;
   };
+  matchId?: string;
   onClose: () => void;
 }
 
@@ -24,7 +25,7 @@ const HEART_ANIMATIONS = [...Array(10)].map((_, i) => ({
   size: (i % 4) * 10 + 20
 }));
 
-export default function MatchScreen({ currentUserPhoto, matchedUser, onClose }: MatchScreenProps) {
+export default function MatchScreen({ currentUserPhoto, matchedUser, matchId, onClose }: MatchScreenProps) {
   const router = useRouter();
   const matchedPhoto = matchedUser.photos?.length > 0 ? matchedUser.photos[0] : (matchedUser.avatarUrl || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000");
   const matchedName = matchedUser.name || "Нэргүй";
@@ -100,7 +101,7 @@ export default function MatchScreen({ currentUserPhoto, matchedUser, onClose }: 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            onClick={() => router.push("/chat")}
+            onClick={() => router.push(matchId ? `/chat?matchId=${matchId}` : "/chat")}
             className="w-full py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-black text-lg flex items-center justify-center gap-3 shadow-[0_10px_30px_-10px_rgba(236,72,153,0.6)] hover:scale-105 transition-all"
           >
             <MessageCircle size={24} /> Зурвас бичих

@@ -116,7 +116,18 @@ export async function recordSwipe(userId: string, targetUserId: string, isLike: 
                 data: { user1SawMatch: true }
             });
 
-            return { isMatch: true };
+            // Find canonical match ID
+            const isUser1Canonical = userId < targetUserId;
+            const canonicalMatch = await prisma.match.findUnique({
+                where: {
+                    user1Id_user2Id: {
+                        user1Id: isUser1Canonical ? userId : targetUserId,
+                        user2Id: isUser1Canonical ? targetUserId : userId
+                    }
+                }
+            });
+
+            return { isMatch: true, matchId: canonicalMatch?.id };
         }
     }
 

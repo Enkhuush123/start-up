@@ -66,6 +66,7 @@ export default function GlobalMatchNotifier() {
         <MatchScreen
             currentUserPhoto={matchData.currentUserPhoto}
             matchedUser={matchData.matchedUser}
+            matchId={matchData.matchId}
             onClose={() => setMatchData(null)}
         />
     );

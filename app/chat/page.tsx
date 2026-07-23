@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, ArrowLeft, Loader2, User, MessageCircle, Sparkles, MapPin } from "lucide-react";
 import { checkSession, logoutUser } from "@/app/actions/session";
@@ -47,6 +47,8 @@ type MessageType = {
 
 export default function ChatPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const matchIdParam = searchParams.get("matchId");
   const [userId, setUserId] = useState<string | null>(null);
   const [matches, setMatches] = useState<MatchType[]>([]);
   const [activeMatch, setActiveMatch] = useState<MatchType | null>(null);
@@ -78,9 +80,14 @@ export default function ChatPage() {
       const data = await getMatches(session.userId);
       setMatches(data);
       setLoading(false);
+
+      if (matchIdParam) {
+        const found = data.find(m => m.id === matchIdParam);
+        if (found) setActiveMatch(found);
+      }
     }
     load();
-  }, [router]);
+  }, [router, matchIdParam]);
 
   useEffect(() => {
     if (!activeMatch || !userId) return;
